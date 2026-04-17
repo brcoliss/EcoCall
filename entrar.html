@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoCall - Criar Conta</title>
+    <link rel="stylesheet" href="style.css"> <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <main class="login-container">
+        <section class="login-welcome">
+            <div class="welcome-content">
+                <div class="welcome-icon">
+                    <svg width="40" height="40" viewBox="0 0 36 36" fill="none">
+                        <path d="M18 6 L22 13 L18 11 Q12 12 10 18 Q8 24 13 28 L11 31 Q4 26 6 18 Q8 10 18 9Z" fill="white"/>
+                        <path d="M18 30 L14 23 L18 25 Q24 24 26 18 Q28 12 23 8 L25 5 Q32 10 30 18 Q28 26 18 27Z" fill="white" opacity="0.75"/>
+                    </svg>
+                </div>
+                <h1>Bem-vindo!</h1>
+                <p>Junte-se à nossa comunidade e comece a gerenciar seus descartes com facilidade.</p>
+                
+                <ul class="welcome-features">
+                    <li><span class="check">✔</span> Registro seguro</li>
+                    <li><span class="check">✔</span> Dashboard personalizado</li>
+                    <li><span class="check">✔</span> Colaboração em tempo real</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="login-form-area">
+            <div class="form-wrapper">
+                <h2>Cadastrar</h2>
+                <p class="subtitle">Insira seus detalhes para criar uma conta.</p>
+
+                <form>
+                    <div class="input-group">
+                        <label>Nome Completo</label>
+                        <input type="text" placeholder="Ex: João Silva">
+                    </div>
+
+                    <div class="input-group">
+                        <label>Endereço de E-mail</label>
+                        <input type="email" placeholder="nome@empresa.com">
+                    </div>
+
+                    <div class="input-group">
+                        <label>Senha</label>
+                        <input type="password" placeholder="********">
+                    </div>
+
+                    <div class="input-group">
+                        <label>Confirmar Senha</label>
+                        <input type="password" placeholder="********">
+                    </div>
+
+                    <div class="terms">
+                        <input type="checkbox" id="terms">
+                        <label for="terms">Eu concordo com os Termos e Condições</label>
+                    </div>
+
+                    <button type="submit" class="btn-fill w-100">Cadastrar</button>
+
+                    <div class="divider">ou continue com</div>
+
+                    <div class="social-login">
+                        <button type="button" class="btn-out">Google</button>
+                        <button type="button" class="btn-out">SSO</button>
+                    </div>
+
+                    <p class="footer-auth">Já tem uma conta? <a href="#">Entrar</a></p>
+                </form>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
