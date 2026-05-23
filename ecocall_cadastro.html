@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ecocall_cadastro.css">
+</head>
+<body>
+
+<!-- Tela de carregamento -->
+<div id="loading-screen" style="position:fixed;inset:0;background:#0a2010;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;opacity:0;pointer-events:none;transition:opacity 0.3s ease;">
+  <div style="width:45px;height:45px;border:4px solid rgba(62,201,106,0.15);border-top:4px solid #3ec96a;border-radius:50%;animation:spin 0.8s linear infinite;"></div>
+  <p style="color:#fff;font-family:'DM Sans',sans-serif;font-size:0.95rem;margin-top:1.2rem;letter-spacing:0.05em;">Conectando com segurança...</p>
+</div>
+<style>@keyframes spin{to{transform:rotate(360deg)}}</style>
+
+<div class="bg">
+  <div class="bgrid"></div>
+  <div class="bblob bb1"></div>
+  <div class="bblob bb2"></div>
+</div>
+
+<nav>
+  <a href="#" class="logo">
+    <div class="logo-mark">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3ec96a" stroke-width="2" stroke-linecap="round">
+        <path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/>
+        <path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85"/>
+      </svg>
+    </div>
+    <div>
+      <div class="logo-name">EcoCall</div>
+      <div class="logo-tag">Resíduos coletados, mundo preservado</div>
+    </div>
+  </a>
+  <div class="nav-r">
+    <span>Já tem conta?</span>
+    <a href="#" onclick="irParaLogin()">Entrar</a>
+  </div>
+</nav>
+
+<div class="page">
+
+  <!-- LEFT PANEL -->
+  <div class="left-panel">
+
+    <div class="left-headline">
+      <div class="left-eyebrow">
+        <div class="eyebrow-line"></div>
+        <span class="eyebrow-txt">Junte-se à EcoCall</span>
+      </div>
+      <h1 class="left-title">Comece a fazer<br><em>a diferença</em><br>hoje mesmo</h1>
+      <p class="left-desc">Cadastre-se grátis e conecte-se com empresas de coleta ou ofereça seus serviços para milhares de pessoas.</p>
+    </div>
+
+    <div class="steps-visual">
+      <div class="step-item">
+        <div class="step-num">01</div>
+        <div class="step-txt">
+          <strong>Crie sua conta</strong>
+          <span>Leva menos de 2 minutos</span>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">02</div>
+        <div class="step-txt">
+          <strong>Complete seu perfil</strong>
+          <span>Adicione localização e preferências</span>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">03</div>
+        <div class="step-txt">
+          <strong>Comece a usar</strong>
+          <span>Agende coletas ou receba pedidos</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="mini-stats">
+      <div class="mstat"><div class="mstat-n">+320<span>.</span></div><div class="mstat-l">Empresas</div></div>
+      <div class="mstat"><div class="mstat-n">+180<span>.</span></div><div class="mstat-l">Cidades</div></div>
+      <div class="mstat"><div class="mstat-n">+5k<span>.</span></div><div class="mstat-l">Coletas</div></div>
+      <div class="mstat"><div class="mstat-n">100<span>%</span></div><div class="mstat-l">Gratuito</div></div>
+    </div>
+
+  </div>
+
+  <!-- RIGHT PANEL -->
+  <div class="right-panel">
+
+    <div class="badge"><div class="badge-dot"></div> Criar conta grátis</div>
+    <h2 class="card-title">Crie sua conta</h2>
+    <p class="card-sub">Escolha o tipo de conta e comece agora</p>
+
+    <div class="type-sel">
+      <button class="type-btn active" onclick="setType('user',this)" type="button">
+        <div class="type-check"><svg viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="currentColor"/></svg></div>
+        <div class="type-ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--g500)" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+        <div class="type-name">Pessoa física</div>
+        <div class="type-desc">Quero solicitar coletas</div>
+      </button>
+      <button class="type-btn" onclick="setType('empresa',this)" type="button">
+        <div class="type-check"><svg viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="currentColor"/></svg></div>
+        <div class="type-ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--g500)" stroke-width="2" stroke-linecap="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
+        <div class="type-name">Empresa</div>
+        <div class="type-desc">Quero oferecer coletas</div>
+      </button>
+    </div>
+
+    <div class="progress">
+      <div class="prog-step active" id="ps1"><div class="prog-num">1</div><span>Conta</span></div>
+      <div class="prog-line" id="pl1"></div>
+      <div class="prog-step" id="ps2"><div class="prog-num">2</div><span id="ps2lbl">Dados</span></div>
+      <div class="prog-line" id="pl2"></div>
+      <div class="prog-step" id="ps3"><div class="prog-num">3</div><span>Confirmar</span></div>
+    </div>
+
+    <!-- STEP 1 — USUÁRIO -->
+    <div class="form-step active" id="step1-user">
+      <div class="row2">
+        <div class="field"><label>Nome</label>
+          <div class="field-wrap"><input type="text" placeholder="João">
+            <svg class="fic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div></div>
+        <div class="field"><label>Sobrenome</label>
+          <div class="field-wrap"><input type="text" placeholder="Silva">
+            <svg class="fic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div></div>
+      </div>
+      <div class="field"><label>E-mail</label>
+        <div class="field-wrap"><input type="email" id="email" placeholder="seu@email.com">
+          <svg class="fic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div></div>
+      <div class="field"><label>Senha</label>
+        <div class="field-wrap"><input type="password" id="pwd" placeholder="••••••••" oninput="checkStr(this.value)">
+          <svg class="fic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          <button class="eye" type="button" onclick="togglePwd('pwd',this)">
+            <svg id="eye1" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+        <div class="strength">
+          <div class="str-bars"><div class="str-bar" id="sb1"></div><div class="str-bar" id="sb2"></div><div class="str-bar" id="sb3"></div><div class="str-bar" id="sb4"></div></div>
+          <span class="str-label" id="str-lbl">Digite uma senha</span>
+        </div>
+      </div>
+      <div class="field"><label>Confirmar senha</label>
+        <div class="field-wrap"><input type="password" id="pwd2" placeholder="••••••••">
+          <svg class="fic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          <button class="eye" type="button" onclick="togglePwd('pwd2',this)">
+            <svg id="eye2" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+      </div>
+      <button class="btn-submit" onclick="goStep2()">Continuar →</button>
+      <div class="div"><span>ou cadastre com</span></div>
+      <div class="socials">
+        <button class="btn-soc" type="button">
+          <svg width="14" height="14" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+          Google
+        </button>
+        <button class="btn-soc" type="button">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="#0A66C2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </button>
+      </div>
+      <p class="login-link">Já tem conta? <a href="#">Entrar</a></p>
+      <div class="sec-note">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Conexão criptografada · SSL 256-bit
+      </div>
+    </div>
+
+    <!-- STEP 1 — EMPRESA -->
+    <div class="form-step" id="step1-empresa">
+      <div class="field"><label>Full Name</label>
+        <div class="field-wrap"><input type="text" placeholder="John Doe">
+          <svg class="fic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div></div>
+      <div class="field"><label>CPF</label>
+        <div class="field-wrap"><input type="text" placeholder="000.000.000-00" oninput="maskCPF(this)">
+          <svg class="fic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg>
+        </div></div>
+      <div class="field"><label>E-mail</label>
+        <div class="field-wrap"><input type="email" id="email-emp" placeholder="nomedoemail@gmail.com">
+          <svg class="fic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div></div>
+      <div class="row2">
+        <div class="field"><label>Celular</label>
+          <div class="field-wrap"><input type="text" placeholder="(11) 99999-0000" oninput="maskPhone(this)">
+            <svg class="fic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.82a16 16 0 0 0 6.29 6.29l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div></div>
+        <div class="field"><label>Cidade</label>
+          <div class="field-wrap"><input type="text" placeholder="São Paulo">
+            <svg class="fic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div></div>
+      </div>
+      <div class="field"><label>Senha</label>
+        <div class="field-wrap"><input type="password" id="pwd-emp" placeholder="••••••••">
+          <svg class="fic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          <button class="eye" type="button" onclick="togglePwd('pwd-emp',this)">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div></div>
+      <div class="terms"><input type="checkbox" id="t-emp"><label for="t-emp">I agree to the <a href="#">Terms and Conditions</a></label></div>
+      <button class="btn-submit" onclick="goStep(3)">Sign Up →</button>
+      <div class="div"><span>OR CONTINUE WITH</span></div>
+      <div class="socials">
+        <button class="btn-soc" type="button">
+          <svg width="14" height="14" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+          Google
+        </button>
+        <button class="btn-soc" type="button">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          SSO
+        </button>
+      </div>
+      <p class="login-link">Already have an account? <a href="#">Log In</a></p>
+    </div>
+
+    <!-- STEP 2 USUÁRIO -->
+    <div class="form-step" id="step2-user">
+      <div class="section-label">Dados pessoais</div>
+      <div class="row2">
+        <div class="field"><label>CPF</label>
+          <div class="field-wrap"><input type="text" placeholder="000.000.000-00" oninput="maskCPF(this)">
+            <svg class="fic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg>
+          </div></div>
+        <div class="field"><label>Telefone</label>
+          <div class="field-wrap"><input type="text" placeholder="(00) 00000-0000" oninput="maskPhone(this)">
+            <svg class="fic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.82a16 16 0 0 0 6.29 6.29l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div></div>
+      </div>
+      <div class="section-label" style="margin-top:.1rem">Endereço</div>
+      <div class="row2">
+        <div class="field"><label>CEP</label>
+          <div class="field-wrap"><input type="text" placeholder="00000-000" oninput="maskCEP(this)">
+            <svg class="fic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div></div>
+        <div class="field"><label>Estado</label>
+          <div class="field-wrap">
+            <select><option value="">Selecione</option><option>SP</option><option>RJ</option><option>MG</option><option>PR</option><option>SC</option><option>RS</option><option>BA</option></select>
+            <svg class="fic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div></div>
+      </div>
+      <div class="field"><label>Cidade</label>
+        <div class="field-wrap"><input type="text" placeholder="Ex: Santos">
+          <svg class="fic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+        </div></div>
+      <div class="terms"><input type="checkbox" id="t1"><label for="t1">Li e concordo com os <a href="#">Termos de Uso</a> e a <a href="#">Política de Privacidade</a></label></div>
+      <div class="btn-row">
+        <button class="btn-back" onclick="goStep(1)">← Voltar</button>
+        <button class="btn-submit" style="margin:0;flex:1" onclick="goStep(3)">Criar conta →</button>
+      </div>
+    </div>
+
+    <!-- STEP 2 EMPRESA -->
+    <div class="form-step" id="step2-empresa">
+      <div class="field"><label>Nome completo</label>
+        <div class="field-wrap"><input type="text" placeholder="John Doe">
+          <svg class="fic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div></div>
+      <div class="field"><label>CPF</label>
+        <div class="field-wrap"><input type="text" placeholder="000.000.000-00" oninput="maskCPF(this)">
+          <svg class="fic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg>
+        </div></div>
+      <div class="field"><label>E-mail</label>
+        <div class="field-wrap"><input type="email" placeholder="nomedoemail@gmail.com">
+          <svg class="fic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div></div>
+      <div class="row2">
+        <div class="field"><label>Celular</label>
+          <div class="field-wrap"><input type="text" placeholder="(11) 99999-0000" oninput="maskPhone(this)">
+            <svg class="fic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.82a16 16 0 0 0 6.29 6.29l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div></div>
+        <div class="field"><label>Cidade</label>
+          <div class="field-wrap"><input type="text" placeholder="São Paulo">
+            <svg class="fic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div></div>
+      </div>
+      <div class="field"><label>Senha</label>
+        <div class="field-wrap"><input type="password" id="emp-pwd" placeholder="••••••••">
+          <svg class="fic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          <button class="eye" type="button" onclick="togglePwd('emp-pwd',this)">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div></div>
+      <div class="terms"><input type="checkbox" id="t2"><label for="t2">Concordo com os <a href="#">Termos e Condições</a></label></div>
+      <button class="btn-submit" onclick="goStep(3)">Cadastrar →</button>
+      <div class="div"><span>ou continue com</span></div>
+      <div class="socials">
+        <button class="btn-soc" type="button">
+          <svg width="14" height="14" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+          Google
+        </button>
+        <button class="btn-soc" type="button">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          SSO
+        </button>
+      </div>
+      <p class="login-link">Já tem conta? <a href="#">Entrar</a></p>
+    </div>
+
+    <!-- STEP 3 SUCESSO -->
+    <div class="form-step" id="step3">
+      <div style="text-align:center;padding:1.5rem 0 .5rem">
+        <div style="width:64px;height:64px;background:var(--g50);border:2px solid rgba(62,201,106,.3);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.2rem">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--g500)" stroke-width="2.5" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        </div>
+        <h3 style="font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;color:var(--text);margin-bottom:.5rem">Conta criada com sucesso!</h3>
+        <p style="font-size:.82rem;color:var(--textl);line-height:1.65;max-width:300px;margin:0 auto 2rem">Enviamos um e-mail de confirmação. Verifique sua caixa de entrada para ativar sua conta.</p>
+        <button class="btn-submit" onclick="toast('Redirecionando para o painel…')">Ir para o painel →</button>
+        <p style="font-size:.72rem;color:var(--gray-400);margin-top:.75rem">Não recebeu? <a href="#" style="color:var(--g600);font-weight:500;text-decoration:none">Reenviar e-mail</a></p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="toast" id="toast"><div class="tdot"></div><span id="tmsg"></span></div>
+
+<script>
+  function irParaLogin() {
+    const loader = document.getElementById('loading-screen');
+    loader.style.pointerEvents = 'all';
+    loader.style.opacity = '1';
+    setTimeout(() => { window.location.href = 'ecocall-login.html'; }, 1200);
+  }
+
+  let tipo = 'user';
+
+  const residuosList = ['Plástico','Papel','Metal','Vidro','Eletrônicos','Orgânico','Têxtil','Óleo'];
+  const selRes = new Set();
+  const resWrap = document.getElementById('residuos');
+  if (resWrap) {
+    residuosList.forEach(r => {
+      const btn = document.createElement('button');
+      btn.type = 'button'; btn.textContent = r;
+      btn.style.cssText = 'padding:3px 11px;border-radius:50px;font-size:.67rem;font-weight:500;cursor:pointer;transition:all .18s;border:1.5px solid var(--gray-200);background:#fff;color:var(--gray-600);font-family:DM Sans,sans-serif';
+      btn.onclick = () => {
+        if(selRes.has(r)){selRes.delete(r);btn.style.background='#fff';btn.style.borderColor='var(--gray-200)';btn.style.color='var(--gray-600)'}
+        else{selRes.add(r);btn.style.background='var(--g50)';btn.style.borderColor='var(--ac)';btn.style.color='var(--g600)'}
+      };
+      resWrap.appendChild(btn);
+    });
+  }
+
+  function setType(t, el) {
+    tipo = t;
+    document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('active'));
+    el.classList.add('active');
+    document.getElementById('ps2lbl').textContent = t === 'empresa' ? 'Empresa' : 'Dados';
+    document.getElementById('step1-user').classList.toggle('active', t === 'user');
+    document.getElementById('step1-empresa').classList.toggle('active', t === 'empresa');
+  }
+
+  function goStep2() {
+    const em = document.getElementById('email').value.trim();
+    const p1 = document.getElementById('pwd').value;
+    const p2 = document.getElementById('pwd2').value;
+    if(!em || !em.includes('@')) { toast('⚠ Informe um e-mail válido'); return; }
+    if(p1.length < 6) { toast('⚠ Senha deve ter ao menos 6 caracteres'); return; }
+    if(p1 !== p2) { toast('⚠ As senhas não coincidem'); return; }
+    goStep(2);
+  }
+
+  function goStep(n) {
+    ['step1-user','step1-empresa','step2-user','step2-empresa','step3'].forEach(id => document.getElementById(id).classList.remove('active'));
+    ['ps1','ps2','ps3'].forEach((id,i) => {
+      const el = document.getElementById(id);
+      el.classList.remove('active','done');
+      if(i+1 < n) el.classList.add('done');
+      else if(i+1 === n) el.classList.add('active');
+    });
+    ['pl1','pl2'].forEach((id,i) => document.getElementById(id).classList.toggle('done', i+1 < n));
+    if(n===1) document.getElementById('step1-'+tipo).classList.add('active');
+    else if(n===2) document.getElementById('step2-'+tipo).classList.add('active');
+    else if(n===3){ document.getElementById('step3').classList.add('active'); toast('✓ Cadastro realizado com sucesso!'); }
+  }
+
+  function togglePwd(id, btn) {
+    const inp = document.getElementById(id);
+    const show = inp.type === 'password';
+    inp.type = show ? 'text' : 'password';
+    btn.querySelector('svg').innerHTML = show
+      ? '<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/>'
+      : '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>';
+  }
+
+  function checkStr(v) {
+    const colors = ['#e24b4b','#f5a623','#f5cc23','#3ec96a'];
+    const labels = ['Muito fraca','Fraca','Boa','Forte'];
+    let s = 0;
+    if(v.length>=8) s++; if(/[A-Z]/.test(v)) s++; if(/[0-9]/.test(v)) s++; if(/[^A-Za-z0-9]/.test(v)) s++;
+    ['sb1','sb2','sb3','sb4'].forEach((id,i) => document.getElementById(id).style.background = i<s ? colors[s-1] : 'var(--gray-200)');
+    const lbl = document.getElementById('str-lbl');
+    lbl.textContent = v.length ? labels[Math.max(0,s-1)] : 'Digite uma senha';
+    lbl.style.color = v.length ? colors[Math.max(0,s-1)] : 'var(--textl)';
+  }
+
+  function maskCPF(i){let v=i.value.replace(/\D/g,'').slice(0,11);v=v.replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d{1,2})$/,'$1-$2');i.value=v}
+  function maskPhone(i){let v=i.value.replace(/\D/g,'').slice(0,11);v=v.replace(/(\d{2})(\d)/,'($1) $2').replace(/(\d{5})(\d)/,'$1-$2');i.value=v}
+  function maskCEP(i){let v=i.value.replace(/\D/g,'').slice(0,8);v=v.replace(/(\d{5})(\d)/,'$1-$2');i.value=v}
+  function maskCNPJ(i){let v=i.value.replace(/\D/g,'').slice(0,14);v=v.replace(/(\d{2})(\d)/,'$1.$2').replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d)/,'$1/$2').replace(/(\d{4})(\d{1,2})$/,'$1-$2');i.value=v}
+  function toast(m,d=3000){const t=document.getElementById('toast');document.getElementById('tmsg').textContent=m;t.classList.add('on');setTimeout(()=>t.classList.remove('on'),d)}
+</script>
+</body>
+</html>
