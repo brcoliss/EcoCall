@@ -26,12 +26,10 @@
 
 <div class="page">
 
-  <!-- ══════════════════════════════
-       LEFT PANEL — WELCOME
-  ══════════════════════════════ -->
+  <!-- LEFT PANEL — WELCOME -->
   <div class="left-panel">
 
-    <a href="#" class="logo">
+    <a href="#" onclick="irParaHome()" class="logo">
       <div class="logo-icon">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
              stroke="#4ecb71" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -103,9 +101,7 @@
 
   </div>
 
-  <!-- ══════════════════════════════
-       RIGHT PANEL — LOGIN FORM
-  ══════════════════════════════ -->
+  <!-- RIGHT PANEL — LOGIN FORM -->
   <div class="right-panel">
 
     <div class="form-tag">
@@ -217,6 +213,19 @@
   const togglePwd   = document.getElementById('togglePwd');
   let pwdVisible    = false;
 
+  /* Loader helper */
+  function showLoader(dest, delay = 800) {
+    const loader = document.getElementById('loading-screen');
+    loader.style.pointerEvents = 'all';
+    loader.style.opacity = '1';
+    setTimeout(() => { window.location.href = dest; }, delay);
+  }
+
+  /* Ir para home com loader */
+  function irParaHome() {
+    showLoader('ecocall-home.html');
+  }
+
   /* Toast helper */
   function showToast(msg, dur = 3000) {
     toastMsg.textContent = msg;
@@ -267,13 +276,10 @@
     b.addEventListener('click', () => showToast(`Conectando com ${b.textContent.trim()}...`))
   );
 
-  /* Signup link */
+  /* Signup link — com loader */
   document.getElementById('signupLink').addEventListener('click', e => {
     e.preventDefault();
-    const loader = document.getElementById('loading-screen');
-    loader.style.pointerEvents = 'all';
-    loader.style.opacity = '1';
-    setTimeout(() => { window.location.href = 'ecocall_cadastro.html'; }, 1200);
+    showLoader('ecocall_cadastro.html', 800);
   });
 
   /* Keyboard navigation */

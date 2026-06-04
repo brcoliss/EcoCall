@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EcoCall — Minhas Coletas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="minhas-coletas.css">
+<style>@keyframes spin { to { transform: rotate(360deg); } }</style>
+</head>
+<body>
+
+<!-- Loading screen -->
+<div id="loading-screen" style="position:fixed;inset:0;background:#0a2010;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;opacity:0;pointer-events:none;transition:opacity 0.3s ease;">
+  <div style="width:45px;height:45px;border:4px solid rgba(62,201,106,0.15);border-top:4px solid #3ec96a;border-radius:50%;animation:spin 0.8s linear infinite;"></div>
+  <p style="color:#fff;font-family:'DM Sans',sans-serif;font-size:.95rem;margin-top:1.2rem;letter-spacing:.05em;">Carregando...</p>
+</div>
+
+<div class="dash-layout">
+
+  <!-- ═══ SIDEBAR ═══════════════════════════════════════════════ -->
+  <aside class="sidebar">
+    <a href="ecocall-home.html" class="logo" onclick="transicaoPara('ecocall-home.html',event)">
+      <div class="logo-mark">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#3ec96a" stroke-width="2" stroke-linecap="round">
+          <path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/>
+          <path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85"/>
+        </svg>
+      </div>
+      <div>
+        <div class="logo-name">EcoCall</div>
+        <div class="logo-tag">Painel do Usuário</div>
+      </div>
+    </a>
+
+    <nav class="sidebar-menu">
+      <a href="ecocall-dashbord_usuario.html" class="nav-item" onclick="transicaoPara('ecocall-dashbord_usuario.html',event)">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        <span>Painel</span>
+      </a>
+      <a href="#" class="nav-item" onclick="toast('Acessando o mapa interativo…')">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/><line x1="9" y1="3" x2="9" y2="18"/><line x1="15" y1="6" x2="15" y2="21"/></svg>
+        <span>Ver no Mapa</span>
+      </a>
+      <a href="#" class="nav-item active">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+        <span>Minhas Coletas</span>
+      </a>
+      <a href="#" class="nav-item" onclick="toast('Exibindo empresas guardadas…')">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+        <span>Empresas Salvas</span>
+      </a>
+      <a href="#" class="nav-item" onclick="toast('Abrindo histórico de atividades…')">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span>Histórico</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="avatar-mini">JS</div>
+      <div class="user-meta">
+        <div class="user-name">João Silva</div>
+        <div class="user-email">joao@email.com</div>
+      </div>
+      <a href="#" class="logout-trigger" onclick="logout(event)" title="Sair do painel">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      </a>
+    </div>
+  </aside>
+
+  <!-- ═══ MAIN ══════════════════════════════════════════════════ -->
+  <main class="main-content">
+
+    <header class="topbar">
+      <div class="topbar-welcome">
+        <h1>Minhas Coletas</h1>
+        <p>Acompanhe o histórico e status de todas as suas coletas.</p>
+      </div>
+      <div class="topbar-right">
+        <div class="topbar-page-title">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+          12 coletas registradas
+        </div>
+        <div class="dash-search-box">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" id="search-input" placeholder="Buscar empresa…" oninput="filterCards()">
+        </div>
+        <div class="notif-bell-box" onclick="toast('Você tem 2 novas notificações.')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          <div class="bell-badge-count">2</div>
+        </div>
+        <div class="user-location-badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3ec96a" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>Santos, SP</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="content-wrapper">
+
+      <!-- Filters -->
+      <div class="filters-bar">
+        <div class="filters-bar-left">
+          <button class="filter-btn active" data-filter="all" onclick="setFilter(this,'all')">
+            <span class="filter-dot dot-all"></span> Todas
+          </button>
+          <button class="filter-btn" data-filter="done" onclick="setFilter(this,'done')">
+            <span class="filter-dot dot-done"></span> Concluídas
+          </button>
+          <button class="filter-btn" data-filter="sched" onclick="setFilter(this,'sched')">
+            <span class="filter-dot dot-sched"></span> Agendadas
+          </button>
+          <button class="filter-btn" data-filter="prog" onclick="setFilter(this,'prog')">
+            <span class="filter-dot dot-prog"></span> Em andamento
+          </button>
+          <button class="filter-btn" data-filter="cancel" onclick="setFilter(this,'cancel')">
+            <span class="filter-dot dot-cancel"></span> Canceladas
+          </button>
+        </div>
+        <select class="sort-select" onchange="sortCards(this.value)">
+          <option value="date-desc">Mais recentes</option>
+          <option value="date-asc">Mais antigas</option>
+          <option value="weight-desc">Maior massa</option>
+        </select>
+        <button class="btn-new-coleta" onclick="toast('Abrindo solicitação de nova coleta…')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Nova coleta
+        </button>
+      </div>
+
+      <!-- Cards list -->
+      <div class="coletas-grid" id="coletas-grid">
+
+        <div class="coleta-card highlighted" data-status="prog" data-date="2026-05-30" data-weight="12" data-company="Santista Ambiental" onclick="openDetail('Santista Ambiental','Gonzaga, Santos','E','av-blue','prog','30','Mai/2026','12','Eletrônicos','30/05/2026','SA-0043')">
+          <div class="coleta-avatar av-blue">S</div>
+          <div class="coleta-info">
+            <div class="coleta-company">Santista Ambiental</div>
+            <div class="coleta-tags">
+              <span class="etag tag-elec">Eletrônicos</span>
+            </div>
+          </div>
+          <div class="coleta-date"><div class="date-day">30</div><div class="date-month">Mai/26</div></div>
+          <div class="coleta-weight"><div class="weight-val">12 kg</div><div class="weight-lbl">Estimado</div></div>
+          <div class="coleta-right">
+            <span class="badge badge-prog">Em andamento</span>
+            <button class="btn-card-action primary" onclick="event.stopPropagation();toast('Rastreando caminhão de coleta…')">Rastrear</button>
+          </div>
+        </div>
+
+        <div class="coleta-card" data-status="sched" data-date="2026-06-10" data-weight="8" data-company="EcoColeta Santos" onclick="openDetail('EcoColeta Santos','Aparecida, Santos','E','av-green','sched','10','Jun/2026','8','Plástico, Papel','10/06/2026','EC-0071')">
+          <div class="coleta-avatar av-green">E</div>
+          <div class="coleta-info">
+            <div class="coleta-company">EcoColeta Santos</div>
+            <div class="coleta-tags">
+              <span class="etag tag-plastic">Plástico</span>
+              <span class="etag tag-paper">Papel</span>
+            </div>
+          </div>
+          <div class="coleta-date"><div class="date-day">10</div><div class="date-month">Jun/26</div></div>
+          <div class="coleta-weight"><div class="weight-val">8 kg</div><div class="weight-lbl">Estimado</div></div>
+          <div class="coleta-right">
+            <span class="badge badge-sched">Agendada</span>
+            <button class="btn-card-action" onclick="event.stopPropagation();toast('Reagendamento solicitado…')">Reagendar</button>
+          </div>
+        </div>
+
+        <div class="coleta-card" data-status="done" data-date="2026-05-20" data-weight="18" data-company="EcoColeta Santos" onclick="openDetail('EcoColeta Santos','Aparecida, Santos','E','av-green','done','20','Mai/2026','18','Plástico, Papel','20/05/2026','EC-0065')">
+          <div class="coleta-avatar av-green">E</div>
+          <div class="coleta-info">
+            <div class="coleta-company">EcoColeta Santos</div>
+            <div class="coleta-tags">
+              <span class="etag tag-plastic">Plástico</span>
+              <span class="etag tag-paper">Papel</span>
+            </div>
+          </div>
+          <div class="coleta-date"><div class="date-day">20</div><div class="date-month">Mai/26</div></div>
+          <div class="coleta-weight"><div class="weight-val">18 kg</div><div class="weight-lbl">Coletados</div></div>
+          <div class="coleta-right">
+            <span class="badge badge-done">Concluída</span>
+            <button class="btn-card-action" onclick="event.stopPropagation();toast('Exibindo comprovante da coleta…')">Ver detalhes</button>
+          </div>
+        </div>
+
+        <div class="coleta-card" data-status="done" data-date="2026-04-28" data-weight="9" data-company="Marim Resíduos" onclick="openDetail('Marim Resíduos','Gonzaga, Santos','M','av-amber','done','28','Abr/2026','9','Vidro, Metal','28/04/2026','MR-0039')">
+          <div class="coleta-avatar av-amber">M</div>
+          <div class="coleta-info">
+            <div class="coleta-company">Marim Resíduos</div>
+            <div class="coleta-tags">
+              <span class="etag tag-glass">Vidro</span>
+              <span class="etag tag-metal">Metal</span>
+            </div>
+          </div>
+          <div class="coleta-date"><div class="date-day">28</div><div class="date-month">Abr/26</div></div>
+          <div class="coleta-weight"><div class="weight-val">9 kg</div><div class="weight-lbl">Coletados</div></div>
+          <div class="coleta-right">
+            <span class="badge badge-done">Concluída</span>
+            <button class="btn-card-action" onclick="event.stopPropagation();toast('Exibindo comprovante da coleta…')">Ver detalhes</button>
+          </div>
+        </div>
+
+        <div class="coleta-card" data-status="done" data-date="2026-04-10" data-weight="22" data-company="ReciclaVerde" onclick="openDetail('ReciclaVerde','Vila Mathias, Santos','R','av-green','done','10','Abr/2026','22','Orgânico, Papel','10/04/2026','RV-0022')">
+          <div class="coleta-avatar av-green">R</div>
+          <div class="coleta-info">
+            <div class="coleta-company">ReciclaVerde</div>
+            <div class="coleta-tags">
+              <span class="etag tag-organic">Orgânico</span>
+              <span class="etag tag-paper">Papel</span>
+            </div>
+          </div>
+          <div class="coleta-date"><div class="date-day">10</div><div class="date-month">Abr/26</div></div>
+          <div class="coleta-weight"><div class="weight-val">22 kg</div><div class="weight-lbl">Coletados</div></div>
+          <div class="coleta-right">
+            <span class="badge badge-done">Concluída</span>
+            <button class="btn-card-action" onclick="event.stopPropagation();toast('Exibindo comprovante da coleta…')">Ver detalhes</button>
+          </div>
+        </div>
+
+        <div class="coleta-card" data-status="cancel" data-date="2026-03-25" data-weight="5" data-company="Santista Ambiental" onclick="openDetail('Santista Ambiental','Gonzaga, Santos','S','av-blue','cancel','25','Mar/2026','5','Eletrônicos','25/03/2026','SA-0031')">
+          <div class="coleta-avatar av-blue">S</div>
+          <div class="coleta-info">
+            <div class="coleta-company">Santista Ambiental</div>
+            <div class="coleta-tags">
+              <span class="etag tag-elec">Eletrônicos</span>
+            </div>
+          </div>
+          <div class="coleta-date"><div class="date-day">25</div><div class="date-month">Mar/26</div></div>
+          <div class="coleta-weight"><div class="weight-val">5 kg</div><div class="weight-lbl">Previsto</div></div>
+          <div class="coleta-right">
+            <span class="badge badge-cancel">Cancelada</span>
+            <button class="btn-card-action" onclick="event.stopPropagation();toast('Abrindo nova solicitação…')">Reagendar</button>
+          </div>
+        </div>
+
+        <div class="coleta-card" data-status="done" data-date="2026-03-05" data-weight="15" data-company="EcoColeta Santos" onclick="openDetail('EcoColeta Santos','Aparecida, Santos','E','av-green','done','05','Mar/2026','15','Plástico, Metal','05/03/2026','EC-0058')">
+          <div class="coleta-avatar av-green">E</div>
+          <div class="coleta-info">
+            <div class="coleta-company">EcoColeta Santos</div>
+            <div class="coleta-tags">
+              <span class="etag tag-plastic">Plástico</span>
+              <span class="etag tag-metal">Metal</span>
+            </div>
+          </div>
+          <div class="coleta-date"><div class="date-day">05</div><div class="date-month">Mar/26</div></div>
+          <div class="coleta-weight"><div class="weight-val">15 kg</div><div class="weight-lbl">Coletados</div></div>
+          <div class="coleta-right">
+            <span class="badge badge-done">Concluída</span>
+            <button class="btn-card-action" onclick="event.stopPropagation();toast('Exibindo comprovante da coleta…')">Ver detalhes</button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Empty state -->
+      <div class="empty-state" id="empty-state">
+        <div class="empty-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+        </div>
+        <h3>Nenhuma coleta encontrada</h3>
+        <p>Tente outro filtro ou crie uma nova solicitação.</p>
+      </div>
+
+      <!-- Pagination -->
+      <div class="pagination" id="pagination">
+        <span class="pag-info" id="pag-info">Exibindo 7 de 12 coletas</span>
+        <div class="pag-btns">
+          <button class="pag-btn" disabled>‹</button>
+          <button class="pag-btn active">1</button>
+          <button class="pag-btn" onclick="toast('Carregando página 2…')">2</button>
+          <button class="pag-btn" onclick="toast('Carregando página 3…')">›</button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<!-- Detail panel overlay -->
+<div class="overlay" id="overlay" onclick="closeDetail()"></div>
+
+<!-- Detail slide panel -->
+<div class="detail-panel" id="detail-panel">
+  <div class="detail-header">
+    <h3 id="dp-title">Detalhes da Coleta</h3>
+    <button class="close-panel" onclick="closeDetail()">✕</button>
+  </div>
+  <div class="detail-body">
+    <div class="detail-avatar-row">
+      <div class="coleta-avatar" id="dp-avatar">E</div>
+      <div>
+        <div class="detail-company-name" id="dp-company"></div>
+        <div class="detail-company-loc" id="dp-loc">📍 </div>
+      </div>
+    </div>
+
+    <div class="detail-section">
+      <div class="detail-section-title">Informações da Coleta</div>
+      <div class="detail-row"><span class="detail-label">Nº do pedido</span><span class="detail-value" id="dp-id"></span></div>
+      <div class="detail-row"><span class="detail-label">Data agendada</span><span class="detail-value" id="dp-date"></span></div>
+      <div class="detail-row"><span class="detail-label">Resíduos</span><span class="detail-value" id="dp-tipos"></span></div>
+      <div class="detail-row"><span class="detail-label">Massa estimada</span><span class="detail-value" id="dp-weight"></span></div>
+      <div class="detail-row"><span class="detail-label">Status</span><span id="dp-badge"></span></div>
+    </div>
+
+    <div class="detail-section">
+      <div class="detail-section-title">Linha do tempo</div>
+      <div class="detail-timeline" id="dp-timeline"></div>
+    </div>
+  </div>
+  <div class="detail-actions" id="dp-actions"></div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="tst"><div class="tdot"></div><span id="tmsg"></span></div>
+
+<script>
+  /* ─── TOAST ─── */
+  function toast(m, d = 3000) {
+    const t = document.getElementById('tst');
+    document.getElementById('tmsg').textContent = m;
+    t.classList.add('on');
+    setTimeout(() => t.classList.remove('on'), d);
+  }
+
+  /* ─── LOADER ─── */
+  function transicaoPara(url, e) {
+    e.preventDefault();
+    const l = document.getElementById('loading-screen');
+    l.style.pointerEvents = 'all'; l.style.opacity = '1';
+    setTimeout(() => { window.location.href = url; }, 800);
+  }
+  function logout(e) {
+    e.preventDefault();
+    const l = document.getElementById('loading-screen');
+    l.style.pointerEvents = 'all'; l.style.opacity = '1';
+    setTimeout(() => { window.location.href = 'ecocall-home.html'; }, 900);
+  }
+
+  /* ─── FILTER ─── */
+  let activeFilter = 'all';
+  function setFilter(btn, f) {
+    activeFilter = f;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    applyFilters();
+  }
+
+  function filterCards() { applyFilters(); }
+
+  function applyFilters() {
+    const q = document.getElementById('search-input').value.toLowerCase();
+    const cards = document.querySelectorAll('.coleta-card');
+    let visible = 0;
+    cards.forEach(c => {
+      const matchStatus = activeFilter === 'all' || c.dataset.status === activeFilter;
+      const matchSearch = c.dataset.company.toLowerCase().includes(q);
+      const show = matchStatus && matchSearch;
+      c.style.display = show ? 'grid' : 'none';
+      if (show) visible++;
+    });
+    document.getElementById('empty-state').classList.toggle('show', visible === 0);
+    document.getElementById('pagination').style.display = visible === 0 ? 'none' : 'flex';
+    document.getElementById('pag-info').textContent = `Exibindo ${visible} de 12 coletas`;
+  }
+
+  /* ─── SORT ─── */
+  function sortCards(val) {
+    const grid = document.getElementById('coletas-grid');
+    const cards = [...grid.querySelectorAll('.coleta-card')];
+    cards.sort((a, b) => {
+      if (val === 'date-desc') return b.dataset.date.localeCompare(a.dataset.date);
+      if (val === 'date-asc')  return a.dataset.date.localeCompare(b.dataset.date);
+      if (val === 'weight-desc') return parseInt(b.dataset.weight) - parseInt(a.dataset.weight);
+      return 0;
+    });
+    cards.forEach(c => grid.appendChild(c));
+    toast('Lista reordenada.');
+  }
+
+  /* ─── DETAIL PANEL ─── */
+  function openDetail(company, loc, letter, avClass, status, day, month, weight, tipos, date, id) {
+    // populate
+    document.getElementById('dp-title').textContent = 'Coleta #' + id;
+    document.getElementById('dp-company').textContent = company;
+    document.getElementById('dp-loc').textContent = '📍 ' + loc;
+    document.getElementById('dp-id').textContent = id;
+    document.getElementById('dp-date').textContent = date;
+    document.getElementById('dp-tipos').textContent = tipos;
+    document.getElementById('dp-weight').textContent = weight + ' kg';
+
+    const av = document.getElementById('dp-avatar');
+    av.textContent = letter;
+    av.className = 'coleta-avatar ' + avClass;
+
+    // badge
+    const badges = {
+      done:   '<span class="badge badge-done">Concluída</span>',
+      sched:  '<span class="badge badge-sched">Agendada</span>',
+      prog:   '<span class="badge badge-prog">Em andamento</span>',
+      cancel: '<span class="badge badge-cancel">Cancelada</span>',
+    };
+    document.getElementById('dp-badge').innerHTML = badges[status] || '';
+
+    // timeline
+    const tlMap = {
+      done: [
+        { label:'Solicitação recebida', date:'confirmado', cls:'done' },
+        { label:'Coleta confirmada',    date:'confirmado', cls:'done' },
+        { label:'Coleta em rota',       date:'finalizado', cls:'done' },
+        { label:'Coleta concluída',     date:date,         cls:'done' },
+      ],
+      sched: [
+        { label:'Solicitação recebida', date:'confirmado', cls:'done' },
+        { label:'Coleta confirmada',    date:date,         cls:'done' },
+        { label:'Coleta em rota',       date:'Aguardando', cls:'wait' },
+        { label:'Coleta concluída',     date:'Pendente',   cls:'wait' },
+      ],
+      prog: [
+        { label:'Solicitação recebida', date:'confirmado', cls:'done' },
+        { label:'Coleta confirmada',    date:'confirmado', cls:'done' },
+        { label:'Coleta em rota',       date:'Em andamento',cls:'active' },
+        { label:'Coleta concluída',     date:'Pendente',   cls:'wait' },
+      ],
+      cancel: [
+        { label:'Solicitação recebida', date:'confirmado', cls:'done' },
+        { label:'Coleta cancelada',     date:date,         cls:'wait' },
+      ],
+    };
+    const tl = document.getElementById('dp-timeline');
+    tl.innerHTML = (tlMap[status]||[]).map(s =>
+      `<div class="tl-item">
+        <div class="tl-dot ${s.cls}"></div>
+        <div class="tl-text">
+          <div class="tl-label">${s.label}</div>
+          <div class="tl-date">${s.date}</div>
+        </div>
+      </div>`
+    ).join('');
+
+    // actions
+    const actMap = {
+      done:   `<button class="btn-detail-primary" onclick="toast('Baixando comprovante PDF…')">Baixar comprovante</button><button class="btn-detail-secondary" onclick="toast('Abrindo nova solicitação…')">Solicitar nova coleta</button>`,
+      sched:  `<button class="btn-detail-primary" onclick="toast('Abrindo reagendamento…')">Reagendar</button><button class="btn-detail-secondary" onclick="toast('Cancelamento solicitado.')">Cancelar coleta</button>`,
+      prog:   `<button class="btn-detail-primary" onclick="toast('Rastreando caminhão em tempo real…')">Rastrear agora</button><button class="btn-detail-secondary" onclick="toast('Entrando em contato com a empresa…')">Falar com empresa</button>`,
+      cancel: `<button class="btn-detail-primary" onclick="toast('Abrindo nova solicitação…')">Solicitar novamente</button>`,
+    };
+    document.getElementById('dp-actions').innerHTML = actMap[status] || '';
+
+    // open
+    document.getElementById('overlay').classList.add('show');
+    document.getElementById('detail-panel').classList.add('open');
+  }
+
+  function closeDetail() {
+    document.getElementById('overlay').classList.remove('show');
+    document.getElementById('detail-panel').classList.remove('open');
+  }
+</script>
+</body>
+</html>
