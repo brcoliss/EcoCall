@@ -12,9 +12,9 @@
 <body>
 
 <!-- Loading screen -->
-<div id="loading-screen" style="position:fixed;inset:0;background:#0a2010;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;opacity:0;pointer-events:none;transition:opacity 0.3s ease;">
-  <div style="width:45px;height:45px;border:4px solid rgba(62,201,106,0.15);border-top:4px solid #3ec96a;border-radius:50%;animation:spin 0.8s linear infinite;"></div>
-  <p style="color:#fff;font-family:'DM Sans',sans-serif;font-size:.95rem;margin-top:1.2rem;letter-spacing:.05em;">Carregando...</p>
+<div id="loading-screen" style="position:fixed;inset:0;background:#ffffff;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;opacity:0;pointer-events:none;transition:opacity 0.3s ease;">
+  <div style="width:42px;height:42px;border:3px solid #e6ebe7;border-top:3px solid #2a8a4a;border-radius:50%;animation:spin 0.8s linear infinite;"></div>
+  <p style="color:#1f2a22;font-family:'DM Sans',sans-serif;font-size:.9rem;margin-top:1rem;">Carregando...</p>
 </div>
 
 <div class="dash-layout">
@@ -23,10 +23,7 @@
   <aside class="sidebar">
     <a href="ecocall-home.html" class="logo" onclick="transicaoPara('ecocall-home.html',event)">
       <div class="logo-mark">
-        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#3ec96a" stroke-width="2" stroke-linecap="round">
-          <path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/>
-          <path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85"/>
-        </svg>
+        <img src="img/logo-folha.png" alt="EcoCall" width="36" height="36">
       </div>
       <div>
         <div class="logo-name">EcoCall</div>
@@ -73,6 +70,7 @@
   <main class="main-content">
 
     <header class="topbar">
+      <div class="topbar-inner">
       <div class="topbar-welcome">
         <h1>Minhas Coletas</h1>
         <p>Acompanhe o histórico e status de todas as suas coletas.</p>
@@ -94,6 +92,7 @@
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3ec96a" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
           <span>Santos, SP</span>
         </div>
+      </div>
       </div>
     </header>
 

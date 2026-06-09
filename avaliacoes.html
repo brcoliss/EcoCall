@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EcoCall — Avaliações</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ecocall-dashboard.css">
+<link rel="stylesheet" href="empresa-pages.css">
+</head>
+<body>
+
+<div id="loading-screen" style="position:fixed;inset:0;background:#0a2010;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;opacity:0;pointer-events:none;transition:opacity 0.3s ease;">
+  <div style="width:45px;height:45px;border:4px solid rgba(62,201,106,0.15);border-top:4px solid #3ec96a;border-radius:50%;animation:spin 0.8s linear infinite;"></div>
+  <p style="color:#fff;font-family:'DM Sans',sans-serif;font-size:.95rem;margin-top:1.2rem;letter-spacing:.05em;">Carregando avaliações...</p>
+</div>
+<style>@keyframes spin { to { transform: rotate(360deg); } }</style>
+
+<div class="dash-layout">
+
+  <aside class="sidebar">
+    <a href="dashboard_empresa.html" class="logo" onclick="transicaoPara('dashboard_empresa.html', event)">
+      <div class="logo-mark"><img src="img/logo-folha.png" alt="EcoCall" width="36" height="36"></div>
+      <div>
+        <div class="logo-name">EcoCall</div>
+        <div class="logo-tag">Painel Empresa</div>
+      </div>
+    </a>
+
+    <nav class="sidebar-menu">
+      <a href="dashboard_empresa.html" class="nav-item" onclick="transicaoPara('dashboard_empresa.html', event)">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        <span>Painel</span>
+      </a>
+      <a href="pedidos.html" class="nav-item" onclick="transicaoPara('pedidos.html', event)">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        <span>Pedidos <b style="background:#f5c842;color:#333;padding:1px 5px;font-size:10px;border-radius:3px;margin-left:5px;">3</b></span>
+      </a>
+      <a href="agendamentos.html" class="nav-item" onclick="transicaoPara('agendamentos.html', event)">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        <span>Agendamentos</span>
+      </a>
+      <a href="relatorios.html" class="nav-item" onclick="transicaoPara('relatorios.html', event)">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        <span>Relatórios</span>
+      </a>
+      <a href="meu-perfil.html" class="nav-item" onclick="transicaoPara('meu-perfil.html', event)">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span>Meu Perfil</span>
+      </a>
+      <a href="avaliacoes.html" class="nav-item active">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <span>Avaliações</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="avatar-mini" style="background:#2d522d;color:#3ec96a;">EC</div>
+      <div class="user-meta">
+        <div class="user-name">EcoColeta SP</div>
+        <div class="user-email">admin@ecocoleta.com.br</div>
+      </div>
+      <a href="#" class="logout-trigger" onclick="logout(event)" title="Sair do painel">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      </a>
+    </div>
+  </aside>
+
+  <main class="main-content">
+
+    <header class="topbar">
+      <div class="topbar-welcome">
+        <h1>Avaliações</h1>
+        <p>Veja o que os clientes dizem sobre o atendimento da sua empresa.</p>
+      </div>
+      <div class="topbar-right">
+        <select class="select-input" onchange="filterReviews(this.value)">
+          <option value="all">Todas</option>
+          <option value="5">5 estrelas</option>
+          <option value="4">4 estrelas</option>
+          <option value="3">3 estrelas</option>
+          <option value="low">2 ou menos</option>
+        </select>
+      </div>
+    </header>
+
+    <div class="content-wrapper">
+
+      <!-- Resumo -->
+      <div class="content-card">
+        <div class="review-summary">
+          <div class="review-big">
+            <div class="review-num">4,7</div>
+            <div class="review-stars-big">★ ★ ★ ★ ★</div>
+            <div class="review-total">Baseado em 38 avaliações</div>
+          </div>
+          <div class="review-bars">
+            <div class="rb-row"><span>5 ★</span><div class="rb-track"><div class="rb-fill" style="width:78%"></div></div><span>30</span></div>
+            <div class="rb-row"><span>4 ★</span><div class="rb-track"><div class="rb-fill" style="width:13%"></div></div><span>5</span></div>
+            <div class="rb-row"><span>3 ★</span><div class="rb-track"><div class="rb-fill" style="width:5%"></div></div><span>2</span></div>
+            <div class="rb-row"><span>2 ★</span><div class="rb-track"><div class="rb-fill" style="width:3%"></div></div><span>1</span></div>
+            <div class="rb-row"><span>1 ★</span><div class="rb-track"><div class="rb-fill" style="width:0%"></div></div><span>0</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lista de avaliações -->
+      <div class="review-list" id="review-list">
+
+        <div class="review-item" data-rating="5">
+          <div class="rev-head">
+            <div class="rev-avatar">JS</div>
+            <div>
+              <div class="rev-name">João Silva</div>
+              <div class="rev-date">02/04/2025 · São Paulo, SP</div>
+            </div>
+            <div class="rev-stars">★ ★ ★ ★ ★</div>
+          </div>
+          <div class="rev-text">Equipe muito atenciosa, chegou no horário combinado e ainda levou um material extra que eu tinha esquecido. Recomendo demais!</div>
+          <button class="btn-reply" onclick="toast('Abrindo campo de resposta…')">Responder</button>
+        </div>
+
+        <div class="review-item" data-rating="5">
+          <div class="rev-head">
+            <div class="rev-avatar">PT</div>
+            <div>
+              <div class="rev-name">Paula Tavares</div>
+              <div class="rev-date">28/03/2025 · São Bernardo, SP</div>
+            </div>
+            <div class="rev-stars">★ ★ ★ ★ ★</div>
+          </div>
+          <div class="rev-text">Serviço impecável, agendamento simples pelo app e o pessoal foi educadíssimo. Vou continuar usando.</div>
+          <div class="rev-reply">
+            <strong>Resposta da empresa</strong>
+            Obrigado, Paula! Ficamos muito felizes que sua experiência foi positiva. Conte sempre conosco. ♻️
+          </div>
+        </div>
+
+        <div class="review-item" data-rating="4">
+          <div class="rev-head">
+            <div class="rev-avatar">CL</div>
+            <div>
+              <div class="rev-name">Carlos Lima</div>
+              <div class="rev-date">22/03/2025 · Guarulhos, SP</div>
+            </div>
+            <div class="rev-stars">★ ★ ★ ★ ☆</div>
+          </div>
+          <div class="rev-text">Boa coleta, só atrasou uns 30 minutos do horário. Avisaram pelo aplicativo, então tudo bem. Vidro e metal coletados sem problemas.</div>
+          <button class="btn-reply" onclick="toast('Abrindo campo de resposta…')">Responder</button>
+        </div>
+
+        <div class="review-item" data-rating="5">
+          <div class="rev-head">
+            <div class="rev-avatar">AS</div>
+            <div>
+              <div class="rev-name">André Santos</div>
+              <div class="rev-date">18/03/2025 · São Paulo, SP</div>
+            </div>
+            <div class="rev-stars">★ ★ ★ ★ ★</div>
+          </div>
+          <div class="rev-text">Achei o atendimento super profissional. Aceitaram eletrônicos antigos que outras empresas tinham recusado.</div>
+          <button class="btn-reply" onclick="toast('Abrindo campo de resposta…')">Responder</button>
+        </div>
+
+        <div class="review-item" data-rating="3">
+          <div class="rev-head">
+            <div class="rev-avatar">FB</div>
+            <div>
+              <div class="rev-name">Fernanda Borges</div>
+              <div class="rev-date">10/03/2025 · Diadema, SP</div>
+            </div>
+            <div class="rev-stars">★ ★ ★ ☆ ☆</div>
+          </div>
+          <div class="rev-text">A coleta foi feita, mas a comunicação podia ser melhor. Mudaram o horário e eu só fiquei sabendo na hora.</div>
+          <div class="rev-reply">
+            <strong>Resposta da empresa</strong>
+            Fernanda, agradecemos o retorno. Já estamos ajustando nosso processo de aviso para evitar que isso aconteça de novo. Obrigado!
+          </div>
+        </div>
+
+        <div class="review-item" data-rating="5">
+          <div class="rev-head">
+            <div class="rev-avatar">LM</div>
+            <div>
+              <div class="rev-name">Lúcia Mota</div>
+              <div class="rev-date">05/03/2025 · Mauá, SP</div>
+            </div>
+            <div class="rev-stars">★ ★ ★ ★ ★</div>
+          </div>
+          <div class="rev-text">Tudo certinho! O moço que fez a coleta foi simpático e cuidadoso. Bom saber que tem gente fazendo esse trabalho com seriedade.</div>
+          <button class="btn-reply" onclick="toast('Abrindo campo de resposta…')">Responder</button>
+        </div>
+
+        <div class="review-item" data-rating="2">
+          <div class="rev-head">
+            <div class="rev-avatar">RM</div>
+            <div>
+              <div class="rev-name">Rafael Mendes</div>
+              <div class="rev-date">28/02/2025 · Itaquaquecetuba, SP</div>
+            </div>
+            <div class="rev-stars">★ ★ ☆ ☆ ☆</div>
+          </div>
+          <div class="rev-text">Demoraram para confirmar o pedido e acabaram cancelando dizendo que era fora da área. Poderiam ter avisado isso antes.</div>
+          <button class="btn-reply" onclick="toast('Abrindo campo de resposta…')">Responder</button>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<div class="toast" id="tst"><div class="tdot"></div><span id="tmsg"></span></div>
+
+<script>
+  function toast(m,d=2500){const t=document.getElementById('tst');document.getElementById('tmsg').textContent=m;t.classList.add('on');setTimeout(()=>t.classList.remove('on'),d);}
+  function transicaoPara(url,e){e.preventDefault();const l=document.getElementById('loading-screen');l.style.pointerEvents='all';l.style.opacity='1';setTimeout(()=>window.location.href=url,700);}
+  function logout(e){e.preventDefault();const l=document.getElementById('loading-screen');document.querySelector('#loading-screen p').textContent='Encerrando sessão…';l.style.pointerEvents='all';l.style.opacity='1';setTimeout(()=>window.location.href='ecocall-home.html',900);}
+
+  function filterReviews(f){
+    document.querySelectorAll('.review-item').forEach(it=>{
+      const r=parseInt(it.dataset.rating);
+      let show=true;
+      if(f==='all') show=true;
+      else if(f==='low') show=r<=2;
+      else show=r===parseInt(f);
+      it.style.display=show?'':'none';
+    });
+  }
+</script>
+</body>
+</html>

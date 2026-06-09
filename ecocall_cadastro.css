@@ -22,7 +22,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--g900);min-height:100vh;di
 /* NAV */
 nav{position:relative;z-index:10;background:rgba(10,32,16,.95);backdrop-filter:blur(20px);border-bottom:1px solid rgba(78,203,113,.1);padding:0 3rem;display:flex;align-items:center;justify-content:space-between;height:64px}
 .logo{display:flex;align-items:center;gap:10px;text-decoration:none}
-.logo-mark{width:34px;height:34px;background:var(--g700);border-radius:9px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(78,203,113,.25)}
+.logo-mark{width:40px;height:40px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.logo-mark img{width:100%;height:100%;object-fit:contain;display:block}
 .logo-name{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;color:#fff;letter-spacing:-.01em}
 .logo-tag{font-size:.5rem;color:var(--g300);letter-spacing:.07em;margin-top:-2px}
 .nav-r{display:flex;align-items:center;gap:.75rem;font-size:.8rem}
