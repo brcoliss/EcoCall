@@ -1,6 +1,6 @@
-/* ─── Componentes compartilhados das páginas da empresa ─── */
-
-/* Filtros / abas no topo do conteúdo */
+/* =====================================================
+   ABAS E FILTROS DAS PÁGINAS
+===================================================== */
 .page-tabs {
   display: flex;
   gap: .5rem;
@@ -39,7 +39,10 @@
   color: var(--text-grey);
 }
 
-/* Card genérico de conteúdo */
+
+/* =====================================================
+   CARDS GENÉRICOS
+===================================================== */
 .content-card {
   background: #fff;
   border: 1px solid var(--border-light);
@@ -61,7 +64,10 @@
   margin-bottom: 1.1rem;
 }
 
-/* Pesquisa + filtro inline */
+
+/* =====================================================
+   PESQUISA E FILTROS
+===================================================== */
 .toolbar-row {
   display: flex; gap: .8rem; flex-wrap: wrap;
   margin-bottom: 1.2rem; align-items: center;
@@ -78,7 +84,10 @@
   outline: none;
 }
 
-/* Stats compactos no topo */
+
+/* =====================================================
+   STATS COMPACTOS NO TOPO
+===================================================== */
 .stats-row {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -101,7 +110,10 @@
 .stat-mini-sub.warn { color: #d68a00; }
 .stat-mini-sub.muted { color: var(--text-grey); font-weight: 400; }
 
-/* ───── Agendamentos ───── */
+
+/* =====================================================
+   AGENDAMENTOS
+===================================================== */
 .calendar-wrap {
   display: grid;
   grid-template-columns: 1.4fr 1fr;
@@ -180,7 +192,11 @@
 .agenda-status.confirmed { background: rgba(62,201,106,.12); color: var(--brand-green-hover); }
 .agenda-status.pending   { background: #fff7d6; color: #d68a00; }
 
-/* ───── Relatórios ───── */
+
+
+/* =====================================================
+   RELATÓRIOS
+===================================================== */
 .chart-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -235,7 +251,11 @@
 .dleg-item { display: flex; align-items: center; gap: .55rem; font-size: .85rem; color: var(--text-dark); }
 .dleg-dot { width: 10px; height: 10px; border-radius: 3px; }
 
-/* ───── Meu Perfil ───── */
+
+
+/* =====================================================
+   MEU PERFIL
+===================================================== */
 .profile-grid {
   display: grid;
   grid-template-columns: 320px 1fr;
@@ -321,7 +341,10 @@
 }
 .btn-cancel:hover { background: #f4f7f5; color: var(--text-dark); }
 
-/* ───── Avaliações ───── */
+
+/* =====================================================
+   AVALIAÇÕES
+===================================================== */
 .review-summary {
   display: grid;
   grid-template-columns: 280px 1fr;
@@ -387,3 +410,105 @@
   padding: 0;
 }
 .btn-reply:hover { text-decoration: underline; }
+
+
+
+/* =====================================================
+   PEDIDOS
+===================================================== */
+
+.loading-screen{
+  position:fixed;
+  inset:0;
+  background:#0a2010;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .3s ease;
+}
+
+.loading-spinner{
+  width:45px;
+  height:45px;
+  border:4px solid rgba(62,201,106,.15);
+  border-top:4px solid #3ec96a;
+  border-radius:50%;
+  animation:spin .8s linear infinite;
+}
+
+.loading-text{
+  color:#fff;
+  font-family:var(--font-dm);
+  font-size:.95rem;
+  margin-top:1.2rem;
+  letter-spacing:.05em;
+}
+
+@keyframes spin{
+  to{
+    transform:rotate(360deg);
+  }
+}
+
+.avatar-company{
+  background:#2d522d;
+  color:#3ec96a;
+}
+
+.badge-count{
+  background:#f5c842;
+  color:#333;
+  padding:1px 5px;
+  font-size:10px;
+  border-radius:3px;
+  margin-left:5px;
+}
+
+.bell-warning{
+  background:#f5c842;
+  color:#111;
+}
+
+.badge-new{
+  background:rgba(245,200,66,.15);
+  color:#d68a00;
+  border:1px solid rgba(245,200,66,.3);
+}
+
+.badge-cancel{
+  background:rgba(255,76,76,.1);
+  color:#d04848;
+  border:1px solid rgba(255,76,76,.2);
+}
+
+.btn-success{
+  background:#3ec96a;
+  color:#0a2010;
+  font-weight:600;
+  padding:5px 12px;
+  border-radius:8px;
+  border:none;
+  cursor:pointer;
+  margin-right:5px;
+}
+
+.btn-success:hover{
+  background:#34b05b;
+}
+
+.btn-danger{
+  background:rgba(255,76,76,.1);
+  color:#d04848;
+  padding:5px 12px;
+  border-radius:8px;
+  border:none;
+  cursor:pointer;
+}
+
+.btn-danger:hover{
+  background:rgba(255,76,76,.18);
+}
