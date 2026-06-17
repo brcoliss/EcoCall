@@ -1,0 +1,209 @@
+/* ==========================================================================
+   A. RESET & TOKENS GLOBAIS
+   ========================================================================== */
+   *, *::before, *::after { 
+    box-sizing: border-box; 
+    margin: 0; 
+    padding: 0; 
+  }
+  
+  :root {
+    --g900: #0a2010;
+    --g800: #0f2e18;
+    --g700: #163d22;
+    --g600: #1d5430;
+    --g500: #256b3e;
+    --g400: #2f8a52;
+    --g300: #3dab68;
+    --g200: #5cc97e;
+    --g100: #a8e4ba;
+    --g50: #e8f5ee;
+    --ac: #3ec96a;
+    
+    --white: #fff;
+    --gray-100: #f0f4f1;
+    --gray-200: #dde4df;
+    --gray-400: #8ba392;
+    --gray-600: #4a6454;
+    --text: #0d1f14;
+    --textl: #5a7066;
+  }
+  
+  html { 
+    scroll-behavior: smooth; 
+  }
+  
+  body {
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+  
+  /* ==========================================================================
+     B. ANIMAÇÕES GLOBAIS
+     ========================================================================== */
+  @keyframes spin      { to { transform: rotate(360deg); } }
+  @keyframes pulse     { 0%, 100% { opacity: 1; } 50% { opacity: .3; } }
+  @keyframes floatY    { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+  @keyframes spinRing  { to { transform: rotate(360deg); } }
+  @keyframes fadeIn    { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  
+  /* ==========================================================================
+     C. COMPONENTES COMPARTILHADOS (LOVERS / BADGES / AVATARES)
+     ========================================================================== */
+  /* Tela de Carregamento Global */
+  .loading-screen {
+    position: fixed;
+    inset: 0;
+    background: #0a2010;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+  
+  .loading-screen.is-active {
+    opacity: 1;
+    pointer-events: all;
+  }
+  
+  .loading-spinner {
+    width: 45px;
+    height: 45px;
+    border: 4px solid rgba(62, 201, 106, 0.15);
+    border-top: 4px solid #3ec96a;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+  
+  .loading-screen p {
+    color: #ffffff;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    margin-top: 1.2rem;
+    letter-spacing: 0.05em;
+  }
+  
+  /* Elementos de Listas e Badges */
+  .etag {
+    font-size: .6rem;
+    padding: 2px 7px;
+    border-radius: 5px;
+    background: var(--g50);
+    color: var(--g600);
+    border: 1px solid rgba(62, 201, 106, .18);
+    font-weight: 500;
+  }
+  
+  .badge-count {
+    background: #f5c842;
+    color: #333;
+    padding: 1px 5px;
+    font-size: 10px;
+    border-radius: 3px;
+    margin-left: 5px;
+    font-weight: 700;
+  }
+  
+  .avatar-mini--brand {
+    background: #2d522d;
+    color: #3ec96a;
+  }
+  
+  /* Modificadores de Alerta / Estatísticas */
+  .bell-badge-count--warn { background: #f5c842; color: #111; }
+  .m-ico--warn            { color: #f5c842; }
+  .m-ico--gold            { color: #ffb800; }
+  .m-sub--warn            { color: #f5c842; }
+  
+  /* Preenchimento das mini-barras (Módulo de Avaliações) */
+  .rb-fill[data-fill="78"] { width: 78%; }
+  .rb-fill[data-fill="13"] { width: 13%; }
+  .rb-fill[data-fill="5"]  { width: 5%;  }
+  .rb-fill[data-fill="3"]  { width: 3%;  }
+  .rb-fill[data-fill="0"]  { width: 0%;  }
+  
+  /* Localização do Usuário (Modo Escuro / Header da Empresa) */
+  .user-location-badge--active {
+    background: rgba(62, 201, 106, 0.1);
+    border-color: rgba(62, 201, 106, 0.3);
+  }
+  .user-location-badge--active .dot { color: #3ec96a; margin-right: 4px; }
+  .user-location-badge--active .label { color: #ffffff; }
+  
+  /* ==========================================================================
+     D. AMBIENTE 1: TELA DE AUTENTICAÇÃO / LANDING (MODO ESCURO)
+     Dica: Adicione a classe '.auth-page' na tag <body> dessas páginas
+     ========================================================================== */
+  body.auth-page {
+    background: var(--g900);
+  }
+  
+  body.auth-page nav {
+    position: relative;
+    z-index: 10;
+    background: rgba(10, 32, 16, .95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(78, 203, 113, .1);
+    padding: 0 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+  
+  /* Logos da Autenticação */
+  body.auth-page .logo-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -.01em;
+  }
+  
+  body.auth-page .logo-tag {
+    font-size: .5rem;
+    color: var(--g300);
+    letter-spacing: .07em;
+    margin-top: -2px;
+  }
+  
+  body.auth-page .nav-r {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    font-size: .8rem;
+  }
+  
+  body.auth-page .nav-r span { color: rgba(255, 255, 255, .5); }
+  body.auth-page .nav-r a { color: var(--ac); text-decoration: none; font-weight: 600; }
+  body.auth-page .nav-r a:hover { text-decoration: underline; }
+  
+  /* Fundo abstrato com Grids e Blobs (Login / Registro) */
+  body.auth-page .bg { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+  body.auth-page .bgrid { position: absolute; inset: 0; background-image: radial-gradient(rgba(78, 203, 113, .12) 1px, transparent 1px); background-size: 30px 30px; }
+  body.auth-page .bblob { position: absolute; border-radius: 50%; filter: blur(80px); opacity: .07; }
+  body.auth-page .bb1 { width: 600px; height: 600px; background: var(--g300); top: -200px; right: -150px; }
+  body.auth-page .bb2 { width: 400px; height: 400px; background: var(--ac); bottom: -150px; left: -100px; }
+  
+  /* Rodapé dos Formulários de Autenticação */
+  body.auth-page .login-link { text-align: center; font-size: .76rem; color: var(--textl); }
+  body.auth-page .login-link a { color: var(--g300); font-weight: 600; text-decoration: none; }
+  body.auth-page .login-link a:hover { text-decoration: underline; }
+  body.auth-page .sec-note { display: flex; align-items: center; justify-content: center; gap: 5px; margin-top: 1.2rem; padding-top: 1rem; border-top: 1px solid rgba(255, 255, 255, 0.1); font-size: .66rem; color: var(--gray-400); }
+  
+  /* ==========================================================================
+     E. AMBIENTE 2: PAINÉIS / INTRA-DASHBOARDS (MODO CLARO)
+     Dica: Adicione a classe '.dash-page' na tag <body> dessas páginas
+     ========================================================================== */
+  body.dash-page {
+    background: #f6f8f6;
+    color: #1f2a22;
+  }

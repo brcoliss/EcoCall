@@ -1,0 +1,518 @@
+/* ==========================================================================
+   ESTRUTURA DE LAYOUT (ESPECÍFICO PARA TELA DIVIDIDA DE LOGIN)
+   ========================================================================== */
+   body {
+    display: flex;
+    align-items: stretch;
+    overflow: hidden;
+  }
+  
+  .page {
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+    z-index: 1;
+  }
+  
+  /* ── BACKGROUND SHAPES (EFEITOS VISUAIS DE FUNDO) ── */
+  .bg-shapes { 
+    position: fixed; 
+    inset: 0; 
+    pointer-events: none; 
+    z-index: 0; 
+    overflow: hidden; 
+  }
+  
+  .dot-grid {
+    position: absolute; 
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(78,203,113,0.15) 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+  
+  .shape { 
+    position: absolute; 
+    opacity: 0.1; 
+  }
+  
+  .s1 {
+    width: 380px; 
+    height: 380px;
+    background: var(--g300);
+    border-radius: 40% 60% 60% 40% / 40% 40% 60% 60%;
+    top: -80px; 
+    left: -80px;
+    animation: drift 18s ease-in-out infinite;
+  }
+  
+  .s2 {
+    width: 260px; 
+    height: 260px;
+    background: var(--accent);
+    border-radius: 60% 40% 40% 60% / 60% 60% 40% 40%;
+    bottom: -60px; 
+    right: 38%;
+    animation: drift 22s ease-in-out infinite reverse;
+  }
+  
+  @keyframes drift {
+    0%, 100% { transform: translate(0,0) rotate(0deg); }
+    33%      { transform: translate(20px,-25px) rotate(4deg); }
+    66%      { transform: translate(-15px,20px) rotate(-3deg); }
+  }
+  
+  /* ==========================================================================
+     PAINEL ESQUERDO (WELCOME / BRANDING)
+     ========================================================================== */
+  .left-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 2.5rem;
+    position: relative;
+  }
+  
+  /* Logo */
+  .logo {
+    position: absolute; 
+    top: 2rem; 
+    left: 2.5rem;
+    display: flex; 
+    align-items: center; 
+    gap: 10px;
+    text-decoration: none;
+  }
+  
+  .logo-icon {
+    width: 44px; 
+    height: 44px;
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  
+  .logo-icon img { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: contain; 
+    display: block; 
+  }
+  
+  .logo-text {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.2rem; 
+    font-weight: 800;
+    color: var(--white);
+  }
+  
+  .logo-sub {
+    font-size: 0.6rem; 
+    color: var(--g200);
+    letter-spacing: 0.05em;
+  }
+  
+  /* Card de Boas-Vindas */
+  .welcome-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(78,203,113,0.18);
+    border-radius: 24px;
+    padding: 3rem 2.5rem;
+    text-align: center;
+    max-width: 340px; 
+    width: 100%;
+    backdrop-filter: blur(6px);
+  }
+  
+  /* Avatar Giratório */
+  .avatar-wrap {
+    width: 88px; 
+    height: 88px;
+    background: rgba(78,203,113,0.15);
+    border: 2px solid rgba(78,203,113,0.3);
+    border-radius: 50%;
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    position: relative;
+  }
+  
+  .avatar-wrap::after {
+    content: '';
+    position: absolute; 
+    inset: -6px;
+    border-radius: 50%;
+    border: 1px dashed rgba(78,203,113,0.25);
+    animation: spin 20s linear infinite;
+  }
+  
+  @keyframes spin { to { transform: rotate(360deg); } }
+  
+  .avatar-wrap svg { 
+    width: 40px; 
+    height: 40px; 
+    color: var(--g200); 
+  }
+  
+  .welcome-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.75rem; 
+    font-weight: 800;
+    color: var(--white); 
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
+  }
+  
+  .welcome-desc {
+    font-size: 0.82rem; 
+    color: var(--g100);
+    line-height: 1.6; 
+    font-weight: 300;
+    margin-bottom: 2rem;
+  }
+  
+  /* Lista de Benefícios */
+  .benefits {
+    list-style: none; 
+    text-align: left;
+    display: flex; 
+    flex-direction: column; 
+    gap: 0.85rem;
+    margin-bottom: 2rem;
+  }
+  
+  .benefits li {
+    display: flex; 
+    align-items: center; 
+    gap: 10px;
+    font-size: 0.85rem; 
+    color: var(--g100);
+  }
+  
+  .check-icon {
+    width: 22px; 
+    height: 22px; 
+    flex-shrink: 0;
+    background: rgba(78,203,113,0.2);
+    border: 1px solid rgba(78,203,113,0.4);
+    border-radius: 50%;
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+  }
+  
+  .check-icon svg { 
+    width: 11px; 
+    height: 11px; 
+    stroke: var(--accent); 
+    stroke-width: 2.5; 
+  }
+  
+  /* Mini Stats */
+  .stats-row {
+    display: flex; 
+    gap: 1.5rem; 
+    justify-content: center;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(78,203,113,0.15);
+  }
+  
+  .stat { 
+    text-align: center; 
+  }
+  
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.25rem; 
+    font-weight: 700; 
+    color: var(--white);
+  }
+  
+  .stat-label {
+    font-size: 0.65rem; 
+    color: var(--g300);
+    letter-spacing: 0.08em; 
+    text-transform: uppercase; 
+    margin-top: 1px;
+  }
+  
+  /* ==========================================================================
+     PAINEL DIREITO (FORMULÁRIO DE LOGIN)
+     ========================================================================== */
+  .right-panel {
+    width: 440px;
+    min-height: 100vh;
+    background: var(--white);
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center;
+    padding: 2.75rem;
+    position: relative;
+  }
+  
+  .right-panel::before {
+    content: '';
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    right: 0; 
+    height: 4px;
+    background: linear-gradient(90deg, var(--g400), var(--accent), var(--g300));
+  }
+  
+  /* Header do Form */
+  .form-tag {
+    display: inline-flex; 
+    align-items: center; 
+    gap: 5px;
+    background: var(--g50); 
+    color: var(--g600);
+    font-size: 0.65rem; 
+    font-weight: 500; 
+    letter-spacing: 0.1em;
+    padding: 4px 10px; 
+    border-radius: 50px; 
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+  
+  .form-title {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.7rem; 
+    font-weight: 800;
+    color: var(--text-dark); 
+    letter-spacing: -0.02em; 
+    line-height: 1.15;
+    margin-bottom: 0.35rem;
+  }
+  
+  .form-subtitle {
+    font-size: 0.83rem; 
+    color: var(--gray-600);
+    font-weight: 300; 
+    margin-bottom: 1.75rem;
+  }
+  
+  /* Campos de Input */
+  .input-group { 
+    margin-bottom: 1rem; 
+  }
+  
+  .input-group label {
+    display: block; 
+    font-size: 0.73rem; 
+    font-weight: 500;
+    color: var(--gray-600); 
+    margin-bottom: 0.35rem; 
+    letter-spacing: 0.02em;
+  }
+  
+  .input-wrapper { 
+    position: relative; 
+  }
+  
+  .input-wrapper input {
+    width: 100%;
+    background: var(--gray-100);
+    border: 1.5px solid transparent;
+    border-radius: 10px;
+    padding: 0.68rem 0.9rem 0.68rem 2.4rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.875rem; 
+    color: var(--text-dark);
+    outline: none; 
+    transition: all 0.2s;
+  }
+  
+  .input-wrapper input::placeholder { 
+    color: var(--gray-400); 
+  }
+  
+  .input-wrapper input:focus {
+    border-color: var(--g400); 
+    background: var(--white);
+    box-shadow: 0 0 0 3px rgba(45,138,82,0.1);
+  }
+  
+  .iico {
+    position: absolute; 
+    left: 0.72rem; 
+    top: 50%;
+    transform: translateY(-50%); 
+    color: var(--gray-400); 
+    pointer-events: none;
+  }
+  
+  .input-wrapper:focus-within .iico { 
+    color: var(--g500); 
+  }
+  
+  .eye-btn {
+    position: absolute; 
+    right: 0.75rem; 
+    top: 50%;
+    transform: translateY(-50%);
+    background: none; 
+    border: none; 
+    cursor: pointer;
+    color: var(--gray-400); 
+    padding: 0;
+  }
+  
+  .eye-btn:hover { 
+    color: var(--g500); 
+  }
+  
+  /* Opções (Lembrar-me / Esqueci Senha) */
+  .form-row {
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+    margin-bottom: 1.25rem;
+  }
+  
+  .remember {
+    display: flex; 
+    align-items: center; 
+    gap: 7px;
+    font-size: 0.78rem; 
+    color: var(--gray-600); 
+    cursor: pointer;
+  }
+  
+  .remember input { 
+    width: 15px; 
+    height: 15px; 
+    accent-color: var(--g500); 
+    cursor: pointer; 
+  }
+  
+  .forgot { 
+    font-size: 0.78rem; 
+    color: var(--g500); 
+    text-decoration: none; 
+    font-weight: 500; 
+  }
+  
+  .forgot:hover { 
+    color: var(--g700); 
+  }
+  
+  /* Botões de Ação */
+  .btn-primary {
+    width: 100%; 
+    background: var(--g600); 
+    color: var(--white);
+    border: none; 
+    border-radius: 10px; 
+    padding: 0.78rem;
+    font-family: 'Syne', sans-serif; 
+    font-size: 0.88rem; 
+    font-weight: 600;
+    letter-spacing: 0.03em; 
+    cursor: pointer; 
+    transition: all 0.2s;
+    margin-bottom: 1rem;
+  }
+  
+  .btn-primary:hover {
+    background: var(--g500); 
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(30,100,55,0.3);
+  }
+  
+  .btn-primary:active { 
+    transform: translateY(0); 
+  }
+  
+  /* Divisor Metodologia Social */
+  .divider { 
+    display: flex; 
+    align-items: center; 
+    gap: 10px; 
+    margin-bottom: 1rem; 
+  }
+  
+  .divider::before, .divider::after { 
+    content: ''; 
+    flex: 1; 
+    height: 1px; 
+    background: var(--gray-200); 
+  }
+  
+  .divider span { 
+    font-size: 0.7rem; 
+    color: var(--gray-400); 
+    font-weight: 500; 
+  }
+  
+  /* Botões Sociais */
+  .social-btns { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    gap: 10px; 
+    margin-bottom: 1.4rem; 
+  }
+  
+  .btn-social {
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    gap: 7px;
+    background: var(--white); 
+    border: 1.5px solid var(--gray-200);
+    border-radius: 10px; 
+    padding: 0.6rem;
+    font-family: 'DM Sans', sans-serif; 
+    font-size: 0.78rem;
+    color: var(--text-dark); 
+    font-weight: 500;
+    cursor: pointer; 
+    transition: all 0.2s;
+  }
+  
+  .btn-social:hover { 
+    border-color: var(--g300); 
+    background: var(--g50); 
+  }
+  
+  /*Links Inferiores */
+  .signup-link { 
+    text-align: center; 
+    font-size: 0.78rem; 
+    color: var(--gray-600); 
+  }
+  
+  .signup-link a { 
+    color: var(--g600); 
+    font-weight: 600; 
+    text-decoration: none; 
+  }
+  
+  .signup-link a:hover { 
+    text-decoration: underline; 
+  }
+  
+  .security-note {
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    gap: 5px;
+    margin-top: 1.4rem; 
+    padding-top: 1.1rem;
+    border-top: 1px solid var(--gray-200);
+    font-size: 0.68rem; 
+    color: var(--gray-400);
+  }
+  
+  /* ==========================================================================
+     REGRAS DE RESPONSIVIDADE (MEDIA QUERIES)
+     ========================================================================== */
+  @media (max-width: 820px) {
+    .left-panel { display: none; }
+    .right-panel { width: 100%; }
+  }

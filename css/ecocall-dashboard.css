@@ -1,0 +1,643 @@
+/* ==========================================================================
+   CONFIGURAÇÕES LOCAIS E MAPEAMENTO DE VARIÁVEIS DA DASHBOARD
+   ========================================================================== */
+   :root {
+    /* Mapeando os nomes de variáveis da dash para as globais do shared.css */
+    --bg-dark-main: var(--g900);
+    --bg-dark-secondary: var(--g800);
+    --bg-app-light: var(--gray-100);
+    --brand-green: var(--ac);
+    --brand-green-hover: var(--g300);
+    --text-dark: var(--text);
+    --text-grey: var(--textl);
+    --border-light: rgba(14, 43, 22, 0.08);
+    
+    --font-syne: 'Syne', sans-serif;
+    --font-dm: 'DM Sans', sans-serif;
+  }
+  
+  body {
+    background-color: var(--bg-app-light);
+    color: var(--text-dark);
+  }
+  
+  /* ==========================================================================
+     ESTRUTURA DE LAYOUT PRINCIPAL (GRID / FLEX)
+     ========================================================================== */
+  .dash-layout {
+    display: flex;
+    min-height: 100vh;
+    width: 100vw;
+  }
+  
+  /* ==========================================================================
+     BARRA LATERAL DE NAVEGAÇÃO (SIDEBAR)
+     ========================================================================== */
+  .sidebar {
+    width: 260px;
+    background-color: var(--bg-dark-main);
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    padding: 2.2rem 1.4rem;
+    position: fixed; /* Mantém a barra fixa ao rolar a página */
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    border-right: 1px solid rgba(255, 255, 255, 0.03);
+  }
+  
+  /* Identidade Visual na Sidebar */
+  .sidebar .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    text-decoration: none;
+    color: #ffffff;
+    margin-bottom: 3.2rem;
+  }
+  
+  .sidebar .logo-mark {
+    background: transparent;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .sidebar .logo-mark img { width: 100%; height: 100%; object-fit: contain; display: block; }
+  
+  .sidebar .logo-name {
+    font-family: var(--font-syne);
+    font-weight: 800;
+    font-size: 1.2rem;
+    letter-spacing: -0.02em;
+  }
+  
+  .sidebar .logo-tag {
+    font-size: 0.72rem;
+    color: var(--brand-green);
+    font-weight: 500;
+    margin-top: -2px;
+  }
+  
+  /* Links do Menu */
+  .sidebar-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    padding: 0.85rem 1.1rem;
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+    font-size: 0.92rem;
+    font-weight: 500;
+    border-radius: 12px;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .nav-item:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.04);
+  }
+  
+  /* Estado ativo do menu (página atual) */
+  .nav-item.active {
+    color: var(--bg-dark-main);
+    background: var(--brand-green);
+    font-weight: 600;
+  }
+  
+  .nav-icon {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+  }
+  
+  /* Widget de Perfil do Usuário (Rodapé da Sidebar) */
+  .sidebar-footer {
+    margin-top: auto; /* Empurra o widget para o final da barra */
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 0.8rem 1rem;
+    border-radius: 14px;
+    gap: 0.75rem;
+  }
+  
+  .avatar-mini {
+    width: 34px;
+    height: 34px;
+    background: var(--brand-green);
+    color: var(--bg-dark-main);
+    font-family: var(--font-syne);
+    font-weight: 700;
+    font-size: 0.85rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .user-meta {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    overflow: hidden;
+  }
+  
+  .user-name {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #ffffff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .user-email {
+    font-size: 0.75rem;
+    color: var(--text-grey);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  /* Botão de Logout (Sair) */
+  .logout-trigger {
+    color: rgba(255, 255, 255, 0.35);
+    display: flex;
+    align-items: center;
+    transition: color 0.2s;
+  }
+  
+  .logout-trigger:hover {
+    color: #ff6b6b; /* Feedback visual em vermelho ao passar o mouse */
+  }
+  
+  /* ==========================================================================
+     ÁREA DE CONTEÚDO PRINCIPAL (PAINEL DIREITO)
+     ========================================================================== */
+  .main-content {
+    margin-left: 260px; /* Evita que o conteúdo fique por baixo da sidebar fixa */
+    flex: 1;
+    padding: 2.5rem 3rem;
+    max-width: 1400px;
+  }
+  
+  /* Cabeçalho da Dashboard (Topbar) */
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2.5rem;
+    gap: 2rem;
+  }
+  
+  .topbar-welcome h1 {
+    font-family: var(--font-syne);
+    font-weight: 800;
+    font-size: 1.8rem;
+    letter-spacing: -0.03em;
+    color: var(--text-dark);
+  }
+  
+  .topbar-welcome p {
+    font-size: 0.92rem;
+    color: var(--text-grey);
+    margin-top: 0.15rem;
+  }
+  
+  /* Elementos da Direita na Topbar (Busca, Notificação, Local) */
+  .topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+  }
+  
+  .dash-search-box {
+    background: #ffffff;
+    border: 1px solid var(--border-light);
+    border-radius: 14px;
+    padding: 0.6rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    width: 240px;
+  }
+  
+  .dash-search-box input {
+    border: none;
+    outline: none;
+    font-family: var(--font-dm);
+    font-size: 0.85rem;
+    color: var(--text-dark);
+    width: 100%;
+  }
+  
+  .dash-search-box input::placeholder {
+    color: #b3c4b8;
+  }
+  
+  /* Ícone de Notificações com Contador */
+  .notif-bell-box {
+    width: 42px;
+    height: 42px;
+    background: #ffffff;
+    border: 1px solid var(--border-light);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+    color: var(--text-dark);
+    transition: border 0.2s;
+  }
+  
+  .notif-bell-box:hover {
+    border-color: var(--brand-green);
+  }
+  
+  .bell-badge-count {
+    position: absolute;
+    top: -3px;
+    right: -3px;
+    background: #ff4d4d;
+    color: #ffffff;
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 2px 5px;
+    border-radius: 50px;
+  }
+  
+  .user-location-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #ffffff;
+    border: 1px solid var(--border-light);
+    padding: 0.6rem 1.1rem;
+    border-radius: 14px;
+    font-size: 0.88rem;
+    font-weight: 500;
+  }
+  
+  /* ==========================================================================
+     GRID DE MÉTRICAS (CARDS EM DESTAQUE)
+     ========================================================================== */
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 colunas iguais para os cards */
+    gap: 1.5rem;
+    margin-bottom: 2.2rem;
+  }
+  
+  .metric-card {
+    background: #ffffff;
+    border: 1px solid var(--border-light);
+    padding: 1.6rem;
+    border-radius: 20px;
+    box-shadow: 0 4px 16px rgba(14, 43, 22, 0.01);
+  }
+  
+  .m-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.8rem;
+  }
+  
+  .m-lbl {
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--text-grey);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  
+  .m-ico {
+    color: var(--brand-green);
+    background: rgba(62, 201, 106, 0.08);
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .m-ico svg {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .m-value {
+    font-family: var(--font-syne);
+    font-size: 2.1rem;
+    font-weight: 700;
+    color: var(--text-dark);
+  }
+  
+  .m-unit {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--text-grey);
+  }
+  
+  .m-sub {
+    font-size: 0.78rem;
+    color: var(--text-grey);
+    margin-top: 0.35rem;
+  }
+  
+  .m-sub.green {
+    color: var(--brand-green-hover);
+    font-weight: 500;
+  }
+  
+  /* ==========================================================================
+     SEÇÃO DE TABELA (HISTÓRICO DE COLETAS)
+     ========================================================================= */
+  .table-section {
+    background: #ffffff;
+    border: 1px solid var(--border-light);
+    border-radius: 22px;
+    padding: 1.8rem;
+    margin-bottom: 2.2rem;
+  }
+  
+  .section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.4rem;
+  }
+  
+  .section-heading h2 {
+    font-family: var(--font-syne);
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: var(--text-dark);
+  }
+  
+  .link-view-all {
+    font-size: 0.88rem;
+    color: var(--brand-green-hover);
+    font-weight: 500;
+    text-decoration: none;
+  }
+  
+  .link-view-all:hover {
+    text-decoration: underline;
+  }
+  
+  /* Ativa scroll horizontal apenas se a tabela não couber em telas menores */
+  .responsive-table-holder {
+    overflow-x: auto;
+  }
+  
+  .coletas-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 0.92rem;
+  }
+  
+  .coletas-table th {
+    padding: 1rem;
+    color: var(--text-grey);
+    font-weight: 500;
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--border-light);
+  }
+  
+  .coletas-table td {
+    padding: 1.2rem 1rem;
+    border-bottom: 1px solid rgba(14, 43, 22, 0.03);
+  }
+  
+  /* Célula de Informações da Empresa (Avatar com Letra + Nome) */
+  .table-comp-info {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-weight: 500;
+  }
+  
+  .comp-letter {
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+    font-family: var(--font-syne);
+    font-weight: 700;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .text-green-bg { background: rgba(62, 201, 106, 0.1); color: var(--brand-green-hover); }
+  .text-dark-bg { background: var(--bg-app-light); border: 1px solid var(--border-light); color: var(--text-dark); }
+  
+  /* Badges de Categorias de Resíduos (Materiais) */
+  .etag {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 500;
+    padding: 2px 8px;
+    border-radius: 50px;
+    margin-right: 0.3rem;
+  }
+  
+  .tag-plastic { background: #e3f2fd; color: #1e88e5; }
+  .tag-paper   { background: #fff3e0; color: #f57c00; }
+  .tag-elec    { background: #ede7f6; color: #5e35b1; }
+  .tag-glass   { background: #e8f5e9; color: #43a047; }
+  .tag-metal   { background: #eceff1; color: #546e7a; }
+  
+  /* Badges de Status da Coleta */
+  .badge {
+    display: inline-block;
+    font-size: 0.78rem;
+    font-weight: 500;
+    padding: 4px 10px;
+    border-radius: 8px;
+  }
+  
+  .badge-done { background: rgba(62, 201, 106, 0.12); color: var(--brand-green-hover); }
+  .badge-prog { background: #fffde7; color: #f59f00; border: 1px solid #fff59d; }
+  .badge-pend { background: #f8f9fa; color: #6c757d; }
+  
+  .btn-table-details {
+    background: none;
+    border: none;
+    font-family: var(--font-dm);
+    color: var(--text-grey);
+    font-size: 0.88rem;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  
+  .btn-table-details:hover {
+    color: var(--text-dark);
+  }
+  
+  /* ==========================================================================
+     GRID INFERIOR ASSIMÉTRICO (DIVIDIDO EM DUAS COLUNAS: 60% / 40%)
+     ========================================================================== */
+  .lower-split-grid {
+    display: grid;
+    grid-template-columns: 1.25fr 0.75fr;
+    gap: 1.5rem;
+  }
+  
+  /* Painel da Esquerda: Empresas Favoritas */
+  .panel-card-box {
+    background: #ffffff;
+    border: 1px solid var(--border-light);
+    border-radius: 22px;
+    padding: 1.8rem;
+  }
+  
+  .fav-companies-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  /* Cards Individuais de Empresas */
+  .dashboard-ecard {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.1rem;
+    border: 1px solid var(--border-light);
+    border-radius: 16px;
+    transition: border 0.2s;
+  }
+  
+  .dashboard-ecard:hover {
+    border-color: rgba(62, 201, 106, 0.4);
+  }
+  
+  .db-ecard-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .db-ecard-avatar {
+    width: 44px;
+    height: 44px;
+    background: var(--bg-dark-main);
+    color: var(--brand-green);
+    font-family: var(--font-syne);
+    font-weight: 700;
+    font-size: 1.15rem;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .db-ecard-meta h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-dark);
+  }
+  
+  .db-ecard-city {
+    font-size: 0.78rem;
+    color: var(--text-grey);
+    margin-top: 0.1rem;
+  }
+  
+  .db-ecard-stars {
+    font-size: 0.78rem;
+    color: #f59f00;
+    margin-top: 0.15rem;
+  }
+  
+  .rating-num {
+    color: var(--text-dark);
+    font-weight: 600;
+  }
+  
+  .btn-c-dash {
+    background: var(--bg-dark-main);
+    color: #ffffff;
+    border: none;
+    font-family: var(--font-dm);
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 0.55rem 1.2rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  
+  .btn-c-dash:hover {
+    background: var(--brand-green);
+    color: var(--bg-dark-main);
+    font-weight: 600;
+  }
+  
+  /* Painel da Direita: Bloco de Chamada para o Mapa (CTA) */
+  .cta-map-container {
+    background: var(--bg-dark-secondary);
+    color: #ffffff;
+    border-radius: 22px;
+    padding: 2.2rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .cta-map-graphics {
+    font-size: 2.5rem;
+    margin-bottom: 0.6rem;
+  }
+  
+  .cta-map-container h3 {
+    font-family: var(--font-syne);
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+  
+  .cta-map-container p {
+    font-size: 0.88rem;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.5;
+    margin-bottom: 1.6rem;
+    max-width: 290px;
+  }
+  
+  .btn-action-map {
+    background: var(--brand-green);
+    color: var(--bg-dark-main);
+    border: none;
+    font-family: var(--font-dm);
+    font-size: 0.92rem;
+    font-weight: 600;
+    padding: 0.8rem 1.6rem;
+    border-radius: 14px;
+    cursor: pointer;
+    width: 100%;
+    transition: background 0.2s;
+  }
+  
+  .btn-action-map:hover {
+    background: var(--brand-green-hover);
+  }
