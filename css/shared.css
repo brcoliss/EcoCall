@@ -7,34 +7,41 @@
     padding: 0; 
   }
   
-  :root {
-    --g900: #0a2010;
-    --g800: #0f2e18;
-    --g700: #163d22;
-    --g600: #1d5430;
-    --g500: #256b3e;
-    --g400: #2f8a52;
-    --g300: #3dab68;
-    --g200: #5cc97e;
-    --g100: #a8e4ba;
-    --g50: #e8f5ee;
-    --ac: #3ec96a;
-    
-    --white: #fff;
-    --gray-100: #f0f4f1;
-    --gray-200: #dde4df;
-    --gray-400: #8ba392;
-    --gray-600: #4a6454;
-    --text: #0d1f14;
-    --textl: #5a7066;
-  }
+:root {
+    --g900:#0d2415;
+    --g800:#14331f;
+    --g700:#1d472b;
+    --g600:#27613a;
+    --g500:#32804d;
+
+    --g400:#46a566;
+    --g300:#67c985;
+    --g200:#8adca3;
+    --g100:#c7efd3;
+    --g50:#f3fbf5;
+
+    --ac:#52d67b;
+
+    --white:#fff;
+    --gray-100:#f0f4f1;
+    --gray-200:#dde4df;
+    --gray-400:#8ba392;
+    --gray-600:#4a6454;
+
+    --text:#0d1f14;
+    --text-dark:#0d1f14;
+    --textl:#5a7066;
+
+    --font-display:'Plus Jakarta Sans',sans-serif;
+    --font-body:'Manrope',sans-serif;
+}
   
   html { 
     scroll-behavior: smooth; 
   }
   
   body {
-    font-family: 'DM Sans', sans-serif;
+    font-family:var(--font-body);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -207,3 +214,41 @@
     background: #f6f8f6;
     color: #1f2a22;
   }
+
+/* ==========================================================================
+   F. TOAST NOTIFICATION (COMPARTILHADO)
+   ========================================================================== */
+.toast {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: #1a3325;
+  border: 1px solid rgba(78,203,113,.25);
+  color: #fff;
+  padding: .6rem 1.1rem;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  font-size: .78rem;
+  font-weight: 500;
+  opacity: 0;
+  pointer-events: none;
+  transition: all .3s;
+  z-index: 10000;
+  white-space: nowrap;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.tdot {
+  width: 6px;
+  height: 6px;
+  background: var(--ac);
+  border-radius: 50%;
+  flex-shrink: 0;
+}

@@ -98,3 +98,115 @@
 .btn-back{background:none;border:1.5px solid var(--gray-200);color:var(--text);width:auto;padding:.72rem 1.4rem;border-radius:9px;font-family:'DM Sans',sans-serif;font-size:.83rem;font-weight:500;cursor:pointer;transition:all .2s}
 .btn-back:hover{border-color:var(--g300);background:var(--g50)}
 .btn-row{display:flex;gap:.65rem}
+/* ==========================================================================
+   COMPONENTES FALTANTES — CADASTRO
+   ========================================================================== */
+
+/* Fundo da página (cor escura que o auth-page já aplica via shared.css) */
+.page {
+  flex: 1;
+  display: flex;
+  align-items: stretch;
+}
+
+/* Botão flex dentro do btn-row */
+.btn-flex { flex: 1; }
+
+/* Divisor "ou continue com" (classe .div no HTML) */
+.div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: .9rem 0;
+  font-size: .7rem;
+  color: var(--gray-400);
+}
+.div::before, .div::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--gray-200);
+}
+
+/* Botões sociais do cadastro (.btn-soc / .socials) */
+.socials {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 1rem;
+}
+
+.btn-soc {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  background: var(--white);
+  border: 1.5px solid var(--gray-200);
+  border-radius: 9px;
+  padding: .58rem;
+  font-family: 'DM Sans', sans-serif;
+  font-size: .78rem;
+  color: var(--text);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all .2s;
+}
+.btn-soc:hover { border-color: var(--g300); background: var(--g50); }
+
+/* Link de login no rodapé do cadastro */
+.login-link {
+  text-align: center;
+  font-size: .76rem;
+  color: var(--textl);
+  margin-top: .5rem;
+}
+.login-link a { color: var(--g600); font-weight: 600; text-decoration: none; }
+.login-link a:hover { text-decoration: underline; }
+
+/* Separador de seção com margem */
+.group-divider { margin-top: .5rem; }
+
+/* Tela de Sucesso (step 3) */
+.success-box {
+  text-align: center;
+  padding: 1.5rem 0;
+}
+.success-icon-wrap {
+  width: 64px;
+  height: 64px;
+  background: var(--g50);
+  border: 2px solid rgba(62,201,106,.3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.2rem;
+}
+.success-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: .5rem;
+}
+.success-desc {
+  font-size: .82rem;
+  color: var(--textl);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+.success-footer-note {
+  font-size: .75rem;
+  color: var(--textl);
+  margin-top: .75rem;
+  text-align: center;
+}
+.success-footer-note a { color: var(--g600); font-weight: 500; text-decoration: none; }
+.success-footer-note a:hover { text-decoration: underline; }
+
+/* Responsivo */
+@media (max-width: 820px) {
+  .left-panel { display: none; }
+  .right-panel { width: 100%; }
+}

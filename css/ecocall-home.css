@@ -554,6 +554,7 @@
     flex-direction: column;
     gap: .85rem;
     align-items: flex-end;
+    margin-left: 570px;
   }
   
   .hcard {
@@ -1292,3 +1293,155 @@
       font-size: 2.2rem;
     }
   }
+
+  /* ======================================
+  NOVA IDENTIDADE VISUAL ECOCALL
+====================================== */
+
+.hero h1{
+    font-family:var(--font-display);
+    font-size:clamp(3rem,6vw,5rem);
+    line-height:.95;
+    letter-spacing:-.04em;
+    font-weight:800;
+    color:#fff;
+}
+
+.hero h1 em{
+    color:var(--ac);
+    font-style:normal;
+}
+
+.hero-p{
+    color:rgba(232,245,238,.82);
+    font-size:1.08rem;
+    line-height:1.85;
+    max-width:500px;
+}
+
+.logo-name{
+    font-family:var(--font-display);
+    font-weight:800;
+    letter-spacing:-.03em;
+}
+
+.logo-tag{
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--g200);
+}
+
+.eyebrow-text{
+    color:var(--g100);
+    font-weight:600;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+}
+
+.btn-cad,
+.hsearch-btn{
+    background:linear-gradient(
+        135deg,
+        #52d67b,
+        #39c96a
+    );
+    color:#0d2415;
+    font-weight:700;
+    box-shadow:0 8px 24px rgba(62,201,106,.25);
+}
+
+.btn-cad:hover,
+.hsearch-btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 12px 30px rgba(62,201,106,.35);
+}
+
+.hero-searchbar{
+    border:1px solid rgba(82,214,123,.25);
+    backdrop-filter:blur(16px);
+}
+
+.hero-searchbar:focus-within{
+    border-color:#52d67b;
+    box-shadow:0 0 0 4px rgba(82,214,123,.15);
+}
+
+.hcard{
+    border:1px solid rgba(82,214,123,.18);
+    backdrop-filter:blur(18px);
+}
+
+.hmini{
+    border:1px solid rgba(82,214,123,.15);
+}
+
+.hstat-n{
+    font-family:var(--font-display);
+    font-weight:800;
+}
+
+.step-t,
+.ecard-name,
+.icard-n{
+    font-family:var(--font-display);
+}
+
+.sec-head h2,
+.sec-emp h2,
+.sec-impact h2{
+    font-family:var(--font-display);
+    font-weight:800;
+    letter-spacing:-.03em;
+}
+
+.stag{
+    font-weight:700;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+}
+
+.how-card{
+    border-radius:20px;
+}
+
+.ecard{
+    border-radius:18px;
+}
+
+.ecard:hover{
+    transform:translateY(-6px);
+}
+
+.btn-c{
+    background:linear-gradient(
+        135deg,
+        var(--g700),
+        var(--g600)
+    );
+}
+
+.btn-c:hover{
+    background:linear-gradient(
+        135deg,
+        var(--g600),
+        var(--g500)
+    );
+}
+
+.sec-how{
+    background:#ffffff;
+}
+
+.sec-emp{
+    background:#f8fbf9;
+}
+
+.hero{
+    background:
+    radial-gradient(
+        circle at top right,
+        rgba(82,214,123,.12),
+        transparent 35%
+    ),
+    var(--g900);
+}
