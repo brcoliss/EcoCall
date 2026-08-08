@@ -34,11 +34,28 @@
     showLoader(url, { delay: 700 });
   }
 
+  function apiFetch(endpoint, options) {
+    options = options || {};
+    options.headers = options.headers || {};
+    if (options.body && typeof options.body === 'object' && !(options.body instanceof FormData)) {
+      options.headers['Content-Type'] = 'application/json';
+      options.body = JSON.stringify(options.body);
+    }
+    return fetch(endpoint, options)
+      .then(function (res) { return res.json(); })
+      .catch(function (err) {
+        console.error('API Error:', err);
+        return { error: 'Falha na comunicação com o servidor PHP.' };
+      });
+  }
+
   function logout(e) {
     if (e && e.preventDefault) e.preventDefault();
-    showLoader('ecocall-home.html', {
-      delay: 900,
-      text: 'Encerrando sessão…'
+    apiFetch('api/auth/logout.php', { method: 'POST' }).then(function (res) {
+      showLoader('ecocall-home.html', {
+        delay: 600,
+        text: 'Encerrando sessão…'
+      });
     });
   }
 
@@ -72,6 +89,7 @@
   window.transicaoPara = transicaoPara;
   window.logout = logout;
   window.showLoader = showLoader;
+  window.apiFetch = apiFetch;
 
   document.addEventListener('DOMContentLoaded', highlightActiveNav);
 })();

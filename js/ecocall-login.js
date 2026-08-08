@@ -40,17 +40,25 @@
     }
     loginBtn.textContent = 'Entrando...';
     loginBtn.disabled = true;
-    showToast('Verificando credenciais...');
-    setTimeout(function () {
-      showToast('✓ Login realizado com sucesso!');
+    showToast('Verificando credenciais no servidor...');
+
+    window.apiFetch('api/auth/login.php', {
+      method: 'POST',
+      body: { email: email, password: pwd }
+    }).then(function (data) {
+      if (data.error) {
+        showToast('⚠ ' + data.error);
+        loginBtn.textContent = '→ Entrar na plataforma';
+        loginBtn.disabled = false;
+        return;
+      }
+      showToast('✓ ' + (data.message || 'Login realizado com sucesso!'));
       loginBtn.textContent = '✓ Acesso liberado';
       loginBtn.style.background = '#256b3e';
       setTimeout(function () {
-        loginBtn.textContent = '→ Entrar na plataforma';
-        loginBtn.disabled = false;
-        loginBtn.style.background = '';
-      }, 3000);
-    }, 1800);
+        window.showLoader(data.redirect || 'ecocall-dashbord_usuario.html', { delay: 400 });
+      }, 800);
+    });
   }
 
   document.addEventListener('DOMContentLoaded', function () {
