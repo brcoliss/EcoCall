@@ -59,10 +59,10 @@
 
       <!-- Rodapé da Sidebar -->
       <div class="sidebar-footer">
-        <div class="avatar-mini">JS</div>
+        <div class="avatar-mini"></div>
         <div class="user-meta">
-          <div class="user-name">João Silva</div>
-          <div class="user-email">joao@email.com</div>
+          <div class="user-name"></div>
+          <div class="user-email"></div>
         </div>
         <a href="javascript:void(0)" class="logout-trigger" onclick="logout(event)" title="Sair do painel">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
@@ -82,19 +82,19 @@
           <div class="topbar-right">
             <div class="topbar-page-title">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
-              12 coletas registradas
+              
             </div>
             <div class="dash-search-box">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
               <input type="text" id="search-input" placeholder="Buscar empresa…" oninput="filterCards()">
             </div>
-            <div class="notif-bell-box" onclick="toast('Você tem 2 novas notificações.')">
+            <div class="notif-bell-box" >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-              <div class="bell-badge-count">2</div>
+              <div class="bell-badge-count"></div>
             </div>
             <div class="user-location-badge">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3ec96a" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-              <span>Santos, SP</span>
+              <span></span>
             </div>
           </div>
         </div>
@@ -135,123 +135,6 @@
         <!-- Grade Dinâmica de Coletas -->
         <div class="coletas-grid" id="coletas-grid">
 
-          <div class="coleta-card highlighted" data-status="prog" data-date="2026-05-30" data-weight="12" data-company="Santista Ambiental" onclick="openDetail('Santista Ambiental','Gonzaga, Santos','E','av-blue','prog','30','Mai/2026','12','Eletrônicos','30/05/2026','SA-0043')">
-            <div class="coleta-avatar av-blue">S</div>
-            <div class="coleta-info">
-              <div class="coleta-company">Santista Ambiental</div>
-              <div class="coleta-tags">
-                <span class="etag tag-elec">Eletrônicos</span>
-              </div>
-            </div>
-            <div class="coleta-date"><div class="date-day">30</div><div class="date-month">Mai/26</div></div>
-            <div class="coleta-weight"><div class="weight-val">12 kg</div><div class="weight-lbl">Estimado</div></div>
-            <div class="coleta-right">
-              <span class="badge badge-prog">Em andamento</span>
-              <button class="btn-card-action primary" onclick="event.stopPropagation();toast('Rastreando caminhão de coleta…')">Rastrear</button>
-            </div>
-          </div>
-
-          <div class="coleta-card" data-status="sched" data-date="2026-06-10" data-weight="8" data-company="EcoColeta Santos" onclick="openDetail('EcoColeta Santos','Aparecida, Santos','E','av-green','sched','10','Jun/2026','8','Plástico, Papel','10/06/2026','EC-0071')">
-            <div class="coleta-avatar av-green">E</div>
-            <div class="coleta-info">
-              <div class="coleta-company">EcoColeta Santos</div>
-              <div class="coleta-tags">
-                <span class="etag tag-plastic">Plástico</span>
-                <span class="etag tag-paper">Papel</span>
-              </div>
-            </div>
-            <div class="coleta-date"><div class="date-day">10</div><div class="date-month">Jun/26</div></div>
-            <div class="coleta-weight"><div class="weight-val">8 kg</div><div class="weight-lbl">Estimado</div></div>
-            <div class="coleta-right">
-              <span class="badge badge-sched">Agendada</span>
-              <button class="btn-card-action" onclick="event.stopPropagation();toast('Reagendamento solicitado…')">Reagendar</button>
-            </div>
-          </div>
-
-          <div class="coleta-card" data-status="done" data-date="2026-05-20" data-weight="18" data-company="EcoColeta Santos" onclick="openDetail('EcoColeta Santos','Aparecida, Santos','E','av-green','done','20','Mai/2026','18','Plástico, Papel','20/05/2026','EC-0065')">
-            <div class="coleta-avatar av-green">E</div>
-            <div class="coleta-info">
-              <div class="coleta-company">EcoColeta Santos</div>
-              <div class="coleta-tags">
-                <span class="etag tag-plastic">Plástico</span>
-                <span class="etag tag-paper">Papel</span>
-              </div>
-            </div>
-            <div class="coleta-date"><div class="date-day">20</div><div class="date-month">Mai/26</div></div>
-            <div class="coleta-weight"><div class="weight-val">18 kg</div><div class="weight-lbl">Coletados</div></div>
-            <div class="coleta-right">
-              <span class="badge badge-done">Concluída</span>
-              <button class="btn-card-action" onclick="event.stopPropagation();toast('Exibindo comprovante da coleta…')">Ver detalhes</button>
-            </div>
-          </div>
-
-          <div class="coleta-card" data-status="done" data-date="2026-04-28" data-weight="9" data-company="Marim Resíduos" onclick="openDetail('Marim Resíduos','Gonzaga, Santos','M','av-amber','done','28','Abr/2026','9','Vidro, Metal','28/04/2026','MR-0039')">
-            <div class="coleta-avatar av-amber">M</div>
-            <div class="coleta-info">
-              <div class="coleta-company">Marim Resíduos</div>
-              <div class="coleta-tags">
-                <span class="etag tag-glass">Vidro</span>
-                <span class="etag tag-metal">Metal</span>
-              </div>
-            </div>
-            <div class="coleta-date"><div class="date-day">28</div><div class="date-month">Abr/26</div></div>
-            <div class="coleta-weight"><div class="weight-val">9 kg</div><div class="weight-lbl">Coletados</div></div>
-            <div class="coleta-right">
-              <span class="badge badge-done">Concluída</span>
-              <button class="btn-card-action" onclick="event.stopPropagation();toast('Exibindo comprovante da coleta…')">Ver detalhes</button>
-            </div>
-          </div>
-
-          <div class="coleta-card" data-status="done" data-date="2026-04-10" data-weight="22" data-company="ReciclaVerde" onclick="openDetail('ReciclaVerde','Vila Mathias, Santos','R','av-green','done','10','Abr/2026','22','Orgânico, Papel','10/04/2026','RV-0022')">
-            <div class="coleta-avatar av-green">R</div>
-            <div class="coleta-info">
-              <div class="coleta-company">ReciclaVerde</div>
-              <div class="coleta-tags">
-                <span class="etag tag-organic">Orgânico</span>
-                <span class="etag tag-paper">Papel</span>
-              </div>
-            </div>
-            <div class="coleta-date"><div class="date-day">10</div><div class="date-month">Abr/26</div></div>
-            <div class="coleta-weight"><div class="weight-val">22 kg</div><div class="weight-lbl">Coletados</div></div>
-            <div class="coleta-right">
-              <span class="badge badge-done">Concluída</span>
-              <button class="btn-card-action" onclick="event.stopPropagation();toast('Exibindo comprovante da coleta…')">Ver detalhes</button>
-            </div>
-          </div>
-
-          <div class="coleta-card" data-status="cancel" data-date="2026-03-25" data-weight="5" data-company="Santista Ambiental" onclick="openDetail('Santista Ambiental','Gonzaga, Santos','S','av-blue','cancel','25','Mar/2026','5','Eletrônicos','25/03/2026','SA-0031')">
-            <div class="coleta-avatar av-blue">S</div>
-            <div class="coleta-info">
-              <div class="coleta-company">Santista Ambiental</div>
-              <div class="coleta-tags">
-                <span class="etag tag-elec">Eletrônicos</span>
-              </div>
-            </div>
-            <div class="coleta-date"><div class="date-day">25</div><div class="date-month">Mar/26</div></div>
-            <div class="coleta-weight"><div class="weight-val">5 kg</div><div class="weight-lbl">Previsto</div></div>
-            <div class="coleta-right">
-              <span class="badge badge-cancel">Cancelada</span>
-              <button class="btn-card-action" onclick="event.stopPropagation();toast('Abrindo nova solicitação…')">Reagendar</button>
-            </div>
-          </div>
-
-          <div class="coleta-card" data-status="done" data-date="2026-03-05" data-weight="15" data-company="EcoColeta Santos" onclick="openDetail('EcoColeta Santos','Aparecida, Santos','E','av-green','done','05','Mar/2026','15','Plástico, Metal','05/03/2026','EC-0058')">
-            <div class="coleta-avatar av-green">E</div>
-            <div class="coleta-info">
-              <div class="coleta-company">EcoColeta Santos</div>
-              <div class="coleta-tags">
-                <span class="etag tag-plastic">Plástico</span>
-                <span class="etag tag-metal">Metal</span>
-              </div>
-            </div>
-            <div class="coleta-date"><div class="date-day">05</div><div class="date-month">Mar/26</div></div>
-            <div class="coleta-weight"><div class="weight-val">15 kg</div><div class="weight-lbl">Coletados</div></div>
-            <div class="coleta-right">
-              <span class="badge badge-done">Concluída</span>
-              <button class="btn-card-action" onclick="event.stopPropagation();toast('Exibindo comprovante da coleta…')">Ver detalhes</button>
-            </div>
-          </div>
-
         </div>
 
         <!-- Estado Vazio (Fallback) -->
@@ -265,12 +148,8 @@
 
         <!-- Paginação -->
         <div class="pagination" id="pagination">
-          <span class="pag-info" id="pag-info">Exibindo 7 de 12 coletas</span>
+          <span class="pag-info" id="pag-info"></span>
           <div class="pag-btns">
-            <button class="pag-btn" disabled>‹</button>
-            <button class="pag-btn active">1</button>
-            <button class="pag-btn" onclick="toast('Carregando página 2…')">2</button>
-            <button class="pag-btn" onclick="toast('Carregando página 3…')">›</button>
           </div>
         </div>
 
@@ -289,7 +168,7 @@
     </div>
     <div class="detail-body">
       <div class="detail-avatar-row">
-        <div class="coleta-avatar" id="dp-avatar">E</div>
+        <div class="coleta-avatar" id="dp-avatar"></div>
         <div>
           <div class="detail-company-name" id="dp-company"></div>
           <div class="detail-company-loc" id="dp-loc">📍 </div>

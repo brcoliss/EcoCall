@@ -4,9 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>EcoCall — Relatórios</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
-  
+
   <link rel="stylesheet" href="css/shared.css">
   <link rel="stylesheet" href="css/ecocall-dashboard.css">
   <link rel="stylesheet" href="css/empresa-pages.css">
@@ -33,39 +34,74 @@
 
       <nav class="sidebar-menu">
         <a href="dashboard_empresa.html" class="nav-item" onclick="transicaoPara('dashboard_empresa.html', event)">
-          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="7" height="7"/>
+            <rect x="14" y="3" width="7" height="7"/>
+            <rect x="14" y="14" width="7" height="7"/>
+            <rect x="3" y="14" width="7" height="7"/>
+          </svg>
           <span>Painel</span>
         </a>
+
         <a href="pedidos.html" class="nav-item" onclick="transicaoPara('pedidos.html', event)">
-          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-          <span>Pedidos <b class="badge-count">3</b></span>
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="16" y1="13" x2="8" y2="13"/>
+            <line x1="16" y1="17" x2="8" y2="17"/>
+            <polyline points="10 9 9 9 8 9"/>
+          </svg>
+          <span>Pedidos <b class="badge-count"></b></span>
         </a>
+
         <a href="agendamentos.html" class="nav-item" onclick="transicaoPara('agendamentos.html', event)">
-          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="4" width="18" height="18" rx="2"/>
+            <line x1="16" y1="2" x2="16" y2="6"/>
+            <line x1="8" y1="2" x2="8" y2="6"/>
+            <line x1="3" y1="10" x2="21" y2="10"/>
+          </svg>
           <span>Agendamentos</span>
         </a>
+
         <a href="relatorios.html" class="nav-item active">
-          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="20" x2="18" y2="10"/>
+            <line x1="12" y1="20" x2="12" y2="4"/>
+            <line x1="6" y1="20" x2="6" y2="14"/>
+          </svg>
           <span>Relatórios</span>
         </a>
+
         <a href="meu-perfil.html" class="nav-item" onclick="transicaoPara('meu-perfil.html', event)">
-          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+            <circle cx="12" cy="7" r="4"/>
+          </svg>
           <span>Meu Perfil</span>
         </a>
+
         <a href="avaliacoes.html" class="nav-item" onclick="transicaoPara('avaliacoes.html', event)">
-          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+          </svg>
           <span>Avaliações</span>
         </a>
       </nav>
 
       <div class="sidebar-footer">
-        <div class="avatar-mini avatar-mini--brand">EC</div>
+        <div class="avatar-mini avatar-mini--brand"></div>
         <div class="user-meta">
-          <div class="user-name">EcoColeta SP</div>
-          <div class="user-email">admin@ecocoleta.com.br</div>
+          <div class="user-name"></div>
+          <div class="user-email"></div>
         </div>
+
         <a href="javascript:void(0)" class="logout-trigger" onclick="logout(event)" title="Sair do painel">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+            <polyline points="16 17 21 12 16 7"/>
+            <line x1="21" y1="12" x2="9" y2="12"/>
+          </svg>
         </a>
       </div>
     </aside>
@@ -77,6 +113,7 @@
           <h1>Relatórios</h1>
           <p>Indicadores de operação, impacto e desempenho da sua empresa.</p>
         </div>
+
         <div class="topbar-right">
           <select class="select-input" onchange="toast('Período atualizado: ' + this.value)">
             <option>Últimos 30 dias</option>
@@ -84,7 +121,13 @@
             <option>Este ano</option>
             <option>Tudo</option>
           </select>
-          <button class="btn-action-map" style="width:auto; padding:.6rem 1.2rem; font-size:.85rem;" onclick="toast('Exportando relatório em PDF…')">Exportar PDF</button>
+
+          <button
+            class="btn-action-map"
+            style="width:auto; padding:.6rem 1.2rem; font-size:.85rem;"
+            onclick="toast('Exportando relatório em PDF…')">
+            Exportar PDF
+          </button>
         </div>
       </header>
 
@@ -93,23 +136,26 @@
         <div class="stats-row">
           <div class="stat-mini">
             <div class="stat-mini-lbl">Massa coletada</div>
-            <div class="stat-mini-val">1.240 <span style="font-size:1rem; color:var(--text-grey);">kg</span></div>
-            <div class="stat-mini-sub">↑ 14% vs período anterior</div>
+            <div class="stat-mini-val"></div>
+            <div class="stat-mini-sub"></div>
           </div>
+
           <div class="stat-mini">
             <div class="stat-mini-lbl">Coletas concluídas</div>
-            <div class="stat-mini-val">96</div>
-            <div class="stat-mini-sub">↑ 8 a mais</div>
+            <div class="stat-mini-val"></div>
+            <div class="stat-mini-sub"></div>
           </div>
+
           <div class="stat-mini">
             <div class="stat-mini-lbl">Tempo médio</div>
-            <div class="stat-mini-val">42 <span style="font-size:1rem; color:var(--text-grey);">min</span></div>
-            <div class="stat-mini-sub muted">Por coleta</div>
+            <div class="stat-mini-val"></div>
+            <div class="stat-mini-sub muted"></div>
           </div>
+
           <div class="stat-mini">
             <div class="stat-mini-lbl">CO₂ evitado</div>
-            <div class="stat-mini-val">2,8 <span style="font-size:1rem; color:var(--text-grey);">t</span></div>
-            <div class="stat-mini-sub">Estimativa LCA</div>
+            <div class="stat-mini-val"></div>
+            <div class="stat-mini-sub"></div>
           </div>
         </div>
 
@@ -118,30 +164,25 @@
           <div class="content-card">
             <h2>Coletas por mês</h2>
             <p class="card-sub">Volume mensal nos últimos 6 meses</p>
-            <div class="bar-chart">
-              <div class="bar" style="height:46%;" title="Nov: 40"></div>
-              <div class="bar" style="height:62%;" title="Dez: 55"></div>
-              <div class="bar" style="height:54%;" title="Jan: 48"></div>
-              <div class="bar" style="height:80%;" title="Fev: 70"></div>
-              <div class="bar" style="height:68%;" title="Mar: 60"></div>
-              <div class="bar peak" style="height:100%;" title="Abr: 88"></div>
+
+            <div class="bar-chart" id="coletas-chart">
+              <!-- Barras serão inseridas aqui com dados reais -->
             </div>
-            <div class="bar-label-row">
-              <span>Nov</span><span>Dez</span><span>Jan</span><span>Fev</span><span>Mar</span><span>Abr</span>
+
+            <div class="bar-label-row" id="coletas-labels">
+              <!-- Meses serão inseridos aqui com dados reais -->
             </div>
           </div>
 
           <div class="content-card">
             <h2>Tipos de resíduo</h2>
             <p class="card-sub">Distribuição por categoria coletada</p>
+
             <div class="donut-wrap">
-              <div class="donut"></div>
-              <div class="donut-legend">
-                <div class="dleg-item"><span class="dleg-dot" style="background:#3ec96a;"></span> Plástico <strong style="margin-left:auto; color:var(--text-grey);">38%</strong></div>
-                <div class="dleg-item"><span class="dleg-dot" style="background:#1e88e5;"></span> Papel <strong style="margin-left:auto; color:var(--text-grey);">22%</strong></div>
-                <div class="dleg-item"><span class="dleg-dot" style="background:#f57c00;"></span> Vidro <strong style="margin-left:auto; color:var(--text-grey);">18%</strong></div>
-                <div class="dleg-item"><span class="dleg-dot" style="background:#5e35b1;"></span> Eletrônicos <strong style="margin-left:auto; color:var(--text-grey);">12%</strong></div>
-                <div class="dleg-item"><span class="dleg-dot" style="background:#94a3b8;"></span> Metal <strong style="margin-left:auto; color:var(--text-grey);">10%</strong></div>
+              <div class="donut" id="residuos-donut"></div>
+
+              <div class="donut-legend" id="residuos-legend">
+                <!-- Legenda será inserida aqui com dados reais -->
               </div>
             </div>
           </div>
@@ -150,7 +191,8 @@
 
         <div class="content-card">
           <h2>Top clientes do período</h2>
-          <p class="card-sub">Quem mais solicitou coletas nos últimos 30 dias</p>
+          <p class="card-sub">Quem mais solicitou coletas no período selecionado</p>
+
           <div class="responsive-table-holder">
             <table class="coletas-table">
               <thead>
@@ -162,42 +204,9 @@
                   <th>Última coleta</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <td><div class="table-comp-info"><div class="comp-letter text-green-bg">JS</div><span>João Silva</span></div></td>
-                  <td>São Paulo, SP</td>
-                  <td>6</td>
-                  <td>78 kg</td>
-                  <td>30/03/2025</td>
-                </tr>
-                <tr>
-                  <td><div class="table-comp-info"><div class="comp-letter text-green-bg">PT</div><span>Paula Tavares</span></div></td>
-                  <td>São Bernardo, SP</td>
-                  <td>5</td>
-                  <td>54 kg</td>
-                  <td>04/04/2025</td>
-                </tr>
-                <tr>
-                  <td><div class="table-comp-info"><div class="comp-letter text-dark-bg">CL</div><span>Carlos Lima</span></div></td>
-                  <td>Guarulhos, SP</td>
-                  <td>4</td>
-                  <td>62 kg</td>
-                  <td>05/04/2025</td>
-                </tr>
-                <tr>
-                  <td><div class="table-comp-info"><div class="comp-letter text-green-bg">AS</div><span>André Santos</span></div></td>
-                  <td>São Paulo, SP</td>
-                  <td>3</td>
-                  <td>44 kg</td>
-                  <td>28/03/2025</td>
-                </tr>
-                <tr>
-                  <td><div class="table-comp-info"><div class="comp-letter text-green-bg">LM</div><span>Lúcia Mota</span></div></td>
-                  <td>Mauá, SP</td>
-                  <td>3</td>
-                  <td>31 kg</td>
-                  <td>26/03/2025</td>
-                </tr>
+
+              <tbody id="top-clientes-tbody">
+                <!-- Clientes reais serão inseridos aqui -->
               </tbody>
             </table>
           </div>

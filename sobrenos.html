@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre Nós | EcoCall</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/shared.css">
+    <link rel="stylesheet" href="css/sobrenos.css">
+</head>
+<body>
+    <div class="about-bg"></div>
+    <nav class="about-nav">
+        <div class="nav-inner">
+            <a href="ecocall-home.html#topo" class="logo" aria-label="EcoCall — início">
+                <img src="img/logo-folha.png" alt="" class="logo-leaf" width="44" height="44">
+                <div class="logo-stack">
+                    <span class="logo-name">EcoCall</span>
+                    <span class="logo-tag">Cada coleta faz diferença</span>
+                </div>
+            </a>
+            <div class="nav-mid">
+                <a href="ecocall-home.html#topo" class="nav-link">Início</a>
+                <a href="ecocall-home.html#como-funciona" class="nav-link">Como funciona</a>
+                <a href="ecocall-home.html#empresas" class="nav-link">Empresas</a>
+                <a href="sobrenos.html" class="nav-link active">Sobre</a>
+                <a href="ecocall-home.html#contato" class="nav-link">Contato</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- SEÇÃO: SOBRE NÓS -->
+<section class="sec-about">
+    <div class="about-content">
+        <div class="about-hero">
+            <div class="about-hero-copy">
+                <div class="stag">Sobre Nós</div>
+                <h2>Conectamos <span>cidadãos</span> e empresas para transformar resíduos em impacto real.</h2>
+                <p class="about-text">
+                    A <strong>EcoCall</strong> nasceu para simplificar a reciclagem e aproximar quem precisa descartar corretamente de quem transforma esses materiais em valor para o planeta.
+                </p>
+                <div class="hero-actions">
+                    <a href="ecocall-home.html" class="hero-btn primary">Descobrir empresas</a>
+                    <a href="#valores" class="hero-btn secondary">Ver nossos pilares</a>
+                </div>
+            </div>
+
+            <div class="about-hero-panel">
+                <div class="hero-stat">
+                    <span>Empresas parceiras</span>
+                    <strong>+320</strong>
+                </div>
+                <div class="hero-stat">
+                    <span>Cidades atendidas</span>
+                    <strong>+180</strong>
+                </div>
+                <div class="hero-stat">
+                    <span>Coletas realizadas</span>
+                    <strong>+5 mil</strong>
+                </div>
+            </div>
+        </div>
+
+        <div class="about-story">
+            <div class="story-copy">
+                <div class="mini-title">Por que existimos</div>
+                <h3>Mais praticidade, mais consciência e menos descarte incorreto.</h3>
+                <p>
+                    Muitas pessoas querem agir corretamente, mas ainda enfrentam dúvidas sobre onde levar, como agendar e com quem confiar. A EcoCall resolve isso de forma simples, rápida e transparente.
+                </p>
+            </div>
+            <div class="story-list">
+                <div class="story-item">
+                    <strong>Busca simples</strong>
+                    Encontre empresas próximas com poucos cliques.
+                </div>
+                <div class="story-item">
+                    <strong>Agendamento direto</strong>
+                    Organize a coleta no horário que fizer sentido para você.
+                </div>
+                <div class="story-item">
+                    <strong>Impacto real</strong>
+                    Cada ação ajuda a reduzir resíduos descartados de forma inadequada.
+                </div>
+            </div>
+        </div>
+ 
+        <div class="about-cards" id="valores">
+            <div class="about-card">
+                <h3>🌱 Missão</h3>
+                <p>
+                    Facilitar o acesso à reciclagem, conectando pessoas e empresas
+                    para reduzir o impacto ambiental.
+                </p>
+            </div>
+ 
+            <div class="about-card">
+                <h3>👁️ Visão</h3>
+                <p>
+                    Ser a principal plataforma brasileira de conexão entre cidadãos
+                    e empresas de coleta sustentável.
+                </p>
+            </div>
+ 
+            <div class="about-card">
+                <h3>💚 Valores</h3>
+                <p>
+                    Sustentabilidade, inovação, transparência, responsabilidade
+                    ambiental e compromisso com a comunidade.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Smooth-scroll helper so links to home anchors land with offset for sticky nav -->
+<script>
+(function(){
+  function getNavHeight(){
+    var nav = document.querySelector('.about-nav .nav-inner') || document.querySelector('#nav .nav-inner') || document.querySelector('nav');
+    return nav ? nav.getBoundingClientRect().height : 0;
+  }
+  function scrollToHash(hash){
+    if(!hash) return;
+    var id = hash.replace('#','');
+    var el = document.getElementById(id);
+    if(!el) return;
+    var navH = getNavHeight();
+    var y = window.pageYOffset + el.getBoundingClientRect().top - navH - 12;
+    window.scrollTo({ top: y, behavior: 'smooth' });
+  }
+  // If this page was opened with a hash that points to home, no-op (navigation happens on home).
+  // For same-page hash clicks, adjust after load
+  document.addEventListener('click', function(e){
+    var a = e.target.closest('a[href^="#"]');
+    if(!a) return;
+    var href = a.getAttribute('href');
+    if(!href || href === '#') return;
+    if(a.pathname === location.pathname || href.indexOf('#') === 0){
+      e.preventDefault();
+      scrollToHash(href);
+      try { history.pushState(null, '', href); } catch(e){}
+    }
+  }, false);
+  window.addEventListener('load', function(){ if(location.hash){ setTimeout(function(){ scrollToHash(location.hash); }, 50); } });
+})();
+</script>
+</body>
+</html>

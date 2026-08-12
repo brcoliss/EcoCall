@@ -57,10 +57,10 @@
       </nav>
 
       <div class="sidebar-footer">
-        <div class="avatar-mini">JS</div>
+        <div class="avatar-mini"></div>
         <div class="user-meta">
-          <div class="user-name">João Silva</div>
-          <div class="user-email">joao@email.com</div>
+          <div class="user-name"></div>
+          <div class="user-email"></div>
         </div>
         <a href="ecocall-home.html" class="logout-trigger" onclick="logout(event)" title="Sair do painel">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
@@ -74,7 +74,7 @@
       <!-- BARRA SUPERIOR (TOPBAR) -->
       <header class="topbar">
         <div class="topbar-welcome">
-          <h1>Bom dia, João 👋</h1>
+          <h1>Bem-vindo 👋</h1>
           <p>Gere e acompanhe as suas contribuições sustentáveis.</p>
         </div>
         
@@ -84,17 +84,17 @@
             <input type="text" id="dash-search-input" placeholder="Buscar cooperativa…">
           </div>
 
-          <div class="notif-bell-box" onclick="toast('Você tem 2 novas notificações.')">
+          <div class="notif-bell-box" >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
               <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
             </svg>
-            <div class="bell-badge-count">2</div>
+            <div class="bell-badge-count"></div>
           </div>
           
           <div class="user-location-badge">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3ec96a" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            <span>Santos, SP</span>
+            <span></span>
           </div>
         </div>
       </header>
@@ -108,8 +108,8 @@
               <span class="m-lbl">Coletas Realizadas</span>
               <div class="m-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
             </div>
-            <div class="m-value">12</div>
-            <div class="m-sub green">↑ +3 este mês</div>
+            <div class="m-value"></div>
+            <div class="m-sub green"></div>
           </div>
 
           <div class="metric-card">
@@ -117,8 +117,8 @@
               <span class="m-lbl">Agendadas</span>
               <div class="m-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
             </div>
-            <div class="m-value">02</div>
-            <div class="m-sub">Próxima: 30/05</div>
+            <div class="m-value"></div>
+            <div class="m-sub"></div>
           </div>
 
           <div class="metric-card">
@@ -126,8 +126,8 @@
               <span class="m-lbl">Massa Reciclada</span>
               <div class="m-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
             </div>
-            <div class="m-value">84 <span class="m-unit">kg</span></div>
-            <div class="m-sub green">Impacto ecológico</div>
+            <div class="m-value"></div>
+            <div class="m-sub green"></div>
           </div>
 
           <div class="metric-card">
@@ -135,8 +135,8 @@
               <span class="m-lbl">Empresas Salvas</span>
               <div class="m-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg></div>
             </div>
-            <div class="m-value">05</div>
-            <div class="m-sub">Na sua região</div>
+            <div class="m-value"></div>
+            <div class="m-sub"></div>
           </div>
         </section>
 
@@ -159,30 +159,6 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>
-                    <div class="table-comp-info">
-                      <div class="comp-letter text-green-bg">E</div>
-                      <span>EcoColeta Santos</span>
-                    </div>
-                  </td>
-                  <td><span class="etag tag-plastic">Plástico</span><span class="etag tag-paper">Papel</span></td>
-                  <td>20/05/2026</td>
-                  <td><span class="badge badge-done">Concluída</span></td>
-                  <td><button class="btn-table-details" onclick="toast('Exibindo detalhes da coleta…')">Ver detalhes</button></td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="table-comp-info">
-                      <div class="comp-letter text-dark-bg">S</div>
-                      <span>Santista Ambiental</span>
-                    </div>
-                  </td>
-                  <td><span class="etag tag-elec">Eletrônicos</span></td>
-                  <td>30/05/2026</td>
-                  <td><span class="badge badge-prog">Em andamento</span></td>
-                  <td><button class="btn-table-details" onclick="toast('Rastreando caminhão de coleta…')">Rastrear</button></td>
-                </tr>
               </tbody>
             </table>
           </div>
@@ -195,18 +171,7 @@
               <h2>Empresas guardadas</h2>
             </div>
             <div class="fav-companies-stack">
-              <div class="dashboard-ecard">
-                <div class="db-ecard-left">
-                  <div class="db-ecard-avatar">M</div>
-                  <div class="db-ecard-meta">
-                    <h3>Marim Resíduos</h3>
-                    <p class="db-ecard-city">📍 Gonzaga, Santos</p>
-                    <div class="db-ecard-stars">★★★★☆ <span class="rating-num">4.2</span></div>
-                  </div>
-                </div>
-                <button class="btn-c-dash" onclick="toast('Solicitando agendamento rápido…')">Chamar Coleta</button>
               </div>
-            </div>
           </div>
 
           <div class="cta-map-container">
