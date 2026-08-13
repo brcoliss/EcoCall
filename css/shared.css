@@ -252,3 +252,48 @@
   border-radius: 50%;
   flex-shrink: 0;
 }
+
+/* =========================================================
+   LOGO PADRÃO ECOCALL
+   ========================================================= */
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  text-decoration: none;
+}
+
+.logo-leaf {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+  display: block;
+  flex-shrink: 0;
+}
+
+.logo-stack {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  line-height: 1;
+}
+
+.logo-name {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.logo-tag {
+  font-family: 'DM Sans', sans-serif;
+  font-size: .55rem;
+  font-weight: 500;
+  color: var(--g300);
+  margin-top: 3px;
+  letter-spacing: .03em;
+  line-height: 1.1;
+}

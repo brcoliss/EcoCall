@@ -641,3 +641,48 @@
   .btn-action-map:hover {
     background: var(--brand-green-hover);
   }
+
+  /* =========================================================
+   LOGO PADRÃO DA SIDEBAR
+   ========================================================= */
+
+.sidebar .logo {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  text-decoration: none;
+}
+
+.sidebar .logo-leaf {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+  display: block;
+  flex-shrink: 0;
+}
+
+.sidebar .logo-stack {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  line-height: 1;
+}
+
+.sidebar .logo-name {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.sidebar .logo-tag {
+  font-family: 'DM Sans', sans-serif;
+  font-size: .55rem;
+  font-weight: 500;
+  color: #67c985;
+  margin-top: 3px;
+  letter-spacing: .03em;
+  line-height: 1.1;
+}

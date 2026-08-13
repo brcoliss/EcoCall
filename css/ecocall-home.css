@@ -102,21 +102,21 @@
     text-decoration: none;
   }
   
-  .logo-img {
-    height: 42px;
+ .logo-img {
+    height: 58px;
     width: auto;
     display: block;
     object-fit: contain;
-  }
+}
   
-  .logo-leaf {
-    height: 44px;
-    width: 44px;
+.logo-leaf {
+    height: 70px;
+    width: 70px;
     display: block;
     object-fit: contain;
     flex-shrink: 0;
     filter: drop-shadow(0 2px 6px rgba(0,0,0,.35));
-  }
+}
   
   .logo-stack {
     display: flex;

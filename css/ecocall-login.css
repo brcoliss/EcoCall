@@ -86,14 +86,14 @@
     text-decoration: none;
   }
   
-  .logo-icon {
-    width: 44px; 
-    height: 44px;
-    display: flex; 
-    align-items: center; 
+.logo-icon {
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
     justify-content: center;
     flex-shrink: 0;
-  }
+}
   
   .logo-icon img { 
     width: 100%; 

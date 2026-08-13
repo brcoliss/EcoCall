@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -25,8 +26,15 @@
     <!-- ─── SIDEBAR LATERAL ─── -->
     <aside class="sidebar">
       <a href="dashboard_empresa.html" class="logo" onclick="transicaoPara('dashboard_empresa.html', event)">
-        <div class="logo-mark"><img src="img/logo-folha.png" alt="EcoCall" width="36" height="36"></div>
-        <div>
+        <img
+          src="img/logo-folha.png"
+          alt="EcoCall"
+          class="logo-leaf"
+          width="70"
+          height="70"
+          style="width:70px;height:70px;object-fit:contain;display:block;flex-shrink:0;"
+        >
+        <div class="logo-stack" style="display:flex;flex-direction:column;justify-content:center;line-height:1.05;">
           <div class="logo-name">EcoCall</div>
           <div class="logo-tag">Painel Empresa</div>
         </div>
@@ -128,3 +136,4 @@
   <script src="js/avaliacoes.js"></script>
 </body>
 </html>
+
