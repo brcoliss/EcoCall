@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>EcoCall — Autenticando...</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #0d1f14;
+      color: #e5f5eb;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      text-align: center;
+    }
+    .spinner {
+      width: 44px;
+      height: 44px;
+      border: 4px solid rgba(82, 214, 123, 0.2);
+      border-top-color: #52d67b;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin-bottom: 1.2rem;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    h2 { font-size: 1.2rem; margin-bottom: 0.3rem; font-weight: 600; }
+    p { font-size: 0.9rem; color: #8fa896; margin: 0; }
+  </style>
+</head>
+<body>
+  <div class="spinner"></div>
+  <h2>Autenticação Concluída</h2>
+  <p>Conectando ao EcoCall, fechando esta janela...</p>
+
+  <script>
+    (function () {
+      // Extrai parâmetros do hash (#...) ou da query (?...)
+      var hash = window.location.hash.substring(1);
+      var query = window.location.search.substring(1);
+      var params = {};
+
+      function parseParams(str) {
+        if (!str) return;
+        var pairs = str.split('&');
+        for (var i = 0; i < pairs.length; i++) {
+          var pair = pairs[i].split('=');
+          if (pair.length === 2) {
+            params[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1]);
+          }
+        }
+      }
+
+      parseParams(hash);
+      parseParams(query);
+
+      // Identificação 100% confiável do provedor
+      var provider = 'google';
+      if (params.state && (params.state.indexOf('ms_') === 0 || params.state.indexOf('microsoft') !== -1)) {
+        provider = 'microsoft';
+      } else if (params.provider === 'microsoft') {
+        provider = 'microsoft';
+      } else if (params.id_token) {
+        try {
+          var parts = params.id_token.split('.');
+          if (parts.length === 3) {
+            var payload = JSON.parse(atob(parts[1].replace(/-/g, '+').replace(/_/g, '/')));
+            if (payload && payload.iss && (payload.iss.includes('microsoft') || payload.iss.includes('windows.net') || payload.iss.includes('sts.msn.com'))) {
+              provider = 'microsoft';
+            }
+          }
+        } catch (e) {}
+      }
+
+      var errorMsg = params.error_description || params.error;
+
+      if (errorMsg) {
+        var h2 = document.querySelector('h2');
+        var p = document.querySelector('p');
+        if (h2) h2.textContent = 'Aviso de Autenticação';
+        if (p) p.textContent = 'Processando retorno...';
+      }
+
+      if (window.opener) {
+        window.opener.postMessage({
+          type: 'ECOCALL_OAUTH_RESPONSE',
+          provider: provider,
+          error: errorMsg || null,
+          data: params
+        }, window.location.origin);
+
+        setTimeout(function () {
+          window.close();
+        }, 500);
+      } else {
+        // Se foi aberto na mesma aba, redireciona para o login
+        window.location.href = 'ecocall-login.html';
+      }
+    })();
+  </script>
+</body>
+</html>

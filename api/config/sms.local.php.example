@@ -1,0 +1,18 @@
+<?php
+/* ==========================================================================
+   EcoCall — Exemplo de Configuração de SMS Real (Twilio / Zenvia / Comtele)
+   Renomeie ou copie este arquivo para: api/config/sms.local.php
+   ========================================================================== */
+
+// 1. Escolha o provedor de envio: 'twilio', 'zenvia' ou 'simulado'
+define('SMS_PROVIDER', 'twilio');
+
+// 2. Se usar TWILIO (https://www.twilio.com):
+define('TWILIO_ACCOUNT_SID', 'AC_SEU_TWILIO_ACCOUNT_SID_AQUI');
+define('TWILIO_AUTH_TOKEN',  'SEU_TWILIO_AUTH_TOKEN_AQUI');
+define('TWILIO_FROM_NUMBER', '+1234567890'); // Número Twilio ou Alphanumeric Sender ID
+
+// 3. Se usar ZENVIA (Brasil - https://www.zenvia.com):
+// define('SMS_PROVIDER', 'zenvia');
+// define('ZENVIA_API_TOKEN', 'SEU_TOKEN_ZENVIA_AQUI');
+// define('ZENVIA_FROM_NAME', 'EcoCall');

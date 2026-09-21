@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoCall — Home</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">  <!-- CSS estruturado e ordenado para consistência global -->
+  <link rel="stylesheet" href="css/shared.css">
+  <link rel="stylesheet" href="css/ecocall-home.css?v=2.8">
+</head>
+<body>
+
+  <!-- BARRA DE ANÚNCIO SUPERIOR -->
+  <div class="announce" id="ann">
+    🌱 Novidade: agende sua coleta pelo app, no seu ritmo. &nbsp;<a href="javascript:void(0)">Veja como funciona →</a>
+    <button class="announce-x" onclick="document.getElementById('ann').remove()">✕</button>
+  </div>
+
+  <!-- MENU DE NAVEGAÇÃO PRINCIPAL (NAVBAR) -->
+  <nav id="nav">
+    <div class="nav-inner">
+      <a href="javascript:void(0)" class="logo" aria-label="EcoCall — início">
+        <img src="img/logo-folha.png" alt="" class="logo-leaf" width="64" height="64">
+        <div class="logo-stack">
+          <span class="logo-name">EcoCall</span>
+          <span class="logo-tag">Cada coleta faz a diferença</span>
+        </div>
+      </a>
+
+      <div class="nav-mid">
+        <div class="nav-item">
+          <button class="nav-link" onclick="scrollerPara('sec-how')">Como funciona
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="dropdown">
+            <a href="javascript:void(0)" onclick="scrollerPara('sec-how')"><svg class="dd-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>Passo a passo</a>
+            <a href="javascript:void(0)" onclick="scrollerPara('sec-cta')"><svg class="dd-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Para empresas</a>
+            <a href="javascript:void(0)" onclick="scrollerPara('sec-faq')"><svg class="dd-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/></svg>FAQ</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <button class="nav-link" onclick="scrollerPara('sec-emp')">Empresas
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="dropdown">
+            <a href="javascript:void(0)" onclick="irParaMapa()">🗺 Ver no mapa</a>
+            <a href="javascript:void(0)" onclick="filtrarMelhoresAvaliadas()">⭐ Melhores avaliadas</a>
+            <a href="javascript:void(0)" onclick="filtrarRecemCadastradas()">🆕 Recém cadastradas</a>
+          </div>
+        </div>
+        <button class="nav-link" onclick="abrirModalSobre()">Sobre</button>
+        <button class="nav-link" onclick="abrirModalContato()">Contato</button>
+      </div>
+
+      <div class="nav-r">
+        <div class="nav-search" id="nav-search-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" id="nav-search-input" placeholder="Buscar bairro ou empresa em Santos…" autocomplete="off" oninput="executarBuscaHome(this.value, false)" onkeydown="if(event.key==='Enter') executarBuscaHome(this.value, true)">
+          <button type="button" class="nav-search-clear" id="nav-search-clear" onclick="limparBuscaHome()" title="Limpar busca" style="display:none;">✕</button>
+        </div>
+        <div class="nav-bell" onclick="toast('Você não possui novas notificações globais.')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.65)" stroke-width="2">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+            <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+          </svg>
+          <div class="bell-dot"></div>
+        </div>
+        <button class="btn-in" onclick="irParaLogin()">Entrar</button>
+        <button class="btn-cad" onclick="irParaCadastro()">Cadastrar</button>
+        <button class="nav-hamburger-btn" id="home-nav-toggle" onclick="toggleMobileHomeNav()" aria-label="Abrir menu de navegação">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- GAVETA MOBILE DE NAVEGAÇÃO (DRAWER HOME) -->
+  <div class="nav-mobile-overlay" id="home-nav-overlay" onclick="toggleMobileHomeNav(false)"></div>
+  <div class="nav-mobile-drawer" id="home-nav-drawer">
+    <div class="nav-drawer-header">
+      <div class="logo">
+        <img src="img/logo-folha.png" alt="" class="logo-leaf" width="42" height="42">
+        <div class="logo-stack">
+          <span class="logo-name" style="font-size:1.3rem;">EcoCall</span>
+          <span class="logo-tag">Sustentabilidade</span>
+        </div>
+      </div>
+      <button class="nav-drawer-close" onclick="toggleMobileHomeNav(false)" aria-label="Fechar menu">✕</button>
+    </div>
+    <div class="nav-drawer-links">
+      <a href="javascript:void(0)" onclick="scrollerPara('sec-how')">🌱 Como funciona</a>
+      <a href="javascript:void(0)" onclick="scrollerPara('sec-emp')">🏢 Empresas de Santos</a>
+      <a href="javascript:void(0)" onclick="irParaMapa()">🗺️ Mapa Interativo</a>
+      <a href="javascript:void(0)" onclick="scrollerPara('sec-impact')">📊 Métricas de Impacto</a>
+      <a href="javascript:void(0)" onclick="scrollerPara('sec-test')">💬 Depoimentos</a>
+      <a href="javascript:void(0)" onclick="scrollerPara('sec-faq')">❓ Dúvidas Frequentes (FAQ)</a>
+      <a href="javascript:void(0)" onclick="abrirModalSobre()">ℹ️ Sobre a EcoCall</a>
+      <a href="javascript:void(0)" onclick="abrirModalContato()">📞 Fale Conosco / Suporte</a>
+    </div>
+    <div class="nav-drawer-footer">
+      <button class="btn-in" style="width:100%;margin-bottom:0.6rem;padding:0.75rem;" onclick="irParaLogin()">Entrar</button>
+      <button class="btn-cad" style="width:100%;padding:0.75rem;" onclick="irParaCadastro()">Cadastrar Grátis</button>
+    </div>
+  </div>
+
+  <!-- TELA DE CARREGAMENTO GLOBAL -->
+  <div id="loading-screen" class="loading-screen">
+    <div class="loading-spinner"></div>
+    <p>Só um instante…</p>
+  </div>
+
+  <!-- SEÇÃO HERO -->
+  <section class="hero">
+    <div class="hero-bg">
+      <div class="hgrid"></div>
+      <div class="hblob hb1"></div>
+      <div class="hblob hb2"></div>
+      <div class="hacc ha1"></div>
+      <div class="hacc ha2"></div>
+      <div class="hacc ha3"></div>
+      <div class="hacc ha4"></div>
+    </div>
+    <div class="hero-l">
+      <div class="hero-eyebrow">
+        <div class="eyebrow-line"></div>
+        <span class="eyebrow-text">Reciclagem perto de casa</span>
+      </div>
+      <h1>Reciclar ficou mais simples<br><em>na sua cidade</em></h1>
+      <p class="hero-p">A gente conecta você a empresas de coleta da sua região — sem burocracia. É só buscar, escolher quem combina com você e agendar no horário que der.</p>
+      
+      <div class="hero-search-wrap">
+        <div class="hero-searchbar">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="2">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+            <circle cx="12" cy="10" r="3"/>
+          </svg>
+          <input type="text" id="hs" placeholder="Digite seu bairro em Santos (ex: Gonzaga, Paquetá, Alemoa…)" oninput="sincronizarBusca(this.value)" onkeydown="if(event.key==='Enter') buscar()">
+          <button class="hsearch-btn" onclick="buscar()">Encontrar empresas</button>
+        </div>
+      </div>
+
+      <div class="hero-chips">
+        <div class="chip" onclick="sc('Gonzaga')">📍 Gonzaga</div>
+        <div class="chip" onclick="sc('Ponta da Praia')">📍 Ponta da Praia</div>
+        <div class="chip" onclick="sc('Paquetá')">📍 Paquetá</div>
+        <div class="chip" onclick="sc('Alemoa')">📍 Alemoa</div>
+        <div class="chip" onclick="sc('Macuco')">📍 Macuco</div>
+        <div class="chip" onclick="sc('Vila Mathias')">📍 Vila Mathias</div>
+        <div class="chip" onclick="sc('Centro')">📍 Centro Histórico</div>
+      </div>
+
+      <div class="hero-stats">
+        <div class="hstat"><div class="hstat-n">+320</div><div class="hstat-l">Empresas parceiras</div></div>
+        <div class="hstat"><div class="hstat-n">+180</div><div class="hstat-l">Cidades atendidas</div></div>
+        <div class="hstat"><div class="hstat-n">+5k</div><div class="hstat-l">Coletas realizadas</div></div>
+      </div>
+    </div>
+
+    <div class="hero-r">
+      <div class="hcard">
+        <div class="hcard-ico">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3ec96a" stroke-width="2">
+            <path d="M21 12a9 9 0 0 1-9 9m9-9a9 9 0 0 0-9-9m9 9H3m9 9a9 9 0 0 1-9-9m9 9c1.66 0 3-4.03 3-9s-1.34-9-3-9m0 18c-1.66 0-3-4.03-3-9s1.34-9 3-9"/>
+          </svg>
+        </div>
+        <div class="hcard-lbl">EcoCall</div>
+        <div class="hcard-n">+5.000</div>
+        <div class="hcard-d">coletas que já saíram do caminho errado</div>
+      </div>
+      <div class="hmini">
+        <div class="hmini-ico"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#3ec96a" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
+        <div><div class="hmini-lbl">Coletas este mês</div><div class="hmini-v">+847 realizadas</div></div>
+      </div>
+      <div class="hmini">
+        <div class="hmini-ico"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#3ec96a" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+        <div><div class="hmini-lbl">Novas empresas</div><div class="hmini-v">12 esta semana</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEÇÃO: COMO FUNCIONA -->
+  <section class="sec-how">
+    <div class="sec-head">
+      <div class="stag">🌱 Passo a Passo</div>
+      <h2>Como funciona? É bem simples</h2>
+      <p class="sdesc">Em poucos passos você conecta seu resíduo ao destino correto — sem burocracia, do seu jeito</p>
+    </div>
+    <div class="how-grid">
+      <div class="how-card">
+        <div class="how-card-head">
+          <span class="step-badge">Passo 01</span>
+          <span class="step-watermark">01</span>
+        </div>
+        <div class="step-ico">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1b6335" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <h3 class="step-t">Conta pra gente onde você está</h3>
+        <p class="step-d">Informe seu bairro ou CEP para mapearmos instantaneamente todas as empresas e cooperativas que coletam na sua rua.</p>
+        <div class="step-micro">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>Busca por geolocalização</span>
+        </div>
+      </div>
+
+      <div class="how-card">
+        <div class="how-card-head">
+          <span class="step-badge">Passo 02</span>
+          <span class="step-watermark">02</span>
+        </div>
+        <div class="step-ico">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1b6335" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        <h3 class="step-t">Compare com total clareza</h3>
+        <p class="step-d">Analise avaliações reais, tipos de materiais aceitos, certificações ambientais e escolha o coletor ideal para você.</p>
+        <div class="step-micro">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>Empresas 100% verificadas</span>
+        </div>
+      </div>
+
+      <div class="how-card">
+        <div class="how-card-head">
+          <span class="step-badge">Passo 03</span>
+          <span class="step-watermark">03</span>
+        </div>
+        <div class="step-ico">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1b6335" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        </div>
+        <h3 class="step-t">Agende a coleta em 1 minuto</h3>
+        <p class="step-d">Escolha o dia, horário e descreva os materiais. A empresa recebe o pedido e confirma o transporte diretamente no app.</p>
+        <div class="step-micro">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>Sem taxas nem burocracia</span>
+        </div>
+      </div>
+
+      <div class="how-card">
+        <div class="how-card-head">
+          <span class="step-badge">Passo 04</span>
+          <span class="step-watermark">04</span>
+        </div>
+        <div class="step-ico">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1b6335" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        </div>
+        <h3 class="step-t">Pronto — é só acompanhar</h3>
+        <p class="step-d">Receba notificações de status em tempo real, protocolo de descarte sustentável e acumule ecopontos a cada coleta.</p>
+        <div class="step-micro">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>Gera ecopontos e protocolo</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEÇÃO: EMPRESAS CADASTRADAS EM SANTOS -->
+  <section class="sec-emp" id="sec-emp">
+    <div class="sec-head">
+      <div class="stag">🌿 Coletores & Cooperativas de Santos</div>
+      <h2>Quem já coleta na sua região</h2>
+      <p class="sdesc">Empresas e cooperativas de Santos-SP avaliadas por quem usa de verdade — confira a experiência real dos moradores</p>
+    </div>
+    
+    <div class="filter-row">
+      <button class="fbtn on" onclick="filt(this, 'todos')">✨ Todos (8)</button>
+      <button class="fbtn" onclick="filt(this, 'plastico')">🧴 Plástico</button>
+      <button class="fbtn" onclick="filt(this, 'papel')">📦 Papel & Papelão</button>
+      <button class="fbtn" onclick="filt(this, 'metal')">🥫 Metal & Sucata</button>
+      <button class="fbtn" onclick="filt(this, 'eletronicos')">💻 Eletrônicos (REEE)</button>
+      <button class="fbtn" onclick="filt(this, 'organico')">🍃 Orgânico & Óleo</button>
+      <button class="fbtn" onclick="filt(this, 'vidro')">🍾 Vidro</button>
+    </div>
+
+    <!-- Banner de Resultados da Busca por Bairro/Empresa -->
+    <div id="search-results-banner" class="search-results-banner" style="display:none;">
+      <div class="srb-left">
+        <span class="srb-icon">🔍</span>
+        <span id="srb-text">Exibindo empresas em Santos</span>
+      </div>
+      <button type="button" class="srb-clear-btn" onclick="limparBuscaHome()">Limpar filtro (Ver todas) ✕</button>
+    </div>
+
+    <div class="cards" id="home-cards-grid">
+      <!-- Card 1: Terra Santos Ambiental -->
+      <div class="ecard featured" data-tags="todos plastico papel metal vidro organico">
+        <div class="ecard-top">
+          <div class="ecard-logo-wrap">
+            <div class="ecard-logo logo-green">T</div>
+            <div class="ecard-vbadge" title="Consórcio Público Oficial">✓</div>
+          </div>
+          <span class="ebadge eb-destaque">⭐ Consórcio Oficial</span>
+        </div>
+        <div class="ecard-body">
+          <h3 class="ecard-name">Terra Santos Ambiental</h3>
+          <div class="ecard-city">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>Santos, SP · Atende os 27 Bairros</span>
+            <span class="dist-pill">Toda Santos</span>
+          </div>
+          <div class="ecard-meta-row">
+            <span class="meta-indicator live"></span>
+            <span class="meta-txt">Coleta Seletiva Pública & Cata-Treco</span>
+          </div>
+          <div class="tags">
+            <span class="etag tag-plastico">Plástico</span>
+            <span class="etag tag-papel">Papel</span>
+            <span class="etag tag-metal">Metal</span>
+            <span class="etag tag-vidro">Vidro</span>
+            <span class="etag tag-organico">Orgânico</span>
+          </div>
+        </div>
+        <div class="ecard-footer">
+          <div class="ecard-rating-bar">
+            <div class="stars-wrap">
+              <span class="stars">★★★★★</span>
+              <span class="rn">4.9</span>
+            </div>
+            <span class="rc">(142 avaliações)</span>
+          </div>
+          <div class="ecard-stats-pill">+1.800 coletas realizadas</div>
+          <!-- Avaliação Real dos Moradores -->
+          <div class="ecard-review-box">
+            <span class="review-quote-ico">“</span>
+            <p class="review-comment">Excelente serviço da equipe de coleta pública! Sempre pontuais no meu bairro no Gonzaga, facilitou muito a separação de lixo do condomínio.</p>
+            <div class="reviewer-meta">
+              <div class="reviewer-av" style="background:#1e7e3e">JM</div>
+              <div class="reviewer-info">
+                <span class="reviewer-name">Juliana Mendes <span class="verified-coleta">✓ Verificada</span></span>
+                <span class="reviewer-sub">Moradora do Gonzaga · Santos</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: Santista Ambiental -->
+      <div class="ecard featured-blue" data-tags="todos plastico vidro eletronicos metal">
+        <div class="ecard-top">
+          <div class="ecard-logo-wrap">
+            <div class="ecard-logo logo-blue">S</div>
+            <div class="ecard-vbadge" title="Empresa Verificada">✓</div>
+          </div>
+          <span class="ebadge eb-top">🏆 Top Avaliada</span>
+        </div>
+        <div class="ecard-body">
+          <h3 class="ecard-name">Santista Ambiental</h3>
+          <div class="ecard-city">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>Santos, SP · Gonzaga (Av. Ana Costa)</span>
+            <span class="dist-pill">1.4 km</span>
+          </div>
+          <div class="ecard-meta-row">
+            <span class="meta-indicator certified"></span>
+            <span class="meta-txt">Caçambas & Coleta Especializada</span>
+          </div>
+          <div class="tags">
+            <span class="etag tag-plastico">Plástico</span>
+            <span class="etag tag-vidro">Vidro</span>
+            <span class="etag tag-eletronicos">Eletrônicos</span>
+            <span class="etag tag-metal">Metal</span>
+          </div>
+        </div>
+        <div class="ecard-footer">
+          <div class="ecard-rating-bar">
+            <div class="stars-wrap">
+              <span class="stars">★★★★★</span>
+              <span class="rn">5.0</span>
+            </div>
+            <span class="rc">(89 avaliações)</span>
+          </div>
+          <div class="ecard-stats-pill">+620 coletas realizadas</div>
+          <!-- Avaliação Real dos Moradores -->
+          <div class="ecard-review-box">
+            <span class="review-quote-ico">“</span>
+            <p class="review-comment">Serviço de caçamba e descarte com pontualidade britânica. Atendimento nota 10 pelo WhatsApp e recolhimento no prazo combinado.</p>
+            <div class="reviewer-meta">
+              <div class="reviewer-av" style="background:#0284c7">RF</div>
+              <div class="reviewer-info">
+                <span class="reviewer-name">Dr. Roberto Fontes <span class="verified-coleta">✓ Verificada</span></span>
+                <span class="reviewer-sub">Síndico no Gonzaga · Santos</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3: Alquimista Reciclagem -->
+      <div class="ecard featured-purple" data-tags="todos metal plastico organico textil">
+        <div class="ecard-top">
+          <div class="ecard-logo-wrap">
+            <div class="ecard-logo logo-purple">A</div>
+            <div class="ecard-vbadge" title="Empresa Verificada">✓</div>
+          </div>
+          <span class="ebadge eb-express">⚡ Coleta Express</span>
+        </div>
+        <div class="ecard-body">
+          <h3 class="ecard-name">Alquimista Reciclagem</h3>
+          <div class="ecard-city">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>Santos, SP · Macuco (Av. Siqueira Campos)</span>
+            <span class="dist-pill">2.1 km</span>
+          </div>
+          <div class="ecard-meta-row">
+            <span class="meta-indicator express"></span>
+            <span class="meta-txt">Coleta no Mesmo Dia · Frota Própria</span>
+          </div>
+          <div class="tags">
+            <span class="etag tag-metal">Metal</span>
+            <span class="etag tag-plastico">Plástico</span>
+            <span class="etag tag-organico">Orgânico</span>
+            <span class="etag tag-textil">Têxtil</span>
+          </div>
+        </div>
+        <div class="ecard-footer">
+          <div class="ecard-rating-bar">
+            <div class="stars-wrap">
+              <span class="stars">★★★★★</span>
+              <span class="rn">4.9</span>
+            </div>
+            <span class="rc">(204 avaliações)</span>
+          </div>
+          <div class="ecard-stats-pill">+810 coletas realizadas</div>
+          <!-- Avaliação Real dos Moradores -->
+          <div class="ecard-review-box">
+            <span class="review-quote-ico">“</span>
+            <p class="review-comment">A melhor empresa de coleta da Baixada! Agendamos a retirada de sucata e eletrônicos e em menos de 2 horas o caminhão já estava no local.</p>
+            <div class="reviewer-meta">
+              <div class="reviewer-av" style="background:#7c3aed">PA</div>
+              <div class="reviewer-info">
+                <span class="reviewer-name">Patrícia Alencar <span class="verified-coleta">✓ Verificada</span></span>
+                <span class="reviewer-sub">Comércio em Ponta da Praia · Santos</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4: Fundação Settaport -->
+      <div class="ecard featured-blue" data-tags="todos eletronicos metal plastico">
+        <div class="ecard-top">
+          <div class="ecard-logo-wrap">
+            <div class="ecard-logo" style="background:linear-gradient(135deg, #0ea5e9, #0369a1);box-shadow:0 6px 16px -4px rgba(14,165,233,0.3)">F</div>
+            <div class="ecard-vbadge" title="Ponto Ecológico Oficial">✓</div>
+          </div>
+          <span class="ebadge" style="background:#e0f2fe;color:#0369a1;border:1px solid #7dd3fc">💻 Especialista em REEE</span>
+        </div>
+        <div class="ecard-body">
+          <h3 class="ecard-name">Fundação Settaport</h3>
+          <div class="ecard-city">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>Santos, SP · Paquetá (Av. Cons. Nébias)</span>
+            <span class="dist-pill">2.8 km</span>
+          </div>
+          <div class="ecard-meta-row">
+            <span class="meta-indicator certified"></span>
+            <span class="meta-txt">Descarte Seguro de Computadores e Baterias</span>
+          </div>
+          <div class="tags">
+            <span class="etag tag-eletronicos">Eletrônicos</span>
+            <span class="etag tag-metal">Metal</span>
+            <span class="etag tag-plastico">Plástico</span>
+          </div>
+        </div>
+        <div class="ecard-footer">
+          <div class="ecard-rating-bar">
+            <div class="stars-wrap">
+              <span class="stars">★★★★★</span>
+              <span class="rn">4.9</span>
+            </div>
+            <span class="rc">(160 avaliações)</span>
+          </div>
+          <div class="ecard-stats-pill">+950 coletas realizadas</div>
+          <!-- Avaliação Real dos Moradores -->
+          <div class="ecard-review-box">
+            <span class="review-quote-ico">“</span>
+            <p class="review-comment">Ponto de referência para descarte de computadores e placas velhas. Dá muita tranquilidade saber que o lixo eletrônico não vai parar no mangue.</p>
+            <div class="reviewer-meta">
+              <div class="reviewer-av" style="background:#0284c7">RS</div>
+              <div class="reviewer-info">
+                <span class="reviewer-name">Renan Silveira <span class="verified-coleta">✓ Verificada</span></span>
+                <span class="reviewer-sub">Técnico de TI · Centro Histórico</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 5: ONG Sem Fronteiras -->
+      <div class="ecard featured" data-tags="todos plastico papel metal eletronicos">
+        <div class="ecard-top">
+          <div class="ecard-logo-wrap">
+            <div class="ecard-logo" style="background:linear-gradient(135deg, #16a34a, #15803d);box-shadow:0 6px 16px -4px rgba(22,163,74,0.3)">O</div>
+            <div class="ecard-vbadge" title="Cadastrada na SEMAM">✓</div>
+          </div>
+          <span class="ebadge eb-destaque">🤝 Cooperativa SEMAM</span>
+        </div>
+        <div class="ecard-body">
+          <h3 class="ecard-name">ONG Sem Fronteiras</h3>
+          <div class="ecard-city">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>Santos, SP · Paquetá (Rua da Constituição)</span>
+            <span class="dist-pill">2.5 km</span>
+          </div>
+          <div class="ecard-meta-row">
+            <span class="meta-indicator live"></span>
+            <span class="meta-txt">Recolhimento Comunitário em Condomínios</span>
+          </div>
+          <div class="tags">
+            <span class="etag tag-plastico">Plástico</span>
+            <span class="etag tag-papel">Papel</span>
+            <span class="etag tag-metal">Metal</span>
+            <span class="etag tag-eletronicos">Eletrônicos</span>
+          </div>
+        </div>
+        <div class="ecard-footer">
+          <div class="ecard-rating-bar">
+            <div class="stars-wrap">
+              <span class="stars">★★★★★</span>
+              <span class="rn">4.8</span>
+            </div>
+            <span class="rc">(98 avaliações)</span>
+          </div>
+          <div class="ecard-stats-pill">+530 coletas realizadas</div>
+          <!-- Avaliação Real dos Moradores -->
+          <div class="ecard-review-box">
+            <span class="review-quote-ico">“</span>
+            <p class="review-comment">Trabalho social incrível em Santos. Fizeram o recolhimento de mais de 100kg de papelão e plástico da nossa loja com muita agilidade.</p>
+            <div class="reviewer-meta">
+              <div class="reviewer-av" style="background:#16a34a">RV</div>
+              <div class="reviewer-info">
+                <span class="reviewer-name">Ricardo Vasconcelos <span class="verified-coleta">✓ Verificada</span></span>
+                <span class="reviewer-sub">Comerciante do Centro · Santos</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 6: Comares -->
+      <div class="ecard" data-tags="todos papel plastico metal vidro">
+        <div class="ecard-top">
+          <div class="ecard-logo-wrap">
+            <div class="ecard-logo" style="background:linear-gradient(135deg, #0d9488, #115e59);box-shadow:0 6px 16px -4px rgba(13,148,136,0.3)">C</div>
+            <div class="ecard-vbadge" title="Cooperativa Certificada">✓</div>
+          </div>
+          <span class="ebadge" style="background:#ccfbf1;color:#0f766e;border:1px solid #99f6e4">📦 Triagem Industrial</span>
+        </div>
+        <div class="ecard-body">
+          <h3 class="ecard-name">Comares</h3>
+          <div class="ecard-city">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>Santos, SP · Alemoa (Zona Portuária)</span>
+            <span class="dist-pill">Porto</span>
+          </div>
+          <div class="ecard-meta-row">
+            <span class="meta-indicator certified"></span>
+            <span class="meta-txt">Emissão de Laudo e Certificado Ambiental</span>
+          </div>
+          <div class="tags">
+            <span class="etag tag-papel">Papel</span>
+            <span class="etag tag-plastico">Plástico</span>
+            <span class="etag tag-metal">Metal</span>
+            <span class="etag tag-vidro">Vidro</span>
+          </div>
+        </div>
+        <div class="ecard-footer">
+          <div class="ecard-rating-bar">
+            <div class="stars-wrap">
+              <span class="stars">★★★★★</span>
+              <span class="rn">4.8</span>
+            </div>
+            <span class="rc">(115 avaliações)</span>
+          </div>
+          <div class="ecard-stats-pill">+740 coletas realizadas</div>
+          <!-- Avaliação Real dos Moradores -->
+          <div class="ecard-review-box">
+            <span class="review-quote-ico">“</span>
+            <p class="review-comment">Ótimo atendimento para descarte de recicláveis em grande volume. Equipe organizada e emitem certificado de destinação correta.</p>
+            <div class="reviewer-meta">
+              <div class="reviewer-av" style="background:#0f766e">FD</div>
+              <div class="reviewer-info">
+                <span class="reviewer-name">Fernando Dias <span class="verified-coleta">✓ Verificada</span></span>
+                <span class="reviewer-sub">Gestor de Logística · Santos</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 7: Recimar Reciclagem & Sucata -->
+      <div class="ecard" data-tags="todos metal plastico eletronicos">
+        <div class="ecard-top">
+          <div class="ecard-logo-wrap">
+            <div class="ecard-logo" style="background:linear-gradient(135deg, #ea580c, #9a3412);box-shadow:0 6px 16px -4px rgba(234,88,12,0.3)">R</div>
+            <div class="ecard-vbadge" title="Empresa Especializada">✓</div>
+          </div>
+          <span class="ebadge" style="background:#ffedd5;color:#9a3412;border:1px solid #fed7aa">🥫 Metais & Sucata</span>
+        </div>
+        <div class="ecard-body">
+          <h3 class="ecard-name">Recimar Reciclagem & Sucata</h3>
+          <div class="ecard-city">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>Santos, SP · Estuário (Av. Senador Dantas)</span>
+            <span class="dist-pill">3.6 km</span>
+          </div>
+          <div class="ecard-meta-row">
+            <span class="meta-indicator express"></span>
+            <span class="meta-txt">Pesagem Precisa de Cobre e Alumínio</span>
+          </div>
+          <div class="tags">
+            <span class="etag tag-metal">Metal</span>
+            <span class="etag tag-plastico">Plástico</span>
+            <span class="etag tag-eletronicos">Eletrônicos</span>
+          </div>
+        </div>
+        <div class="ecard-footer">
+          <div class="ecard-rating-bar">
+            <div class="stars-wrap">
+              <span class="stars">★★★★★</span>
+              <span class="rn">4.7</span>
+            </div>
+            <span class="rc">(76 avaliações)</span>
+          </div>
+          <div class="ecard-stats-pill">+410 coletas realizadas</div>
+          <!-- Avaliação Real dos Moradores -->
+          <div class="ecard-review-box">
+            <span class="review-quote-ico">“</span>
+            <p class="review-comment">Super confiáveis na pesagem e compra de sucatas de cobre e alumínio. Destinação 100% ambientalmente responsável aqui em Santos.</p>
+            <div class="reviewer-meta">
+              <div class="reviewer-av" style="background:#c2410c">MP</div>
+              <div class="reviewer-info">
+                <span class="reviewer-name">Marcelo Prado <span class="verified-coleta">✓ Verificada</span></span>
+                <span class="reviewer-sub">Proprietário de Oficina · Estuário</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 8: Reciclar é Viver -->
+      <div class="ecard" data-tags="todos organico plastico vidro papel">
+        <div class="ecard-top">
+          <div class="ecard-logo-wrap">
+            <div class="ecard-logo" style="background:linear-gradient(135deg, #65a30d, #3f6212);box-shadow:0 6px 16px -4px rgba(101,163,13,0.3)">V</div>
+            <div class="ecard-vbadge" title="Cooperativa Comunitária">✓</div>
+          </div>
+          <span class="ebadge" style="background:#ecfccb;color:#3f6212;border:1px solid #d9f99d">🍃 Óleo Usado & PET</span>
+        </div>
+        <div class="ecard-body">
+          <h3 class="ecard-name">Reciclar é Viver</h3>
+          <div class="ecard-city">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>Santos, SP · Vila Mathias (Rua Carvalho de Mendonça)</span>
+            <span class="dist-pill">1.8 km</span>
+          </div>
+          <div class="ecard-meta-row">
+            <span class="meta-indicator live"></span>
+            <span class="meta-txt">Coleta Semanal em Bares e Restaurantes</span>
+          </div>
+          <div class="tags">
+            <span class="etag tag-organico">Orgânico / Óleo</span>
+            <span class="etag tag-plastico">Plástico</span>
+            <span class="etag tag-vidro">Vidro</span>
+            <span class="etag tag-papel">Papel</span>
+          </div>
+        </div>
+        <div class="ecard-footer">
+          <div class="ecard-rating-bar">
+            <div class="stars-wrap">
+              <span class="stars">★★★★★</span>
+              <span class="rn">4.8</span>
+            </div>
+            <span class="rc">(88 avaliações)</span>
+          </div>
+          <div class="ecard-stats-pill">+390 coletas realizadas</div>
+          <!-- Avaliação Real dos Moradores -->
+          <div class="ecard-review-box">
+            <span class="review-quote-ico">“</span>
+            <p class="review-comment">Recolhem o óleo de cozinha usado do nosso restaurante toda semana sem falhar. Além de sustentável, gera renda para a comunidade local.</p>
+            <div class="reviewer-meta">
+              <div class="reviewer-av" style="background:#4d7c0f">CS</div>
+              <div class="reviewer-info">
+                <span class="reviewer-name">Chef Cláudia Siqueira <span class="verified-coleta">✓ Verificada</span></span>
+                <span class="reviewer-sub">Restaurante no Embaré · Santos</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="ver-btn">
+      <button class="btn-ver" onclick="irParaMapa()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
+        <span>Ver todas as 8 empresas e ecopontos no mapa interativo de Santos →</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- SEÇÃO: MÉTRICAS DE IMPACTO -->
+  <section class="sec-impact">
+    <div class="imp-grid-bg"></div>
+    <div style="text-align:center;margin-bottom:3rem;position:relative;z-index:1">
+      <div class="stag stag-dark">Impacto</div>
+      <h2 class="light">Juntos, a gente já fez diferença</h2>
+      <p class="sdesc light">Cada coleta soma — e esses números mostram o que já construímos com você</p>
+    </div>
+    <div class="imp-grid">
+      <div class="icard"><div class="icard-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3ec96a" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div><div class="icard-n">850<span>t</span></div><div class="icard-l">Toneladas desviadas de aterros</div></div>
+      <div class="icard"><div class="icard-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3ec96a" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="icard-n">1.2<span>k</span></div><div class="icard-l">Toneladas de CO₂ evitadas</div></div>
+      <div class="icard"><div class="icard-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3ec96a" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div class="icard-n">5<span>k+</span></div><div class="icard-l">Coletas realizadas em Santos</div></div>
+      <div class="icard"><div class="icard-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3ec96a" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><div class="icard-n">32<span>k</span></div><div class="icard-l">Pessoas impactadas em Santos</div></div>
+    </div>
+  </section>
+
+  <!-- SEÇÃO: TESTEMUNHOS REAIS DE SANTOS -->
+  <section class="sec-test">
+    <div class="sec-head">
+      <div class="stag">Depoimentos de Santos</div>
+      <h2>O que as empresas e cooperativas de Santos contam</h2>
+      <p class="sdesc">Histórias reais de quem coleta, recicla e transforma a sustentabilidade em Santos</p>
+    </div>
+    <div class="test-grid">
+      <div class="tcard">
+        <div class="tcard-quote">"</div>
+        <p class="tcard-text">A EcoCall conectou nossa cooperativa no Paquetá direto aos condomínios do Gonzaga e Ponta da Praia. Triplicamos o volume de recicláveis recolhidos e organizamos rotas diárias com total agilidade.</p>
+        <div style="color:#f59e0b;font-size:0.8rem;margin-bottom:0.75rem;letter-spacing:1px;">★★★★★ <span style="color:var(--txl);font-size:0.75rem;font-weight:600;">5.0 · Reciclagem Geral</span></div>
+        <div class="tcard-author">
+          <div class="tcard-av">MS</div>
+          <div>
+            <div class="tcard-name">Marcelo Santos</div>
+            <div class="tcard-role">Coord. de Operações · ONG Sem Fronteiras (Paquetá)</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tcard">
+        <div class="tcard-quote">"</div>
+        <p class="tcard-text">Recebíamos muito descarte incorreto de pilhas, placas e computadores em Santos. Com a plataforma, os munícipes agendam coletas com protocolo e garantimos 100% de destinação reversa aos eletrônicos.</p>
+        <div style="color:#f59e0b;font-size:0.8rem;margin-bottom:0.75rem;letter-spacing:1px;">★★★★★ <span style="color:var(--txl);font-size:0.75rem;font-weight:600;">5.0 · Lixo Eletrônico REEE</span></div>
+        <div class="tcard-author">
+          <div class="tcard-av">JM</div>
+          <div>
+            <div class="tcard-name">Juliana Mendes</div>
+            <div class="tcard-role">Gestora Ambiental · Fundação Settaport REEE</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tcard">
+        <div class="tcard-quote">"</div>
+        <p class="tcard-text">O sistema de agendamento e geolocalização facilitou o atendimento a comércios e empresas de Santos. Otimizamos o combustível da frota e aumentamos a renda de 45 cooperados.</p>
+        <div style="color:#f59e0b;font-size:0.8rem;margin-bottom:0.75rem;letter-spacing:1px;">★★★★★ <span style="color:var(--txl);font-size:0.75rem;font-weight:600;">4.9 · Cooperativa Industrial</span></div>
+        <div class="tcard-author">
+          <div class="tcard-av">CV</div>
+          <div>
+            <div class="tcard-name">Carlos Eduardo Vieira</div>
+            <div class="tcard-role">Diretor Operacional · Cooperativa Comares (Alemoa)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEÇÃO: DÚVIDAS FREQUENTES (FAQ INTERATIVO) -->
+  <section class="sec-faq" id="sec-faq">
+    <div class="sec-head">
+      <div class="stag">Tire suas dúvidas</div>
+      <h2>Perguntas Frequentes</h2>
+      <p class="sdesc">Entenda como funciona a intermediação da EcoCall e as políticas das empresas parceiras</p>
+    </div>
+    <div class="faq-container">
+      <div class="faq-item active" onclick="toggleFaq(this)">
+        <div class="faq-q">
+          <span>Qual é o papel da EcoCall no agendamento e descarte de materiais?</span>
+          <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="faq-a">
+          <p>A <strong>EcoCall atua como uma plataforma de tecnologia e intermediação</strong>. Nós conectamos cidadãos, condomínios e estabelecimentos comerciais às cooperativas, ecopontos e empresas coletoras cadastradas em Santos e região. Toda a execução física da coleta, triagem, pesagem e destinação final segue a política e operação da empresa ou cooperativa parceira escolhida.</p>
+        </div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">
+          <span>A coleta possui custos ou é gratuita?</span>
+          <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="faq-a">
+          <p><strong>Depende da política individual de cada empresa ou cooperativa parceira.</strong> A maioria das cooperativas de reciclagem realiza a coleta de recicláveis residenciais comuns de forma gratuita. No entanto, para coletas comerciais, grandes volumes, entulhos ou materiais especiais (como certos tipos de eletrônicos ou químicos), cada empresa parceira define suas próprias condições comerciais, valores ou exigências de volume mínimo diretamente em seu perfil.</p>
+        </div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">
+          <span>Quais materiais são aceitos e quais as regras de separação?</span>
+          <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="faq-a">
+          <p>Cada empresa cadastrada possui sua própria política de materiais aceitos e diretrizes de triagem (por exemplo: cooperativas especializadas em recicláveis gerais, centros de lixo eletrônico REEE, coletores de óleo ou sucata metálica). Você pode consultar detalhadamente no perfil e no mapa da plataforma os tipos de resíduos aceitos por cada coletor antes de solicitar.</p>
+        </div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">
+          <span>Quais bairros de Santos cada empresa parceira atende?</span>
+          <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="faq-a">
+          <p>A área de cobertura e a disponibilidade de retirada dependem exclusivamente da logística e das rotas de cada empresa parceira em Santos. Algumas cobrem todos os bairros da cidade (Gonzaga, Ponta da Praia, Aparecida, Boqueirão, Embaré, etc.), enquanto outras atuam em bairros específicos (como Paquetá, Alemoa ou Macuco) ou em dias determinados da semana.</p>
+        </div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">
+          <span>Como funciona a confirmação da coleta e o contato com o coletor?</span>
+          <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="faq-a">
+          <p>Ao realizar um pedido pela plataforma, sua solicitação é recebida diretamente no painel corporativo da empresa selecionada. A empresa parceira avalia as informações (volume, endereço e materiais) e confirma o agendamento de acordo com sua capacidade operacional, podendo entrar em contato com você para alinhar detalhes da retirada.</p>
+        </div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">
+          <span>Como minha empresa de coleta define suas próprias regras e condições?</span>
+          <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="faq-a">
+          <p>Ao cadastrar sua empresa ou cooperativa, você tem total autonomia para configurar no seu painel os tipos de materiais que recebe, bairros atendidos, turnos disponíveis, exigências mínimas e políticas operacionais, recebendo apenas solicitações compatíveis com a sua capacidade.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEÇÃO B2B CALL-TO-ACTION -->
+  <section class="sec-cta" id="sec-cta">
+    <div class="cta-blobs"><div class="cb1"></div><div class="cb2"></div></div>
+    <div class="cta-g"></div>
+    <div class="cta-in">
+      <h2 class="cta-t">Tem empresa de coleta?<br><em>Vem fazer parte</em></h2>
+      <p class="cta-d">Mostre seu trabalho para quem está procurando reciclagem aí perto — e ganhe visibilidade na sua região.</p>
+      <div class="cta-btns">
+        <button class="cta-p" onclick="irParaCadastro()">Cadastrar minha empresa</button>
+        <button class="cta-s" onclick="abrirModalSobre()">Saiba mais</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- RODAPÉ ESTRUTURADO -->
+  <footer>
+    <div class="fg">
+      <div class="fb">
+        <a href="javascript:void(0)" class="flogo" aria-label="EcoCall — início">
+          <img src="img/logo-folha.png" alt="" class="flogo-icon" width="76" height="76">
+          <div class="logo-stack">
+            <span class="logo-name">EcoCall</span>
+            <span class="logo-tag">Cada coleta faz a diferença</span>
+          </div>
+        </a>
+        <div class="fsoc">
+          <div class="fsocb" onclick="toast('Canal EcoCall no X (Twitter)')"><span>X</span></div>
+          <div class="fsocb" onclick="toast('LinkedIn Oficial EcoCall')"><span>in</span></div>
+          <div class="fsocb" onclick="toast('Instagram Oficial @EcoCallSantos')"><span>ig</span></div>
+          <div class="fsocb" onclick="toast('Canal YouTube EcoCall')"><span>yt</span></div>
+        </div>
+      </div>
+      <div class="fcol"><div class="fcol-t">Plataforma</div><a href="javascript:void(0)" onclick="scrollerPara('sec-how')">Como funciona</a><a href="javascript:void(0)" onclick="scrollerPara('sec-emp')">Empresas</a><a href="javascript:void(0)" onclick="abrirModalSobre()">Sobre</a><a href="javascript:void(0)" onclick="abrirModalContato()">Contato</a></div>
+      <div class="fcol"><div class="fcol-t">Empresa</div><a href="javascript:void(0)" onclick="abrirModalSobre()">Sobre nós</a><a href="javascript:void(0)" onclick="abrirModalContato()">Trabalhe Conosco</a><a href="javascript:void(0)" onclick="scrollerPara('sec-impact')">Impacto Ambiental</a><a href="javascript:void(0)" onclick="scrollerPara('sec-faq')">FAQ</a></div>
+      <div class="fcol"><div class="fcol-t">Legal</div><a href="javascript:void(0)" onclick="toast('Termos de Uso e Política de Proteção de Dados LGPD')">Termos de Uso</a><a href="javascript:void(0)" onclick="toast('Privacidade e Segurança de Dados em conformidade com a LGPD')">Privacidade</a><a href="javascript:void(0)" onclick="toast('Preferências de Cookies salvas')">Cookies</a></div>
+    </div>
+    <div class="fbot">
+      <span class="fbot-l">© 2026 EcoCall. Todos os direitos reservados.</span>
+      <div class="fbot-r"><span>🌱 Feito para o planeta</span><div class="fbot-dot"></div><span>Santos, SP</span></div>
+    </div>
+  </footer>
+
+  <!-- MODAL: SOBRE A ECOCALL -->
+  <div class="home-modal-overlay" id="modal-sobre-overlay" onclick="fecharModalSobre(event)">
+    <div class="home-modal-card">
+      <div class="home-modal-header">
+        <div style="display:flex;align-items:center;gap:0.85rem;">
+          <div style="width:44px;height:44px;background:rgba(82,214,123,0.12);border:1.5px solid rgba(82,214,123,0.3);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <img src="img/logo-folha.png" alt="EcoCall" style="width:28px;height:28px;object-fit:contain;display:block;">
+          </div>
+          <div>
+            <h3 style="font-family:var(--font-display);font-size:1.25rem;font-weight:800;color:var(--text-dark);margin:0;">Sobre a EcoCall</h3>
+            <span style="font-size:0.75rem;color:var(--brand-green-hover);font-weight:600;text-transform:uppercase;letter-spacing:1px;">Santos Sustentável · Município de Santos</span>
+          </div>
+        </div>
+        <button class="home-modal-close" onclick="fecharModalSobre()">✕</button>
+      </div>
+      <div class="home-modal-body">
+        <p style="color:var(--txl);line-height:1.7;font-size:0.92rem;margin-bottom:1rem;">
+          A <strong>EcoCall</strong> é uma plataforma de tecnologia e logística reversa criada para conectar cidadãos, condomínios e estabelecimentos comerciais às cooperativas e empresas recicladoras credenciadas de <strong>Santos</strong>.
+        </p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.8rem;margin:1.2rem 0;">
+          <div style="background:#f0fdf4;border:1px solid rgba(82,214,123,0.3);border-radius:12px;padding:1rem;">
+            <div style="font-size:1.3rem;margin-bottom:0.3rem;">🎯</div>
+            <strong style="color:var(--g900);font-size:0.85rem;display:block;margin-bottom:0.2rem;">Nossa Missão</strong>
+            <p style="font-size:0.78rem;color:var(--txl);margin:0;line-height:1.5;">Eliminar o descarte incorreto de recicláveis e eletrônicos nas praias, canais e manguezais de Santos.</p>
+          </div>
+          <div style="background:#f0fdf4;border:1px solid rgba(82,214,123,0.3);border-radius:12px;padding:1rem;">
+            <div style="font-size:1.3rem;margin-bottom:0.3rem;">🤝</div>
+            <strong style="color:var(--g900);font-size:0.85rem;display:block;margin-bottom:0.2rem;">Valorização Local</strong>
+            <p style="font-size:0.78rem;color:var(--txl);margin:0;line-height:1.5;">Geração de renda e rotas organizadas para catadores e cooperativas de Santos.</p>
+          </div>
+        </div>
+        <div style="background:var(--gray-100);border-radius:10px;padding:0.85rem 1rem;font-size:0.82rem;color:var(--text-dark);">
+          📍 <strong>Cobertura Operacional:</strong> Município de Santos, SP — Atendimento a todos os bairros da cidade.
+        </div>
+      </div>
+      <div class="home-modal-footer">
+        <button class="btn-cad" style="width:100%;padding:0.75rem;" onclick="fecharModalSobre();irParaCadastro()">Fazer Parte da Comunidade →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: FALE CONOSCO / SUPORTE -->
+  <div class="home-modal-overlay" id="modal-contato-overlay" onclick="fecharModalContato(event)">
+    <div class="home-modal-card">
+      <div class="home-modal-header">
+        <div style="display:flex;align-items:center;gap:0.75rem;">
+          <div style="width:38px;height:38px;background:#e8f8ee;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;color:var(--brand-green-hover);">📞</div>
+          <div>
+            <h3 style="font-family:var(--font-display);font-size:1.25rem;font-weight:800;color:var(--text-dark);margin:0;">Fale com a EcoCall</h3>
+            <span style="font-size:0.75rem;color:var(--txl);font-weight:500;">Atendimento e suporte no município de Santos</span>
+          </div>
+        </div>
+        <button class="home-modal-close" onclick="fecharModalContato()">✕</button>
+      </div>
+      <div class="home-modal-body">
+        <div style="display:flex;gap:0.6rem;margin-bottom:1.2rem;flex-wrap:wrap;">
+          <a href="https://wa.me/5513997421200" target="_blank" style="flex:1;min-width:140px;background:#25d366;color:#fff;text-decoration:none;padding:0.65rem;border-radius:10px;display:flex;align-items:center;justify-content:center;gap:0.4rem;font-weight:700;font-size:0.82rem;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">
+            <span>💬 WhatsApp Santos</span>
+          </a>
+          <a href="mailto:contato@ecocall.com.br" style="flex:1;min-width:140px;background:#1a3325;color:#fff;text-decoration:none;padding:0.65rem;border-radius:10px;display:flex;align-items:center;justify-content:center;gap:0.4rem;font-weight:700;font-size:0.82rem;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">
+            <span>✉️ E-mail Direto</span>
+          </a>
+        </div>
+
+        <form id="form-contato-home" onsubmit="enviarContatoHome(event)">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.7rem;margin-bottom:0.7rem;">
+            <div>
+              <label style="display:block;font-size:0.75rem;font-weight:600;color:var(--text-dark);margin-bottom:0.3rem;">Seu Nome</label>
+              <input type="text" id="fc-nome" required placeholder="Ex: Ana Silva" style="width:100%;padding:0.6rem 0.8rem;border:1px solid var(--border-light);border-radius:8px;font-size:0.85rem;background:#f9fafb;outline:none;">
+            </div>
+            <div>
+              <label style="display:block;font-size:0.75rem;font-weight:600;color:var(--text-dark);margin-bottom:0.3rem;">Seu E-mail ou WhatsApp</label>
+              <input type="text" id="fc-email" required placeholder="contato@exemplo.com" style="width:100%;padding:0.6rem 0.8rem;border:1px solid var(--border-light);border-radius:8px;font-size:0.85rem;background:#f9fafb;outline:none;">
+            </div>
+          </div>
+          <div style="margin-bottom:0.7rem;">
+            <label style="display:block;font-size:0.75rem;font-weight:600;color:var(--text-dark);margin-bottom:0.3rem;">Assunto</label>
+            <select id="fc-assunto" style="width:100%;padding:0.6rem 0.8rem;border:1px solid var(--border-light);border-radius:8px;font-size:0.85rem;background:#f9fafb;outline:none;">
+              <option value="duvida">Dúvida sobre Agendamento de Coleta</option>
+              <option value="empresa">Credenciamento de Cooperativa / Empresa</option>
+              <option value="condominio">Parceria com Condomínio em Santos</option>
+              <option value="suporte">Suporte Técnico / Outros</option>
+            </select>
+          </div>
+          <div style="margin-bottom:1rem;">
+            <label style="display:block;font-size:0.75rem;font-weight:600;color:var(--text-dark);margin-bottom:0.3rem;">Mensagem</label>
+            <textarea id="fc-msg" required rows="3" placeholder="Como podemos te ajudar hoje?" style="width:100%;padding:0.6rem 0.8rem;border:1px solid var(--border-light);border-radius:8px;font-size:0.85rem;background:#f9fafb;outline:none;resize:vertical;"></textarea>
+          </div>
+          <button type="submit" class="btn-cad" style="width:100%;padding:0.75rem;font-size:0.9rem;">Enviar Mensagem 🚀</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOTÃO FLUTUANTE: VOLTAR AO INÍCIO -->
+  <button id="btn-back-to-top" class="btn-back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Voltar ao início da página" aria-label="Voltar ao início">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+    <span>Início</span>
+  </button>
+
+  <!-- Componente Flutuante de Notificação Toast (Sincronizado) -->
+  <div class="toast" id="toast">
+    <div class="tdot"></div>
+    <span id="tmsg"></span>
+  </div>
+
+  <!-- Inicializadores de Script -->
+  <script src="js/core.js"></script>
+  <script src="js/ecocall-home.js?v=2.1"></script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<?php
+/* ==========================================================================
+   EcoCall — Exemplo de Credenciais Locais de E-mail (Copie para mailer.local.php)
+   ========================================================================== */
+
+// 1. Resend API Key (Recomendado)
+// Obtenha sua chave em: https://resend.com
+if (!defined('RESEND_API_KEY')) {
+    define('RESEND_API_KEY', 're_sua_chave_resend_aqui');
+}
+
+// 2. SMTP Gmail / Outro Provedor (Fallback / Contingência)
+if (!defined('SMTP_HOST')) define('SMTP_HOST', 'smtp.gmail.com');
+if (!defined('SMTP_PORT')) define('SMTP_PORT', 587);
+if (!defined('SMTP_USER')) define('SMTP_USER', 'seu_email@gmail.com');
+if (!defined('SMTP_PASS')) define('SMTP_PASS', 'sua_senha_de_aplicativo_aqui');
+if (!defined('SMTP_FROM')) define('SMTP_FROM', 'seu_email@gmail.com');
+if (!defined('SMTP_FROM_NAME')) define('SMTP_FROM_NAME', 'EcoCall System');

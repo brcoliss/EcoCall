@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoCall — Ativação de Conta</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/shared.css">
+  <link rel="stylesheet" href="css/ecocall-login.css">
+  <style>
+    .activation-card {
+      background: rgba(13, 36, 21, 0.85);
+      border: 1px solid rgba(82, 214, 123, 0.25);
+      backdrop-filter: blur(20px);
+      border-radius: 24px;
+      padding: 3rem 2.5rem;
+      max-width: 540px;
+      width: 100%;
+      margin: 4rem auto;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+      color: #fff;
+    }
+    .activation-icon {
+      width: 72px;
+      height: 72px;
+      margin: 0 auto 1.5rem auto;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+      background: rgba(82, 214, 123, 0.15);
+      border: 2px solid #52d67b;
+      animation: pulse 2s infinite;
+    }
+    .activation-title {
+      font-family: var(--font-syne, 'Syne', sans-serif);
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 0.8rem;
+      color: #fff;
+    }
+    .activation-desc {
+      font-size: 0.95rem;
+      color: #a3c4b0;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+    .btn-act-login {
+      display: inline-block;
+      width: 100%;
+      padding: 0.95rem;
+      background: #52d67b;
+      color: #0d2415;
+      font-weight: 700;
+      border-radius: 12px;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-act-login:hover {
+      background: #42c46b;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(82, 214, 123, 0.35);
+    }
+  </style>
+</head>
+<body class="auth-page">
+
+  <!-- Elementos decorativos de fundo -->
+  <div class="bg-shapes">
+    <div class="dot-grid"></div>
+    <div class="shape s1"></div>
+    <div class="shape s2"></div>
+  </div>
+
+  <div class="page" style="display:flex;justify-content:center;align-items:center;min-height:90vh;">
+    
+    <div class="activation-card" id="activation-box">
+      <div class="activation-icon" id="act-icon">⏳</div>
+      <h2 class="activation-title" id="act-title">Validando ativação...</h2>
+      <p class="activation-desc" id="act-desc">Por favor, aguarde enquanto autenticamos o link de validação do seu e-mail.</p>
+      
+      <div id="act-actions" style="display:none;">
+        <button class="btn-act-login" onclick="irParaLogin()">Ir para o Login →</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Componente Flutuante do Toast -->
+  <div class="toast" id="toast"><div class="tdot"></div><span id="toastMsg"></span></div>
+
+  <script src="js/core.js"></script>
+  <script>
+    function irParaLogin() {
+      window.location.href = 'ecocall-login.html';
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      var params = new URLSearchParams(window.location.search);
+      var token = params.get('token');
+
+      var iconEl = document.getElementById('act-icon');
+      var titleEl = document.getElementById('act-title');
+      var descEl = document.getElementById('act-desc');
+      var actionsEl = document.getElementById('act-actions');
+
+      if (!token) {
+        iconEl.textContent = '❌';
+        iconEl.style.borderColor = '#ef4444';
+        iconEl.style.background = 'rgba(239, 68, 68, 0.15)';
+        titleEl.textContent = 'Token de ativação ausente';
+        descEl.textContent = 'Nenhum token de ativação foi informado na URL. Verifique se copiou o link completo enviado para o seu e-mail.';
+        actionsEl.style.display = 'block';
+        return;
+      }
+
+      window.apiFetch('api/auth/activate.php?token=' + encodeURIComponent(token))
+        .then(function (res) {
+          if (res && res.success) {
+            iconEl.textContent = '✓';
+            iconEl.style.borderColor = '#52d67b';
+            iconEl.style.background = 'rgba(82, 214, 123, 0.2)';
+            titleEl.textContent = 'Conta Ativada com Sucesso! 🌿';
+            descEl.innerHTML = 'Parabéns, <strong>' + (res.nome || 'Usuário') + '</strong>!<br>Seu e-mail (<em>' + (res.email || '') + '</em>) foi validado e sua conta está 100% liberada para acesso.';
+            actionsEl.style.display = 'block';
+            if (window.toast) window.toast('✓ Conta ativada com sucesso!');
+          } else {
+            iconEl.textContent = '⚠';
+            iconEl.style.borderColor = '#f59e0b';
+            iconEl.style.background = 'rgba(245, 158, 11, 0.15)';
+            titleEl.textContent = 'Falha na Ativação';
+            descEl.textContent = (res && res.error) ? res.error : 'O link de ativação pode ter expirado ou já ter sido utilizado.';
+            actionsEl.style.display = 'block';
+          }
+        })
+        .catch(function () {
+          iconEl.textContent = '⚠';
+          iconEl.style.borderColor = '#ef4444';
+          titleEl.textContent = 'Erro de Comunicação';
+          descEl.textContent = 'Não foi possível conectar ao servidor para validar o token. Tente novamente.';
+          actionsEl.style.display = 'block';
+        });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoCall — Entrar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&family=Roboto:wght@400;500;700;800&display=swap" rel="stylesheet">
+  
+  <!-- CSS estruturado e ordenado para consistência global -->
+  <link rel="stylesheet" href="css/shared.css">
+  <link rel="stylesheet" href="css/ecocall-login.css">
+  
+  <!-- SDKs Oficiais de Autenticação Social -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <script src="https://alcdn.msauth.net/browser/2.35.0/js/msal-browser.min.js"></script>
+</head>
+<body class="auth-page">
+
+  <!-- Tela de Carregamento Global -->
+  <div id="loading-screen" class="loading-screen">
+    <div class="loading-spinner"></div>
+    <p>Conectando com segurança...</p>
+  </div>
+
+  <!-- Elementos decorativos de fundo -->
+  <div class="bg-shapes">
+    <div class="dot-grid"></div>
+    <div class="shape s1"></div>
+    <div class="shape s2"></div>
+  </div>
+
+  <div class="page">
+
+    <!-- ─── PAINEL ESQUERDO — BOAS-VINDAS ─── -->
+    <div class="left-panel">
+      <div class="left-header">
+        <a href="javascript:void(0)" onclick="irParaHome()" class="logo" title="EcoCall — Início">
+          <div class="logo-icon">
+            <img src="img/logo-folha.png" alt="EcoCall" width="40" height="40">
+          </div>
+          <div>
+            <div class="logo-text">EcoCall</div>
+            <div class="logo-sub">Resíduos coletados, mundo preservado</div>
+          </div>
+        </a>
+        <a href="javascript:void(0)" onclick="irParaHome()" class="login-back-btn" title="Voltar para a página inicial">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          <span>Voltar ao Início</span>
+        </a>
+      </div>
+
+      <div class="welcome-card">
+        <div class="avatar-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+            <circle cx="12" cy="7" r="4"/>
+          </svg>
+        </div>
+
+        <h2 class="welcome-title">Bem-vindo!</h2>
+        <p class="welcome-desc">Faça parte da mudança. Cada coleta é um passo por um planeta mais limpo.</p>
+
+        <ul class="benefits">
+          <li>
+            <div class="check-icon">
+              <svg viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="currentColor"/></svg>
+            </div>
+            Reduza resíduos no meio ambiente
+          </li>
+          <li>
+            <div class="check-icon">
+              <svg viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="currentColor"/></svg>
+            </div>
+            Promova economia circular
+          </li>
+          <li>
+            <div class="check-icon">
+              <svg viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="currentColor"/></svg>
+            </div>
+            Diminua sua pegada de carbono
+          </li>
+          <li>
+            <div class="check-icon">
+              <svg viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="currentColor"/></svg>
+            </div>
+            Contribua com as metas do ODS 12
+          </li>
+        </ul>
+
+        <div class="stats-row">
+          <div class="stat">
+            <div class="stat-num">+320</div>
+            <div class="stat-label">Empresas</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">+180</div>
+            <div class="stat-label">Cidades</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">+5k</div>
+            <div class="stat-label">Coletas</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── PAINEL DIREITO — FORMULÁRIO DE LOGIN ─── -->
+    <div class="right-panel">
+      <!-- Barra Mobile para Retorno Rápido -->
+      <div class="mobile-login-bar">
+        <a href="javascript:void(0)" onclick="irParaHome()" class="mobile-login-logo">
+          <img src="img/logo-folha.png" alt="EcoCall" width="28" height="28">
+          <span>EcoCall</span>
+        </a>
+        <a href="javascript:void(0)" onclick="irParaHome()" class="mobile-back-link">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          <span>Início</span>
+        </a>
+      </div>
+
+      <div class="form-tag">
+        <svg width="7" height="7" viewBox="0 0 8 8">
+          <circle cx="4" cy="4" r="4" fill="currentColor"/>
+        </svg>
+        Acesso seguro
+      </div>
+      
+      <h2 class="form-title">Entrar na conta</h2>
+      <p class="form-subtitle">Informe suas credenciais para continuar</p>
+
+      <!-- Grupo do Input: E-mail -->
+      <div class="input-group">
+        <label for="email">E-mail</label>
+        <div class="input-wrapper">
+          <input type="email" id="email" placeholder="seu@email.com" autocomplete="email">
+          <svg class="iico" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Grupo do Input: Senha -->
+      <div class="input-group">
+        <label for="password">Senha</label>
+        <div class="input-wrapper">
+          <input type="password" id="password" placeholder="••••••••" autocomplete="current-password">
+          <svg class="iico" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="11" width="18" height="11" rx="2"/>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          </svg>
+          <button class="eye-btn" id="togglePwd" type="button" aria-label="Mostrar/ocultar senha">
+            <svg id="eyeIco" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+              <circle cx="12" cy="12" r="3"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Caixa de Opções Alternativas (Lembrar/Esqueci) -->
+      <div class="form-row">
+        <label class="remember">
+          <input type="checkbox" id="remember">
+          Lembrar de mim
+        </label>
+        <a href="javascript:void(0)" class="forgot" onclick="openForgotModal()">Esqueci a senha</a>
+      </div>
+
+      <!-- Gatilho de Autenticação -->
+      <button class="btn-primary" id="loginBtn" type="button">
+        → Entrar na plataforma
+      </button>
+
+      <div class="divider"><span>ou continue com</span></div>
+
+      <!-- Provedores SSO Sociais -->
+      <div class="social-btns">
+        <button class="btn-social" type="button" onclick="iniciarLoginGoogle()" title="Entrar ou cadastrar com Google">
+          <svg width="16" height="16" viewBox="0 0 24 24">
+            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
+            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+          </svg>
+          Google
+        </button>
+        <button class="btn-social" type="button" onclick="iniciarLoginMicrosoft()" title="Entrar ou cadastrar com Microsoft (Outlook / Office 365)">
+          <svg width="16" height="16" viewBox="0 0 23 23">
+            <path fill="#f35325" d="M1 1h10v10H1z"/>
+            <path fill="#81bc06" d="M12 1h10v10H12z"/>
+            <path fill="#05a6f0" d="M1 12h10v10H1z"/>
+            <path fill="#ffba08" d="M12 12h10v10H12z"/>
+          </svg>
+          Microsoft
+        </button>
+      </div>
+
+      <p class="signup-link">
+        Não tem conta? <a href="javascript:void(0)" id="signupLink" onclick="irParaCadastro()">Cadastre-se grátis</a>
+      </p>
+
+      <div class="security-note">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        </svg>
+        Conexão criptografada · SSL 256-bit
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Modal de Recuperação de Senha por E-mail -->
+  <div class="forgot-overlay" id="forgot-overlay" onclick="closeForgotModal()"></div>
+  <div class="forgot-modal" id="forgot-modal">
+    <div class="fmodal-head">
+      <div>
+        <h3 style="font-family:var(--font-syne);font-size:1.25rem;color:#fff;margin-bottom:4px;">Recuperar Senha 🔐</h3>
+        <p style="font-size:0.84rem;color:#a3c4b0;">Informe seu e-mail para receber o código de recuperação.</p>
+      </div>
+      <button class="fmodal-close" type="button" onclick="closeForgotModal()">✕</button>
+    </div>
+
+    <div class="fmodal-body">
+      <!-- Passo 1: Solicitar Código -->
+      <div id="forgot-step-1">
+        <div class="input-group" style="margin-top:0.6rem;">
+          <label>E-mail Cadastrado</label>
+          <div class="input-wrapper">
+            <input type="email" id="forgot-identificador" placeholder="seu@email.com" autocomplete="email">
+            <svg class="iico" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
+          </div>
+        </div>
+
+        <button type="button" class="btn-primary" id="btn-send-code" style="margin-top:1.2rem;" onclick="solicitarCodigoRecuperacao()">
+          → Enviar Código por E-mail
+        </button>
+      </div>
+
+      <!-- Passo 2: Digitar Código e Nova Senha -->
+      <div id="forgot-step-2" style="display:none;">
+        <div style="background:rgba(82,214,123,0.12);border:1px solid rgba(82,214,123,0.3);padding:0.8rem 1rem;border-radius:10px;font-size:0.85rem;color:#c7efd3;margin-bottom:1rem;" id="forgot-sent-msg">
+          Código de 6 dígitos enviado para seu e-mail.
+        </div>
+
+        <div class="input-group">
+          <label>Código de 6 Dígitos</label>
+          <div class="input-wrapper">
+            <input type="text" id="forgot-code" maxlength="6" placeholder="000000" style="letter-spacing:4px;font-weight:700;text-align:center;font-size:1.1rem;">
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label>Nova Senha</label>
+          <div class="input-wrapper">
+            <input type="password" id="forgot-new-pwd" placeholder="Mínimo 6 caracteres">
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label>Confirmar Nova Senha</label>
+          <div class="input-wrapper">
+            <input type="password" id="forgot-new-pwd-conf" placeholder="Repita a nova senha">
+          </div>
+        </div>
+
+        <div style="display:flex;gap:0.8rem;margin-top:1.2rem;">
+          <button type="button" class="btn-social" style="flex:1;" onclick="voltarPasso1Recuperacao()">Voltar</button>
+          <button type="button" class="btn-primary" style="flex:2;" id="btn-confirm-reset" onclick="confirmarRedefinicaoSenha()">
+            ✓ Redefinir Senha
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Reenvio de Link de Ativação -->
+  <div class="forgot-overlay" id="resend-overlay" onclick="closeResendModal()"></div>
+  <div class="forgot-modal" id="resend-modal" style="max-width:440px;">
+    <div class="fmodal-head">
+      <div>
+        <h3 style="font-family:var(--font-syne);font-size:1.2rem;color:#fff;margin-bottom:4px;">Ativar Minha Conta ✉️</h3>
+        <p style="font-size:0.84rem;color:#a3c4b0;">Informe seu e-mail para receber um novo link de ativação.</p>
+      </div>
+      <button class="fmodal-close" type="button" onclick="closeResendModal()">✕</button>
+    </div>
+    <div class="fmodal-body">
+      <div class="input-group">
+        <label>E-mail Cadastrado</label>
+        <div class="input-wrapper">
+          <input type="email" id="resend-email-input" placeholder="seu@email.com">
+        </div>
+      </div>
+      <div id="resend-preview-box" style="display:none;margin-top:1rem;padding:0.9rem;background:rgba(82,214,123,0.15);border:1px dashed #52d67b;border-radius:10px;font-size:0.85rem;text-align:left;color:#c7efd3;">
+      </div>
+      <button type="button" class="btn-primary" id="btn-resend-act" style="margin-top:1.2rem;" onclick="reenviarLinkAtivacao()">
+        → Reenviar Link de Ativação
+      </button>
+    </div>
+  </div>
+
+  <!-- Componente Flutuante de Notificação Toast (Sincronizado) -->
+  <div class="toast" id="toast">
+    <div class="tdot"></div>
+    <span id="toastMsg">Verificando...</span>
+  </div>
+
+  <!-- Inicializadores de Script -->
+  <script src="js/core.js?v=3.2"></script>
+  <script src="js/auth-social.js?v=3.3"></script>
+  <script src="js/ecocall-login.js?v=3.2"></script>
+</body>
+</html>

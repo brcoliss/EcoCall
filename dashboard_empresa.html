@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoCall — Painel da Empresa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+  
+  <!-- CSS estruturado e ordenado para consistência global -->
+  <link rel="stylesheet" href="css/shared.css">
+  <link rel="stylesheet" href="css/ecocall-dashboard.css">
+  <link rel="stylesheet" href="css/empresa-pages.css">
+</head>
+<body class="dash-page">
+
+  <!-- Tela de Carregamento Global -->
+  <div id="loading-screen" class="loading-screen">
+    <div class="loading-spinner"></div>
+    <p>Carregando o seu painel corporativo...</p>
+  </div>
+
+  <div class="dash-layout">
+
+    <!-- Overlay para fechar gaveta mobile no toque fora -->
+    <div class="sidebar-overlay" id="sidebar-overlay" onclick="toggleMobileSidebar(false)"></div>
+
+    <!-- ─── SIDEBAR LATERAL NATIVA ─── -->
+    <aside class="sidebar">
+      <a href="javascript:void(0)" class="logo" onclick="switchEmpresaTab('dash')">
+        <div class="logo-mark">
+          <img src="img/logo-folha.png" alt="EcoCall" width="36" height="36">
+        </div>
+        <div>
+          <div class="logo-name">EcoCall</div>
+          <div class="logo-tag">Painel Empresa</div>
+        </div>
+      </a>
+
+      <!-- Menu de Navegação SPA Nativo -->
+      <nav class="sidebar-menu">
+        <a href="javascript:void(0)" class="nav-item active" data-tab="dash" onclick="switchEmpresaTab('dash', this)">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          <span>Painel</span>
+        </a>
+        <a href="javascript:void(0)" class="nav-item" data-tab="pedidos" onclick="switchEmpresaTab('pedidos', this)">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          <span>Pedidos <b class="badge-count" id="emp-badge-pedidos">3</b></span>
+        </a>
+        <a href="javascript:void(0)" class="nav-item" data-tab="agendamentos" onclick="switchEmpresaTab('agendamentos', this)">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          <span>Agendamentos</span>
+        </a>
+        <a href="javascript:void(0)" class="nav-item" data-tab="relatorios" onclick="switchEmpresaTab('relatorios', this)">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          <span>Relatórios</span>
+        </a>
+        <a href="javascript:void(0)" class="nav-item" data-tab="perfil" onclick="switchEmpresaTab('perfil', this)">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span>Meu Perfil</span>
+        </a>
+        <a href="javascript:void(0)" class="nav-item" data-tab="avaliacoes" onclick="switchEmpresaTab('avaliacoes', this)">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <span>Avaliações</span>
+        </a>
+      </nav>
+
+      <!-- Rodapé da Sidebar Sincronizado -->
+      <div class="sidebar-footer">
+        <div class="avatar-mini avatar-mini--brand" id="dash-sidebar-avatar">--</div>
+        <div class="user-meta">
+          <div class="user-name" id="dash-sidebar-name">Carregando…</div>
+          <div class="user-email" id="dash-sidebar-email">...</div>
+        </div>
+        <a href="javascript:void(0)" class="logout-trigger" onclick="logout(event)" title="Sair do painel">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        </a>
+      </div>
+    </aside>
+
+    <!-- ─── CONTEÚDO PRINCIPAL ─── -->
+    <main class="main-content">
+      
+      <!-- TOPBAR DINÂMICA -->
+      <header class="topbar">
+        <div style="display:flex;align-items:center;gap:0.85rem;">
+          <button class="sidebar-toggle-btn" id="sidebar-toggle-btn" onclick="toggleMobileSidebar()" aria-label="Abrir Menu">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+          </button>
+          <div class="topbar-welcome">
+            <h1 id="emp-topbar-title">Painel da Empresa 🏢</h1>
+            <p id="emp-topbar-sub">Gerencie requisições e controle a operação de coleta na sua região.</p>
+          </div>
+        </div>
+        
+        <div class="topbar-right">
+          <div class="user-location-badge status-active">
+            <span class="dot-indicator">●</span>
+            <span class="status-label" id="emp-topbar-city">Santos, SP</span>
+          </div>
+
+          <div class="notif-bell-box" onclick="toast('Você tem 3 novos pedidos pendentes.')">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+              <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+            </svg>
+            <div class="bell-badge-count text-dark">3</div>
+          </div>
+        </div>
+      </header>
+
+      <div class="content-wrapper">
+
+        <!-- ==================== ABA 1: PAINEL PRINCIPAL ==================== -->
+        <div id="emp-tab-dash" class="emp-tab-content" style="display:block;">
+          
+          <!-- Grid de Métricas Principais -->
+          <section class="metrics-grid">
+            <div class="metric-card card-alert">
+              <div class="m-top">
+                <span class="m-lbl">Pedidos Novos</span>
+                <div class="m-ico icon-warning">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                </div>
+              </div>
+              <div class="m-value" id="emp-stat-novos">03</div>
+              <div class="m-sub sub-warning">Aguardando resposta</div>
+            </div>
+
+            <div class="metric-card">
+              <div class="m-top">
+                <span class="m-lbl">Coletas Concluídas</span>
+                <div class="m-ico">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                </div>
+              </div>
+              <div class="m-value" id="emp-stat-concluidas">28</div>
+              <div class="m-sub green">↑ +6 vs mês anterior</div>
+            </div>
+
+            <div class="metric-card">
+              <div class="m-top">
+                <span class="m-lbl">Avaliação Média</span>
+                <div class="m-ico icon-star">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                </div>
+              </div>
+              <div class="m-value" id="emp-stat-nota">4.9 <span class="m-unit">★</span></div>
+              <div class="m-sub">38 avaliações ativas</div>
+            </div>
+
+            <div class="metric-card">
+              <div class="m-top">
+                <span class="m-lbl">Massa Coletada</span>
+                <div class="m-ico">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                </div>
+              </div>
+              <div class="m-value" id="emp-stat-peso">1.240 <span class="m-unit">kg</span></div>
+              <div class="m-sub green">Total acumulado</div>
+            </div>
+          </section>
+
+          <!-- Seção da Tabela de Pedidos Recentes -->
+          <section class="table-section">
+            <div class="section-heading">
+              <h2>Novos pedidos recebidos</h2>
+              <a href="javascript:void(0)" class="link-view-all" onclick="switchEmpresaTab('pedidos')">Ver todos →</a>
+            </div>
+            
+            <div class="responsive-table-holder">
+              <table class="coletas-table">
+                <thead>
+                  <tr>
+                    <th>Cliente</th>
+                    <th>Tipo de Resíduo</th>
+                    <th>Endereço / Cidade</th>
+                    <th>Data Solicitada</th>
+                    <th>Status</th>
+                    <th>Ações</th>
+                  </tr>
+                </thead>
+                <tbody id="emp-dash-orders-tbody">
+                  <tr><td colspan="6" style="text-align:center;color:var(--text-grey);padding:2rem;">Carregando pedidos recentes...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <!-- Seções Divisórias Inferiores (Gráficos e Status) -->
+          <div class="lower-split-grid">
+            
+            <div class="panel-card-box">
+              <div class="section-heading" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.8rem;">
+                <h2 style="margin:0;">Coletas da Empresa</h2>
+                <span class="sub-heading-badge" style="font-size:0.75rem;background:#f0fdf4;color:#15803d;padding:3px 10px;border-radius:50px;border:1px solid #bbf7d0;font-weight:700;">Últimos 6 meses</span>
+              </div>
+              
+              <div class="chart-container-mini">
+                <div class="chart-bars-wrap" id="emp-dash-chart-bars">
+                  <!-- Barras calculadas e preenchidas via JS dinamicamente -->
+                  <div class="chart-bar bar-past" style="height:35%;" data-val="3 coletas" title="3 coletas"></div>
+                  <div class="chart-bar bar-past" style="height:50%;" data-val="5 coletas" title="5 coletas"></div>
+                  <div class="chart-bar bar-past" style="height:40%;" data-val="4 coletas" title="4 coletas"></div>
+                  <div class="chart-bar bar-past" style="height:65%;" data-val="7 coletas" title="7 coletas"></div>
+                  <div class="chart-bar bar-past" style="height:55%;" data-val="6 coletas" title="6 coletas"></div>
+                  <div class="chart-bar bar-current" style="height:85%;" data-val="9 coletas" title="9 coletas"></div>
+                </div>
+                <div class="chart-months-labels" id="emp-dash-chart-labels">
+                  <span>Nov</span><span>Dez</span><span>Jan</span><span>Fev</span><span>Mar</span><span style="color:#15803d;font-weight:800;">Atual</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel-card-box">
+              <div class="section-heading">
+                <h2>Status do perfil corporativo</h2>
+              </div>
+              
+              <div class="profile-status-list">
+                <div class="status-list-item">
+                  <span class="status-item-name">Visível no mapa</span>
+                  <span class="badge badge-done">✓ Ativo</span>
+                </div>
+                <div class="status-list-item">
+                  <span class="status-item-name">Perfil & Contato</span>
+                  <span class="badge badge-done">✓ OK</span>
+                </div>
+                <div class="status-list-item">
+                  <span class="status-item-name">Recepção de Pedidos</span>
+                  <span class="badge badge-done">✓ Habilitada</span>
+                </div>
+                <div class="status-list-item">
+                  <span class="status-item-name">Área de Atendimento</span>
+                  <span class="badge badge-done">✓ Santos (Exclusivo)</span>
+                </div>
+                <div class="status-list-item">
+                  <span class="status-item-name">Emissão de Comprovantes</span>
+                  <span class="badge badge-done">✓ Digital Ativo</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div> <!-- Fim de emp-tab-dash -->
+
+        <!-- ==================== ABA 2: PEDIDOS ==================== -->
+        <div id="emp-tab-pedidos" class="emp-tab-content" style="display:none;">
+          
+          <div class="stats-row">
+            <div class="stat-mini">
+              <div class="stat-mini-lbl">Novos / Pendentes</div>
+              <div class="stat-mini-val" id="stat-pedidos-novos">0</div>
+              <div class="stat-mini-sub warn">Aguardando resposta</div>
+            </div>
+            <div class="stat-mini">
+              <div class="stat-mini-lbl">Em andamento</div>
+              <div class="stat-mini-val" id="stat-pedidos-prog">0</div>
+              <div class="stat-mini-sub muted">Agendadas na rota</div>
+            </div>
+            <div class="stat-mini">
+              <div class="stat-mini-lbl">Concluídos</div>
+              <div class="stat-mini-val" id="stat-pedidos-done">0</div>
+              <div class="stat-mini-sub green">Total acumulado</div>
+            </div>
+            <div class="stat-mini">
+              <div class="stat-mini-lbl">Recusados / Cancelados</div>
+              <div class="stat-mini-val" id="stat-pedidos-cancel">0</div>
+              <div class="stat-mini-sub muted">Itinerários cancelados</div>
+            </div>
+          </div>
+
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;flex-wrap:wrap;gap:1rem;">
+            <div class="page-tabs" style="margin-bottom:0;">
+              <button class="tab-btn active" onclick="setTab(this,'all')">Todos <span class="tab-count" id="count-tab-all">0</span></button>
+              <button class="tab-btn" onclick="setTab(this,'novo')">Novos <span class="tab-count" id="count-tab-novo">0</span></button>
+              <button class="tab-btn" onclick="setTab(this,'prog')">Em andamento <span class="tab-count" id="count-tab-prog">0</span></button>
+              <button class="tab-btn" onclick="setTab(this,'done')">Concluídos <span class="tab-count" id="count-tab-done">0</span></button>
+              <button class="tab-btn" onclick="setTab(this,'cancel')">Recusados <span class="tab-count" id="count-tab-cancel">0</span></button>
+            </div>
+            <div class="dash-search-box">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#627d6a" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input type="text" id="search-orders" placeholder="Buscar cliente, protocolo ou resíduo…" oninput="filterRows()">
+            </div>
+          </div>
+
+          <section class="table-section">
+            <div class="responsive-table-holder">
+              <table class="coletas-table">
+                <thead>
+                  <tr>
+                    <th>Protocolo / Cliente</th>
+                    <th>Tipo de Resíduo</th>
+                    <th>Endereço de Coleta</th>
+                    <th>Data Solicitada</th>
+                    <th>Massa</th>
+                    <th>Status</th>
+                    <th>Ações</th>
+                  </tr>
+                </thead>
+                <tbody id="orders-tbody">
+                  <tr><td colspan="7" style="text-align:center;color:var(--text-grey);padding:2rem;">Carregando pedidos de coleta do MySQL...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+        </div> <!-- Fim de emp-tab-pedidos -->
+
+        <!-- ==================== ABA 3: AGENDAMENTOS ==================== -->
+        <div id="emp-tab-agendamentos" class="emp-tab-content" style="display:none;">
+          
+          <div class="stats-row">
+            <div class="stat-mini">
+              <div class="stat-mini-lbl">Hoje</div>
+              <div class="stat-mini-val" id="ag-stat-hoje">0</div>
+              <div class="stat-mini-sub muted">Coletas no dia</div>
+            </div>
+            <div class="stat-mini">
+              <div class="stat-mini-lbl">Esta semana</div>
+              <div class="stat-mini-val" id="ag-stat-semana">0</div>
+              <div class="stat-mini-sub green">Escaladas</div>
+            </div>
+            <div class="stat-mini">
+              <div class="stat-mini-lbl">Este mês</div>
+              <div class="stat-mini-val" id="ag-stat-mes">0</div>
+              <div class="stat-mini-sub muted">Volume mensal</div>
+            </div>
+            <div class="stat-mini">
+              <div class="stat-mini-lbl">Taxa de Conclusão</div>
+              <div class="stat-mini-val" id="ag-stat-taxa">100%</div>
+              <div class="stat-mini-sub green">Operação ativa</div>
+            </div>
+          </div>
+
+          <div class="calendar-wrap">
+            <div class="calendar-card">
+              <div class="cal-head">
+                <h2 id="cal-title">Carregando calendário...</h2>
+                <div class="cal-nav">
+                  <button type="button" onclick="mudarMesCalendario(-1)" title="Mês anterior">‹</button>
+                  <button type="button" onclick="mudarMesCalendario(1)" title="Próximo mês">›</button>
+                </div>
+              </div>
+              <div class="cal-grid" id="cal-grid-days">
+                <!-- Preenchido dinamicamente pelo JavaScript -->
+              </div>
+            </div>
+
+            <div class="calendar-card">
+              <div class="cal-head">
+                <h2 id="cal-selected-day-title">Agendamentos do Dia</h2>
+              </div>
+              <div class="agenda-list" id="emp-agenda-list">
+                <div style="padding:2rem;text-align:center;color:var(--text-grey);">Selecione uma data com coletas para ver a rota.</div>
+              </div>
+            </div>
+          </div>
+
+        </div> <!-- Fim de emp-tab-agendamentos -->
+
+        <!-- ==================== ABA 4: RELATÓRIOS ==================== -->
+        <div id="emp-tab-relatorios" class="emp-tab-content" style="display:none;">
+          
+          <div class="stats-row">
+            <div class="stat-mini">
+              <div class="stat-mini-lbl">Massa coletada</div>
+              <div class="stat-mini-val" id="rel-massa-val">0 <span style="font-size:1rem; color:var(--text-grey);">kg</span></div>
+              <div class="stat-mini-sub green">Total acumulado</div>
+            </div>
+            <div class="stat-mini">
+              <div class="stat-mini-lbl">Coletas concluídas</div>
+              <div class="stat-mini-val" id="rel-concluidas-val">0</div>
+              <div class="stat-mini-sub green">Finalizadas</div>
+            </div>
+            <div class="stat-mini">
+              <div class="stat-mini-lbl">Tempo médio</div>
+              <div class="stat-mini-val" id="rel-tempo-val">35 <span style="font-size:1rem; color:var(--text-grey);">min</span></div>
+              <div class="stat-mini-sub muted">Por coleta na rota</div>
+            </div>
+            <div class="stat-mini">
+              <div class="stat-mini-lbl">CO₂ evitado</div>
+              <div class="stat-mini-val" id="rel-co2-val">0 <span style="font-size:1rem; color:var(--text-grey);">kg</span></div>
+              <div class="stat-mini-sub green">Estimativa ecológica</div>
+            </div>
+          </div>
+
+          <div class="chart-grid">
+            <div class="content-card">
+              <h2>Coletas por mês</h2>
+              <p class="card-sub">Volume mensal registrado na plataforma</p>
+              <div class="bar-chart" id="rel-bar-chart">
+                <!-- Renderizado via JS -->
+              </div>
+              <div class="bar-label-row" id="rel-bar-labels">
+                <!-- Renderizado via JS -->
+              </div>
+            </div>
+
+            <div class="content-card">
+              <h2>Tipos de resíduo</h2>
+              <p class="card-sub">Distribuição por categoria coletada</p>
+              <div class="donut-wrap">
+                <div class="donut"></div>
+                <div class="donut-legend" id="rel-residuos-legend">
+                  <div class="dleg-item"><span class="dleg-dot" style="background:#3ec96a;"></span> Plástico <strong style="margin-left:auto; color:var(--text-grey);" id="pct-plastico">38%</strong></div>
+                  <div class="dleg-item"><span class="dleg-dot" style="background:#1e88e5;"></span> Papel <strong style="margin-left:auto; color:var(--text-grey);" id="pct-papel">24%</strong></div>
+                  <div class="dleg-item"><span class="dleg-dot" style="background:#f57c00;"></span> Vidro <strong style="margin-left:auto; color:var(--text-grey);" id="pct-vidro">16%</strong></div>
+                  <div class="dleg-item"><span class="dleg-dot" style="background:#5e35b1;"></span> Eletrônicos <strong style="margin-left:auto; color:var(--text-grey);" id="pct-eletronicos">12%</strong></div>
+                  <div class="dleg-item"><span class="dleg-dot" style="background:#94a3b8;"></span> Metal <strong style="margin-left:auto; color:var(--text-grey);" id="pct-metal">10%</strong></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="content-card">
+            <h2>Top clientes do período</h2>
+            <p class="card-sub">Cidadãos com maior volume de solicitações atendidas</p>
+            <div class="responsive-table-holder">
+              <table class="coletas-table">
+                <thead>
+                  <tr>
+                    <th>Cliente</th>
+                    <th>Cidade</th>
+                    <th>Coletas</th>
+                    <th>Massa total</th>
+                    <th>Última coleta</th>
+                  </tr>
+                </thead>
+                <tbody id="rel-top-clientes-tbody">
+                  <tr><td colspan="5" style="text-align:center;color:var(--text-grey);padding:2rem;">Nenhum histórico acumulado ainda.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div> <!-- Fim de emp-tab-relatorios -->
+
+        <!-- ==================== ABA 5: MEU PERFIL CORPORATIVO ==================== -->
+        <div id="emp-tab-perfil" class="emp-tab-content" style="display:none;">
+          <div class="profile-grid">
+
+            <!-- Card Lateral da Empresa -->
+            <div class="profile-side-card">
+              <div class="profile-pic" id="emp-card-avatar">--</div>
+              <h3 id="emp-card-name">Carregando...</h3>
+              <p id="emp-card-email">...</p>
+              
+              <input type="file" id="emp-avatar-file-input" accept="image/png, image/jpeg, image/webp, image/gif" style="display:none;" onchange="uploadAvatarEmpresa(this)">
+              
+              <div style="display:flex;gap:0.4rem;justify-content:center;margin-top:1rem;flex-wrap:wrap;">
+                <button type="button" class="profile-pic-btn" style="margin-top:0;" onclick="document.getElementById('emp-avatar-file-input').click()">📷 Trocar logotipo</button>
+                <button type="button" class="profile-pic-btn" id="btn-emp-remover-avatar" style="margin-top:0;color:#b53b3b;display:none;" onclick="removerAvatarEmpresa()">✕ Remover</button>
+              </div>
+
+              <div style="margin-top:1.6rem;text-align:left;display:flex;flex-direction:column;gap:.65rem;">
+                <div style="display:flex;justify-content:space-between;font-size:.84rem;">
+                  <span style="color:var(--text-grey);">Coletas Concluídas</span>
+                  <strong id="emp-card-coletas">0 coletas</strong>
+                </div>
+                <div style="display:flex;justify-content:space-between;font-size:.84rem;">
+                  <span style="color:var(--text-grey);">Avaliação Média</span>
+                  <strong id="emp-card-nota" style="color:#f59e0b;">5.00 ★</strong>
+                </div>
+                <div style="display:flex;justify-content:space-between;font-size:.84rem;">
+                  <span style="color:var(--text-grey);">Membro desde</span>
+                  <strong id="emp-card-membro">--/----</strong>
+                </div>
+              </div>
+            </div>
+
+            <!-- Formulário Corporativo da Empresa -->
+            <div class="profile-form-card">
+              <h2 style="font-family:var(--font-syne);font-size:1.15rem;margin-bottom:1.2rem;">Dados Cadastrais da Empresa</h2>
+
+              <form id="emp-profile-form" onsubmit="salvarPerfilEmpresa(event)">
+                
+                <div class="form-row">
+                  <div class="form-field">
+                    <label>Razão Social</label>
+                    <input type="text" id="emp-input-nome" placeholder="Nome da empresa" required>
+                  </div>
+                  <div class="form-field">
+                    <label>CNPJ</label>
+                    <input type="text" id="emp-input-cnpj" placeholder="00.000.000/0000-00">
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-field">
+                    <label>E-mail Corporativo</label>
+                    <input type="email" id="emp-input-email" placeholder="contato@empresa.com" required>
+                  </div>
+                  <div class="form-field">
+                    <label>Telefone / WhatsApp Comercial</label>
+                    <input type="text" id="emp-input-telefone" placeholder="(13) 3333-3333">
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-field">
+                    <label>Categoria de Atuação</label>
+                    <input type="text" id="emp-input-categoria" placeholder="Ex: Plásticos, Papéis e Metais">
+                  </div>
+                  <div class="form-field">
+                    <label>CEP</label>
+                    <input type="text" id="emp-input-cep" placeholder="00000-000">
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-field" style="flex:2;">
+                    <label>Cidade / UF</label>
+                    <div style="display:flex;gap:.5rem;">
+                      <input type="text" id="emp-input-cidade" placeholder="Cidade" style="flex:2;">
+                      <input type="text" id="emp-input-uf" placeholder="UF" maxlength="2" style="flex:1;text-transform:uppercase;">
+                    </div>
+                  </div>
+                  <div class="form-field" style="flex:1;">
+                    <label>Número</label>
+                    <input type="text" id="emp-input-numero" placeholder="100">
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-field" style="flex:2;">
+                    <label>Logradouro / Endereço</label>
+                    <input type="text" id="emp-input-logradouro" placeholder="Ex: Rua do Comércio">
+                  </div>
+                  <div class="form-field" style="flex:1;">
+                    <label>Bairro</label>
+                    <input type="text" id="emp-input-bairro" placeholder="Centro">
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-field">
+                    <label>Complemento</label>
+                    <input type="text" id="emp-input-complemento" placeholder="Galpão 3, Sala 10">
+                  </div>
+                  <div class="form-field">
+                    <label>Especialidades / Descrição</label>
+                    <input type="text" id="emp-input-descricao" placeholder="Breve descrição dos serviços de coleta">
+                  </div>
+                </div>
+
+                <!-- Seção de Alteração de Senha -->
+                <div style="margin-top:1.5rem;padding-top:1.2rem;border-top:1px solid var(--border-light, #e0e0e0);">
+                  <h3 style="font-family:var(--font-syne);font-size:1rem;margin-bottom:0.8rem;color:var(--text-dark);">Alterar Senha de Acesso</h3>
+                  <p style="font-size:0.82rem;color:var(--text-grey);margin-bottom:1rem;">Preencha os campos abaixo apenas se desejar modificar a senha de acesso da empresa.</p>
+                  
+                  <div class="form-row">
+                    <div class="form-field">
+                      <label>Nova Senha</label>
+                      <input type="password" id="emp-input-senha" placeholder="Mínimo de 6 caracteres">
+                    </div>
+                    <div class="form-field">
+                      <label>Confirmar Nova Senha</label>
+                      <input type="password" id="emp-input-senha-conf" placeholder="Repita a nova senha">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-actions" style="margin-top:1.5rem;">
+                  <button type="button" class="btn-cancel" onclick="carregarPerfilEmpresa()">Descartar</button>
+                  <button type="submit" class="btn-save" id="emp-btn-save">Salvar alterações</button>
+                </div>
+              </form>
+
+              <!-- Zona de Perigo / Exclusão de Empresa -->
+              <div class="danger-zone-card">
+                <div class="danger-zone-header">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                  <h3>Zona de Perigo — Exclusão de Cadastro Corporativo</h3>
+                </div>
+                <p class="danger-zone-desc">
+                  Ao excluir o cadastro da empresa, seu perfil corporativo, área de atendimento, registros de pedidos e histórico de avaliações serão permanentemente excluídos da plataforma EcoCall. Esta ação é irreversível.
+                </p>
+                <button type="button" class="btn-danger-action" onclick="excluirCadastroEmpresa()">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
+                  Excluir Cadastro da Empresa Permanentemente
+                </button>
+              </div>
+
+            </div>
+
+          </div>
+        </div> <!-- Fim de emp-tab-perfil -->
+
+        <!-- ==================== ABA 6: AVALIAÇÕES ==================== -->
+        <div id="emp-tab-avaliacoes" class="emp-tab-content" style="display:none;">
+          
+          <div class="content-card" style="margin-bottom:1.5rem;">
+            <div class="review-summary">
+              <div class="review-big">
+                <div class="review-num" id="rev-summary-score">5.0</div>
+                <div class="review-stars-big" id="rev-summary-stars">★ ★ ★ ★ ★</div>
+                <div class="review-total" id="rev-summary-total">Baseado em 0 avaliações</div>
+              </div>
+              <div class="review-bars" id="rev-summary-bars">
+                <div class="rb-row"><span>5 ★</span><div class="rb-track"><div class="rb-fill" id="rb-fill-5" style="width:100%;"></div></div><span id="rb-cnt-5">0</span></div>
+                <div class="rb-row"><span>4 ★</span><div class="rb-track"><div class="rb-fill" id="rb-fill-4" style="width:0%;"></div></div><span id="rb-cnt-4">0</span></div>
+                <div class="rb-row"><span>3 ★</span><div class="rb-track"><div class="rb-fill" id="rb-fill-3" style="width:0%;"></div></div><span id="rb-cnt-3">0</span></div>
+                <div class="rb-row"><span>2 ★</span><div class="rb-track"><div class="rb-fill" id="rb-fill-2" style="width:0%;"></div></div><span id="rb-cnt-2">0</span></div>
+                <div class="rb-row"><span>1 ★</span><div class="rb-track"><div class="rb-fill" id="rb-fill-1" style="width:0%;"></div></div><span id="rb-cnt-1">0</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div style="display:flex;justify-content:flex-end;margin-bottom:1rem;">
+            <select class="select-input" onchange="filterReviews(this.value)">
+              <option value="all">Todas as notas</option>
+              <option value="5">5 estrelas</option>
+              <option value="4">4 estrelas</option>
+              <option value="3">3 estrelas</option>
+              <option value="low">2 estrelas ou menos</option>
+            </select>
+          </div>
+
+          <div class="review-list" id="review-list">
+            <!-- Renderizado dinamicamente via JS a partir de api/avaliacoes/index.php -->
+          </div>
+
+        </div> <!-- Fim de emp-tab-avaliacoes -->
+
+      </div>
+    </main>
+  </div>
+
+  <!-- Componente Flutuante do Toast -->
+  <div class="toast" id="tst"><div class="tdot"></div><span id="tmsg"></span></div>
+
+  <!-- Scripts Dedicados -->
+  <script src="js/core.js"></script>
+  <script src="js/dashboard_empresa.js"></script>
+</body>
+</html>
